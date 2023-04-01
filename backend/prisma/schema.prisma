@@ -1,0 +1,169 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+  CUSTOMER
+  ADMIN
+  WORKER
+}
+
+model User {
+  id       String  @id @default(uuid())
+  name     String
+  gender   String?
+  email    String  @unique
+  mobile   String  @unique
+  password String
+  profile  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  type      UserType @default(CUSTOMER)
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?  @unique
+
+  worker   Shop   @relation(fields: [workerId], references: [id], name: "works")
+  workerId String
+
+  owner    Shop?      @relation(fields: [ownerId], references: [id], name: "own")
+  ownerId  String?    @unique
+  cartItem CartItem[]
+  orders   Order[]    @relation(name: "customer")
+  delivery Order[]    @relation(name: "worker")
+}
+
+model Address {
+  id            String  @id @default(uuid())
+  address_line1 String
+  city          String
+  zip           String
+  state         String
+  country       String  @default("India")
+  user          User?
+  order         Order[]
+}
+
+model Shop {
+  id      String @id @default(uuid())
+  name    String
+  workers User[] @relation(name: "works")
+  owner   User?  @relation(name: "own")
+}
+
+model Product {
+  id              String   @id @default(uuid())
+  name            String
+  pictures        String[]
+  quantityInStock Int
+  unitPrice       Float
+  description     String
+  weight          Float?
+  color           Color    @relation(fields: [colorId], references: [id])
+  colorId         String
+
+  brand   Brand  @relation(fields: [brandId], references: [id])
+  brandId String
+
+  attributes        Attributes[]
+  ProductCategories ProductCategories[]
+  CartItem          CartItem[]
+  OrderItem         OrderItem[]
+}
+
+model Color {
+  id      String    @id @default(uuid())
+  name    String
+  Product Product[]
+}
+
+model Brand {
+  id      String    @id @default(uuid())
+  name    String    @unique
+  Product Product[]
+}
+
+model Category {
+  id                String              @id @default(uuid())
+  name              String
+  ProductCategories ProductCategories[]
+}
+
+model Attributes {
+  id        String   @id @default(uuid())
+  name      String
+  value     String
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId String?
+}
+
+model ProductCategories {
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  @@id([productId, categoryId])
+}
+
+model CartItem {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, productId])
+}
+
+enum DeliveryStatus {
+  PACKED
+  SHIPPED
+  OUT_FOR_DELIVERY
+  DELIVERED
+}
+
+model Order {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id], name: "customer")
+  userId String
+
+  status DeliveryStatus
+
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?  @unique
+
+  worker   User   @relation(fields: [workerId], references: [id], name: "worker")
+  workerId String
+
+  orderAt   DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  OrderItem OrderItem[]
+}
+
+model OrderItem {
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  quantity  Int
+  unitPrice Float
+
+  @@id([orderId, productId])
+}
