@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            display: table;
+            text-align: center;
+        }
+
+        .container {
+            background-color: cadetblue;
+            margin: auto 0px;
+            text-align: center;
+            padding: 5rem;
+        }
+
+
+        .msg {
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 500;
+        }
+
+        .otp {
+            background-color: cornflowerblue;
+            font-size: 34px;
+            padding: 1rem;
+            padding: 1rem;
+            width: 10rem;
+            text-justify: auto;
+            text-align: center;
+            height: 3rem;
+            font-weight: 900;
+        }
+
+        h1 {
+            font-size: 30px;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to My Shop</h1>
+        <br />
+        <h4 class="msg">
+            Hi <span>
+                <%= name %>
+            </span>! this is your one time password use this to verify your email.
+        </h4>
+        <br /><br />
+        <span class="otp">
+            <%= value %>
+        </span>
+    </div>
+</body>
+
+</html>

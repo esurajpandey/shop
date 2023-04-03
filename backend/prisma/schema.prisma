@@ -17,29 +17,39 @@ enum UserType {
 }
 
 model User {
-  id       String  @id @default(uuid())
-  name     String
-  gender   String?
-  email    String  @unique
-  mobile   String  @unique
-  password String
-  profile  String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String   @id @default(uuid())
+  name            String
+  gender          String?
+  email           String   @unique
+  mobile          String   @unique
+  password        String
+  profile         String   @default("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg")
+  isEmailVerified Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   type      UserType @default(CUSTOMER)
   address   Address? @relation(fields: [addressId], references: [id])
   addressId String?  @unique
 
-  worker   Shop   @relation(fields: [workerId], references: [id], name: "works")
-  workerId String
+  worker   Shop?   @relation(fields: [workerId], references: [id], name: "works")
+  workerId String?
 
   owner    Shop?      @relation(fields: [ownerId], references: [id], name: "own")
   ownerId  String?    @unique
   cartItem CartItem[]
   orders   Order[]    @relation(name: "customer")
   delivery Order[]    @relation(name: "worker")
+  otp      Otp?
+}
+
+model Otp {
+  id        String   @id @default(uuid())
+  value     Int
+  createdAt DateTime @default(now())
+  expireIn  Int
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @unique
 }
 
 model Address {
