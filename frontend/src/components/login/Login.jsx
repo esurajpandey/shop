@@ -1,171 +1,139 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useToast } from "@chakra-ui/react";
+import { Button, useToast } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
+import loginImage from "../../assets/login-image.jpg";
+import {
+  Input,
+  InputContainer,
+  SubmitButton,
+} from "../register/register.styled";
+import { Lable, LoginContainer, LoginForm, RegisterLink } from "./login.styled";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { AiOutlineCodepen } from "react-icons/ai";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
-    axios
-      .post("/api/login", { email, password })
-      .then((response) => {
-        // TODO: Handle successful login
-      })
-      .catch((error) => {
-        setError("Invalid email or password");
-        toast({
-          title: "Error Occured",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "bottom",
-        });
+    if (!(email && password)) {
+      toast({
+        title: "Enter the email and password",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
       });
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { data } = await axios.post("/api/user/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: data.data.name,
+          email: data.data.email,
+          token: data.token,
+        })
+      );
+
+      toast({
+        title: data?.message,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      navigate("/all");
+    } catch (err) {
+      console.log(err.response.data);
+      toast({
+        title: err?.response?.data?.message,
+        description: "Inavlid email and password",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    const user = JSON.stringify(localStorage.getItem("user"));
+    if (user) {
+      navigate("/all");
+    }
+  }, []);
 
   return (
     <LoginContainer>
-      <div className="form-container">
-        <AiOutlineCodepen fontSize="2rem" />
-        <h1>Login</h1>
-        <LoginForm onSubmit={handleSubmit}>
-          <div className="input-box">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-          </div>
-          <div className="input-box">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-          </div>
-          <LoginButton type="submit">
-            <span>Login</span>
-          </LoginButton>
+      <div className="main-login-container">
+        <div className="left-image">
+          <img src={loginImage} alt="Login" />
+        </div>
+        <div className="form-container">
+          <h2 className="login-text">Login your account</h2>
+          <LoginForm>
+            <InputContainer>
+              <Lable color="white">Email</Lable>
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </InputContainer>
+            <InputContainer>
+              <Lable>Password</Lable>
+              <Input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </InputContainer>
+
+            <Button
+              variant="solid"
+              colorScheme="cyan"
+              width={"100%"}
+              style={{ marginTop: 15 }}
+              onClick={handleSubmit}
+              isLoading={loading}
+            >
+              Login
+            </Button>
+          </LoginForm>
+
           <RegisterLink>
-            Create new account
-            <Link to="/register">Register</Link>
+            <Link to="/register">Create account</Link>
           </RegisterLink>
-        </LoginForm>
+        </div>
       </div>
     </LoginContainer>
   );
 }
 
-const LoginContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  padding: 3.3rem;
-  font-family: "Anton";
-  background: linear-gradient(to right, #b5b6b6, white);
-  h1 {
-    font-weight: 900;
-  }
-
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2em;
-    background-color: #919b9b;
-    border-radius: 3px;
-  }
-`;
-
-const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  .input-box {
-    display: flex;
-    flex-direction: column;
-    font-family: inherit;
-    label {
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 500;
-    }
-    input {
-      font-size: 1rem;
-      color: black;
-      /* outline: 1px solid black; */
-      width: 24rem;
-      padding: 0.35em;
-      border: 0;
-      border-radius: 2px;
-      background: linear-gradient(to right, #dbdada, white);
-    }
-  }
-`;
-
-const LoginButton = styled.button`
-  width: 100%;
-  background-color: rgba(77, 71, 62, 0.925);
-  padding: 0.4rem;
-  font-family: inherit;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  border-radius: 2px;
-  span {
-    font-family: inherit;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: white;
-  }
-  :hover {
-    border: 0;
-    outline: 0;
-    background: linear-gradient(to right, #06ad76, #0074d9);
-  }
-
-  :focus {
-    border: 0;
-    outline: 0;
-  }
-`;
-
-const RegisterLink = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  word-spacing: 0.09rem;
-  a {
-    :hover {
-      text-decoration: underline;
-      color: #14aa23;
-    }
-  }
+const LoaderEffect = styled.span`
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #7983ff;
+  width: 16px;
+  height: 16px;
 `;
 export default Login;

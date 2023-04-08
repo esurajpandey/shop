@@ -5,7 +5,7 @@ import { errorResponse, successResponse } from "../../utils/helper/response.js";
 
 function isValidOtp(expiredIn, creationTime) {
     // Set the expiration period to 10 minutes (600,000 milliseconds)
-    const expirationPeriod = 50 * 60 * 1000;
+    const expirationPeriod = expiredIn * 60 * 1000;
 
     // Calculate the expiration time based on the creation time and the expiration period
     const expirationTime = creationTime.getTime() + expirationPeriod;
@@ -22,7 +22,9 @@ function isValidOtp(expiredIn, creationTime) {
 
 export default async (req, reply) => {
     try {
+        // console.log(req.body);
         const responseObj = await verify(req);
+        console.log(responseObj);
         reply.code(200).send(responseObj);
     } catch (err) {
         reply.code(err?.status ?? 500).send(errorResponse(err));
@@ -31,7 +33,8 @@ export default async (req, reply) => {
 
 const verify = async (req) => {
     return prisma.$transaction(async tx => {
-        const { email, otp } = req.body;
+        let { email, otp } = req.body;
+        otp = +otp;
         let user = await tx.user.findUnique({
             where: {
                 email
@@ -82,6 +85,8 @@ const verify = async (req) => {
             select: {
                 otp: true,
                 id: true,
+                name: true,
+                email: true,
             }
         });
 
@@ -91,6 +96,7 @@ const verify = async (req) => {
             }
         });
 
+        user.otp = null;
         const responseObj = successResponse(user, "Email is verified successfully");
         responseObj.token = generateToken({ id: user.id });
 

@@ -3,10 +3,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 import cors from '@fastify/cors'
 import userRoutes from './routes/userRoutes.js';
-const fastify = Fastify({ logger: true });
 
+const fastify = Fastify();//{ logger: true }
 await fastify.register(cors);
-
 
 fastify.get('/api', async (req, resp) => {
     resp.send("Hello Welcome")

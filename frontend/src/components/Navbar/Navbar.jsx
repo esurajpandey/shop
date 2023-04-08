@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BottomNavbar from "./BottomNavbar";
 import TopNavbar from "./TopNavbar";
-import { css } from "@emotion/react";
 
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { TbLogin } from "react-icons/tb";
@@ -20,48 +19,27 @@ import {
 import ProfileModel from "../profileModel/ProfileModel";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
+  MenuCss,
+  MenuItemCss,
   MiddleContainer,
   NavContainer,
   RightBar,
   SearchBox,
   ShopName,
-} from "./source";
+} from "./Navbar.styled";
+
+import EmailVerifierLink from "./EmailVerifierLink";
+
 function Navbar() {
   const user = {
     name: "Suraj Pandey",
     picture: "",
+    isEmailVerified: true,
   };
-
-  const MenuItemCss = css`
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    width: 10rem;
-    min-width: 9.5rem;
-    font-family: "Open-Sans";
-    font-size: 1rem;
-    :hover {
-      background-color: transparent;
-      background-color: #8f8a8a;
-    }
-
-    :active {
-      border: none;
-    }
-
-    :focus {
-      border: none;
-      outline: none;
-    }
-  `;
-
-  const MenuCss = css`
-    min-width: 10rem;
-  `;
 
   return (
     <NavContainer>
-      <TopNavbar />
+      {user.name && !user?.isEmailVerified && <EmailVerifierLink />}
       <MiddleContainer>
         <div className="leftBar">
           <ShopName>

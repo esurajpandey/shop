@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { navLinks } from "./source";
+import { navLinks } from "./Navbar.styled";
 import { FaBars } from "react-icons/fa";
 
 const BottomNavbar = () => {
@@ -27,13 +27,6 @@ const BottomNavbar = () => {
           </ul>
         </div>
       </nav>
-      {/* {navLinks.map((item) => {
-        return (
-          <Link to={`/${item.path}`} key={item.name}>
-            {item.name}
-          </Link>
-        );
-      })} */}
     </BottomNavContainer>
   );
 };
@@ -45,6 +38,7 @@ const BottomNavContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     background-color: #333;
+    background: #3c4a66;
   }
 
   .navbar-links {

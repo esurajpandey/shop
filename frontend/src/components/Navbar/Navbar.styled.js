@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { css } from "@emotion/react";
+
 export const navLinks = [
   {
     name: "Shop All",
-    path: ""
+    path: "all"
   },
   {
     name: "Computers",
@@ -35,6 +37,30 @@ export const navLinks = [
 ]
 
 
+export const MenuItemCss = css`
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    width: 10rem;
+    min-width: 9.5rem;
+    font-family: "Open-Sans";
+    font-size: 1rem;
+    :hover {
+      background-color: transparent;
+      background-color: #8f8a8a;
+    }
+    :active {
+      border: none;
+    }
+    :focus {
+      border: none;
+      outline: none;
+    }
+  `;
+export const MenuCss = css`
+    min-width: 10rem;
+  `;
+
 export const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,9 +72,10 @@ export const MiddleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  width: 100%;
+  width: 100vw;
   padding: 1rem 0;
-  /* border: 1px solid red; */
+  overflow:hidden;
+
   .leftBar {
     display: flex;
     align-items: center;
@@ -77,6 +104,7 @@ export const ShopName = styled.div`
   h1{
     font-family: "Anton";
     font-weight: 900;
+    /* color:white; */
   }
   @media (max-width: 600px) {
     h1{
@@ -93,7 +121,6 @@ export const SearchBox = styled.div`
   align-items: center;
   border-radius: 30px;
   padding: 0.08em;
-  /* border: 1px solid red; */
   margin: 0 auto;
   outline: 1px solid black;
   background-color: transparent;

@@ -1,5 +1,6 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./page/HomePage/HomePage";
 import AdminPage from "./page/AdminPage/AdminPage";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,8 +9,19 @@ import Contact from "./page/Contact";
 import Help from "./page/Help";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
-
+import axios from "axios";
+import OtpVerify from "./components/OtpVerification/OtpVerify";
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.defaults.baseURL = "http://127.0.0.1:5000";
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -21,6 +33,7 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/verify-account" element={<OtpVerify />} />
       </Routes>
     </div>
   );
