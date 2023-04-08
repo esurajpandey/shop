@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import cors from '@fastify/cors'
 import userRoutes from './routes/userRoutes.js';
+import productRoutes from './routes/productRoutes.js'
 
 const fastify = Fastify();//{ logger: true }
 await fastify.register(cors);
@@ -12,6 +13,7 @@ fastify.get('/api', async (req, resp) => {
 })
 
 fastify.register(userRoutes, { prefix: '/api/user' });
+fastify.register(productRoutes, { prefix: "/api/product" });
 
 const PORT = process.env.PORT || 5000;
 const start = async () => {

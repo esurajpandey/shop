@@ -1,0 +1,482 @@
+[
+  {
+    "id": "b9dda138-0532-4eaf-8ed6-521cc7484a1a",
+    "name": "Keyboard",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+    "quantityInStock": 92,
+    "unitPrice": 575,
+    "weight": 73,
+    "colorId": "3d733f24-bebb-4cca-8d3f-e6ddfb37a432",
+    "brandId": "58c3028f-15fe-4898-a869-75e0fe25e604",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "b6bd815d-5222-4291-b362-2df18558115c",
+    "name": "Ball",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+    "quantityInStock": 43,
+    "unitPrice": 379,
+    "weight": 37,
+    "colorId": "16d2c775-9a49-4d84-b1f9-455199dcf7c8",
+    "brandId": "6698082b-a708-467a-badd-836140fe5f3a",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "03a7e887-3529-4b52-abc0-96e2db66f688",
+    "name": "Gloves",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+    "quantityInStock": 48,
+    "unitPrice": 589,
+    "weight": 84,
+    "colorId": "3cf11c5d-2a25-4039-8b05-7536731830ad",
+    "brandId": "b14be2a3-ecb2-438b-b24f-284c09b2f5f0",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "750dee44-06b3-46b4-8605-c3365fc14aa5",
+    "name": "Bike",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+    "quantityInStock": 19,
+    "unitPrice": 872,
+    "weight": 40,
+    "colorId": "5353a207-841c-4cfa-9c11-9da5e36d5650",
+    "brandId": "69ea5218-1c93-4418-bf45-3af081b706b7",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "41330200-e64b-4012-8135-f99cde648cda",
+    "name": "Chair",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+    "quantityInStock": 76,
+    "unitPrice": 624,
+    "weight": 47,
+    "colorId": "0c3fb3d5-9a53-4b15-86a7-d2bb0437cbf9",
+    "brandId": "5cb9b43d-1dfc-440d-842f-bf6b863a6b12",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "28b21a95-4182-4480-9ee9-6ee0979e28e1",
+    "name": "Fish",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+    "quantityInStock": 14,
+    "unitPrice": 64,
+    "weight": 83,
+    "colorId": "623b4122-0f99-49da-bcd7-0a45f108e5a9",
+    "brandId": "1b7e42f3-b047-496a-b53d-7c22ffb61e43",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "c9e236d7-412a-4099-bf82-9f628747df2a",
+    "name": "Tuna",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+    "quantityInStock": 47,
+    "unitPrice": 607,
+    "weight": 88,
+    "colorId": "bc5ef294-d625-4bef-b709-f326c3aa8a57",
+    "brandId": "c07de00b-4cb5-4d2f-a575-56f0344318ff",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "a4f4a035-17a3-42be-a7cd-f6c9482f8690",
+    "name": "Cheese",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+    "quantityInStock": 34,
+    "unitPrice": 443,
+    "weight": 91,
+    "colorId": "d3156a13-9155-4377-b653-22299829f03c",
+    "brandId": "8c0887bc-defc-4327-9832-f2b22733238a",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "534bd6dd-444c-492e-a56a-69c2012695c9",
+    "name": "Shoes",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "quantityInStock": 69,
+    "unitPrice": 533,
+    "weight": 45,
+    "colorId": "d9375625-bab3-4fcb-bc4a-97a484e15738",
+    "brandId": "5ca760d7-2df1-4d07-8d66-9820d22af9cc",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "32717181-d292-45e5-8b36-bdefd9a4b26b",
+    "name": "Ball",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+    "quantityInStock": 49,
+    "unitPrice": 855,
+    "weight": 50,
+    "colorId": "6d0833c3-f61d-4a6c-8b23-3c940abca5c6",
+    "brandId": "de5ce52d-e4f7-499e-b7e3-d6145139615d",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "46674394-9614-4deb-a849-7b789bd87c0e",
+    "name": "Chair",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+    "quantityInStock": 13,
+    "unitPrice": 462,
+    "weight": 48,
+    "colorId": "d2dd5eb3-446a-43ff-8a77-65d6db70dca8",
+    "brandId": "54298129-716e-43f4-bcf8-66a855ab35f6",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "a00e957f-4c9c-42f3-89cb-260e78fe6be3",
+    "name": "Keyboard",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+    "quantityInStock": 57,
+    "unitPrice": 587,
+    "weight": 64,
+    "colorId": "3ad57595-45d9-4927-b10e-8ae8db636b47",
+    "brandId": "515e6ca1-ba45-485c-b678-2da3343b9b8a",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "80a09a94-095e-4622-a2ea-6be5188a6104",
+    "name": "Car",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+    "quantityInStock": 45,
+    "unitPrice": 577,
+    "weight": 20,
+    "colorId": "e0155e22-8bed-4e61-8b1d-e088cf206da1",
+    "brandId": "569f02c9-d53e-4160-b0d2-9a0789968d11",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "c2a15bc6-eb6a-4d84-a4a3-5397f93a6285",
+    "name": "Gloves",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+    "quantityInStock": 71,
+    "unitPrice": 950,
+    "weight": 35,
+    "colorId": "e19e869e-c3c8-4481-a011-1bd6db903785",
+    "brandId": "615d06d6-540c-4836-a52f-35e732c5790e",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "24fb7148-2c43-4cd7-8730-c58f451fd5bd",
+    "name": "Chips",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+    "quantityInStock": 75,
+    "unitPrice": 471,
+    "weight": 70,
+    "colorId": "8d640814-5425-4e75-82e8-243846601774",
+    "brandId": "f2b744c4-e151-4e75-a805-5c195e1d4574",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "be4f900e-edd2-464b-af16-ac0b97d378c3",
+    "name": "Gloves",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+    "quantityInStock": 57,
+    "unitPrice": 221,
+    "weight": 52,
+    "colorId": "b0ed47a5-1f8c-4da1-a886-fbe07ad0365c",
+    "brandId": "39993e55-c313-4189-9bbd-407985fa3b19",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "0a48278a-998d-4349-944f-85e77e196923",
+    "name": "Soap",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+    "quantityInStock": 52,
+    "unitPrice": 182,
+    "weight": 11,
+    "colorId": "b909781e-c498-4df9-b433-28b5c5b8b79c",
+    "brandId": "751c7f26-a4b5-47b6-b236-5b954352203b",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "edb5f860-c36c-4def-affe-b828fa2ab71d",
+    "name": "Table",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "quantityInStock": 87,
+    "unitPrice": 129,
+    "weight": 38,
+    "colorId": "148d7d9d-3ab4-426a-9f9f-a35faf9f481b",
+    "brandId": "f0ccbc92-7100-4cdb-9405-3a9e11c9dc4f",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "f7def8c0-1495-4ec1-b96a-f9724033b4ed",
+    "name": "Chicken",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+    "quantityInStock": 62,
+    "unitPrice": 381,
+    "weight": 79,
+    "colorId": "4d0ce018-f476-4e94-99cc-d1ca3fc5ada4",
+    "brandId": "15bb7b67-779e-4d60-8005-fa3cf84c206a",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "16a31092-fe65-4a2f-aa29-6199877ac839",
+    "name": "Hat",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+    "quantityInStock": 48,
+    "unitPrice": 202,
+    "weight": 54,
+    "colorId": "f7911ac6-c2f3-425d-b982-9a1042e19d01",
+    "brandId": "2891db9f-acc3-4efa-b3a6-d77c39d862dd",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "f962c9e9-d8b7-4e33-8f49-38ff86d7fe3e",
+    "name": "Towels",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+    "quantityInStock": 39,
+    "unitPrice": 688,
+    "weight": 13,
+    "colorId": "5a0dfb3e-50eb-49d9-b116-b07b328f6391",
+    "brandId": "11f3bf08-3cac-47f0-bea5-4e61206bf62f",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "6fb8f529-f2f5-49d4-91e5-f8087df5567f",
+    "name": "Shoes",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+    "quantityInStock": 43,
+    "unitPrice": 384,
+    "weight": 51,
+    "colorId": "e0cd8dcc-35e2-44d4-9769-46f7bc480020",
+    "brandId": "45a910a2-c5ba-4295-a33f-b4aac229048f",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "f1e4d31b-8924-48d5-9a7e-2252613bad50",
+    "name": "Chips",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The Football Is Good For Training And Recreational Purposes",
+    "quantityInStock": 24,
+    "unitPrice": 739,
+    "weight": 11,
+    "colorId": "38367527-5935-493e-9030-47e4be8483c0",
+    "brandId": "f3d2b774-f39f-44b3-82a8-e9e992c656bf",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "daf1a4d4-6213-4352-a33e-237d3e6782a8",
+    "name": "Pants",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+    "quantityInStock": 66,
+    "unitPrice": 31,
+    "weight": 28,
+    "colorId": "0355bc00-5af4-48ad-9148-0eb3c272d089",
+    "brandId": "25d1b43c-a4cf-4282-9021-cfde3ccccc8f",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "cf0a18f5-85f7-4280-902a-fedb0dee3e36",
+    "name": "Gloves",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+    "quantityInStock": 78,
+    "unitPrice": 827,
+    "weight": 68,
+    "colorId": "30689643-d058-4226-a3e3-17ead4f808e8",
+    "brandId": "6e048986-272c-4987-99b4-f103e07b0677",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "2425023e-f313-4c64-8038-3ed5335eb337",
+    "name": "Salad",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "quantityInStock": 78,
+    "unitPrice": 260,
+    "weight": 17,
+    "colorId": "f64f3e4a-ba2b-45b9-be34-c82d414c1f6d",
+    "brandId": "97eab47b-89ae-48aa-a03f-852feb65ba71",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "55276ed6-8847-443b-a8ae-0ffe843e4316",
+    "name": "Fish",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The Football Is Good For Training And Recreational Purposes",
+    "quantityInStock": 37,
+    "unitPrice": 787,
+    "weight": 13,
+    "colorId": "0f0566e7-801b-4b28-a25e-af71851472a8",
+    "brandId": "cbee2262-538f-4a73-9c09-26f39b528767",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "81389eb3-52dd-4daf-928c-c1c17faff768",
+    "name": "Chair",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "quantityInStock": 18,
+    "unitPrice": 273,
+    "weight": 57,
+    "colorId": "f489de6a-1313-4bd0-a972-840b4795425b",
+    "brandId": "d52585a1-0514-4cc4-b779-12aafaabfe7f",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "c498ad56-8be4-499d-a323-5fb5b9ddc0c7",
+    "name": "Hat",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+    "quantityInStock": 43,
+    "unitPrice": 985,
+    "weight": 42,
+    "colorId": "87bbe634-4286-42ba-b76d-3ad506046564",
+    "brandId": "537f0032-f873-433b-8c71-5a25a35f739e",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "9b5531a5-3a8b-4f07-ba94-9dfa453555d6",
+    "name": "Salad",
+    "pictures": [
+      "https://loremflickr.com/500/500/mobiles",
+      "https://loremflickr.com/500/500/electonics",
+      "https://loremflickr.com/500/500/electrics"
+    ],
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "quantityInStock": 85,
+    "unitPrice": 108,
+    "weight": 96,
+    "colorId": "f4f6ee00-9453-4d97-ab16-79b0d2b210e2",
+    "brandId": "d00cbd90-8bce-4674-8e57-d32aaf94b606",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  }
+]

@@ -64,10 +64,11 @@ model Address {
 }
 
 model Shop {
-  id      String @id @default(uuid())
-  name    String
-  workers User[] @relation(name: "works")
-  owner   User?  @relation(name: "own")
+  id       String    @id @default(uuid())
+  name     String
+  workers  User[]    @relation(name: "works")
+  owner    User?     @relation(name: "own")
+  products Product[]
 }
 
 model Product {
@@ -80,6 +81,9 @@ model Product {
   weight          Float?
   color           Color    @relation(fields: [colorId], references: [id])
   colorId         String
+
+  shop   Shop   @relation(fields: [shopId], references: [id])
+  shopId String
 
   brand   Brand  @relation(fields: [brandId], references: [id])
   brandId String
