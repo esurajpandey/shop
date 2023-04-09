@@ -69,6 +69,7 @@ model Shop {
   workers  User[]    @relation(name: "works")
   owner    User?     @relation(name: "own")
   products Product[]
+  orders   Order[]
 }
 
 model Product {
@@ -138,6 +139,7 @@ model CartItem {
   productId String
 
   quantity  Int
+  unitPrice Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -152,21 +154,27 @@ enum DeliveryStatus {
 }
 
 model Order {
-  id     String @id @default(uuid())
+  id String @id @default(uuid())
+
   user   User   @relation(fields: [userId], references: [id], name: "customer")
   userId String
 
   status DeliveryStatus
 
-  address   Address? @relation(fields: [addressId], references: [id])
-  addressId String?  @unique
+  address   Address @relation(fields: [addressId], references: [id])
+  addressId String
 
   worker   User   @relation(fields: [workerId], references: [id], name: "worker")
   workerId String
 
-  orderAt   DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  orderAt   DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   OrderItem OrderItem[]
+  shop      Shop        @relation(fields: [shopId], references: [id])
+  shopId    String
+
+  @@index([id, addressId])
 }
 
 model OrderItem {

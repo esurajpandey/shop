@@ -7,6 +7,15 @@ import category from './data/category.json' assert {type: 'json'};
 import productCategories from './data/productCategories.json' assert {type: 'json'};
 import attributes from './data/attributes.json' assert {type: 'json'};
 
+import address from './data/address.json' assert {type: 'json'};
+import users from './data/user.json' assert {type: 'json'};
+import worker from './data/workers.json' assert {type: 'json'};
+import cartItem from './data/cartItems.json' assert {type: 'json'};
+import order from './data/orders.json' assert {type: 'json'};
+import orderItem from './data/orderItem.json' assert {type: 'json'};
+import workerAddress from './data/workerAddress.json' assert {type: 'json'};
+import bcrypt from 'bcrypt';
+
 const shopSeeder = async () => {
     return await prisma.shop.create({
         data: shop
@@ -46,6 +55,67 @@ const attributesSeeder = async () => {
     })
 }
 
+const addressSeeder = async () => {
+    return await prisma.address.createMany({
+        data: address
+    })
+}
+
+const userSeeder = async () => {
+    const usersDetails = users.map(user => {
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            type: "CUSTOMER",
+            gender: user.gender,
+            profile: user.profile,
+            mobile: user.mobile,
+            password: bcrypt.hashSync(user.password, 10),
+            isEmailVerified: user.isEmailVerified,
+            addressId: user.addressId
+        }
+    });
+
+    return await prisma.user.createMany({
+        data: usersDetails
+    })
+}
+
+const workerAddressSeeder = async () => {
+    return await prisma.address.createMany({
+        data: workerAddress
+    })
+}
+const workersSeeder = async () => {
+    return await prisma.user.createMany({
+        data: worker
+    })
+}
+
+
+const cartItemSeeder = async () => {
+    return await prisma.cartItem.createMany({
+        data: cartItem
+    })
+}
+
+
+const orderSeeder = async () => {
+    return await prisma.order.createMany({
+        data: order
+    })
+}
+
+
+const orderItemSeeder = async () => {
+    return await prisma.orderItem.createMany({
+        data: orderItem
+    })
+}
+
+
+
 
 async function main() {
     await shopSeeder();
@@ -55,6 +125,13 @@ async function main() {
     await categorySeeder();
     await productCategoriesSeeder();
     await attributesSeeder();
+    await addressSeeder();
+    await userSeeder();
+    await workerAddressSeeder();
+    await workersSeeder();
+    await cartItemSeeder();
+    await orderSeeder();
+    await orderItemSeeder();
 }
 
 await main();

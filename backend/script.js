@@ -1,11 +1,15 @@
 import { faker } from '@faker-js/faker';
-
+import bcrypt from 'bcrypt';
 import fs from 'fs';
 import brand from './data/brand.json' assert {type: 'json'};
 import color from './data/color.json' assert {type: 'json'};
 import product from './data/product.json' assert {type: 'json'};
 import category from './data/category.json' assert {type: 'json'};
-
+import address from './data/address.json' assert {type: 'json'};
+import user from './data/user.json' assert {type: 'json'};
+import worker from './data/workers.json' assert {type: 'json'};
+import orders from './data/orders.json' assert {type: 'json'};
+import workerAddress from './data/workerAddress.json' assert {type: 'json'};
 
 const productGenrator = () => {
     const products = []
@@ -110,6 +114,117 @@ const productCategoriesGenerator = () => {
     fs.writeFileSync('./data/productCategories.json', JSON.stringify(productCategories, null, 2));
 }
 
+const addressGenerator = () => {
+    const addresses = [];
+    for (let i = 0; i < 10; i++) {
+        const address = {
+            id: faker.datatype.uuid(),
+            address_line1: `${faker.address.streetAddress()} ${faker.address.direction()}  ${faker.address.street()} `,
+            city: faker.address.city(),
+            state: faker.address.state(),
+            zip: faker.address.zipCode('######'),
+            country: faker.address.country(),
+        }
+        addresses.push(address);
+    }
+    fs.writeFileSync('./data/workerAddress.json', JSON.stringify(addresses, null, 2));
+}
+
+const generateUsers = () => {
+    const users = [];
+    for (let i = 0; i < 30; i++) {
+        const user = {
+            id: faker.datatype.uuid(),
+            name: faker.name.findName(),
+            email: faker.internet.email(),
+            type: "CUSTOMER",
+            gender: faker.name.sexType(),
+            profile: faker.internet.avatar(400, 400),
+            mobile: faker.phone.number('+91 ##########'),
+            password: faker.internet.password(10),
+            isEmailVerified: true,
+            addressId: address[i].id
+        }
+        users.push(user);
+    }
+    fs.writeFileSync('./data/user.json', JSON.stringify(users, null, 2));
+    // console.log(users);
+}
+
+const generateWorkers = () => {
+    const workers = [];
+    for (let i = 0; i < 10; i++) {
+        const user = {
+            id: faker.datatype.uuid(),
+            name: faker.name.findName(),
+            email: faker.internet.email(),
+            type: "WORKER",
+            gender: faker.name.sexType(),
+            profile: faker.internet.avatar(400, 400),
+            mobile: faker.phone.number('+91 ##########'),
+            password: faker.internet.password(10),
+            isEmailVerified: true,
+            addressId: workerAddress[i].id
+        }
+        workers.push(user);
+    }
+    fs.writeFileSync('./data/workers.json', JSON.stringify(workers, null, 2));
+    // console.log(users);
+}
+
+const cartItemsGenerator = () => {
+    const carts = [];
+    for (let i = 0; i < 30; i++) {
+        for (let j = 0; j < 5; j++) {
+            const cart = {
+                userId: user[i].id,
+                productId: product[j].id,
+                quantity: 2,
+                unitPrice: product[j].unitPrice,
+            }
+            carts.push(cart);
+        }
+    }
+    // console.log(carts)
+    fs.writeFileSync('./data/cartItems.json', JSON.stringify(carts, null, 2));
+}
+
+const deliveryStatus = ["PACKED", "SHIPPED", "OUT_FOR_DELIVERY", "DELIVERED"];
+
+const generateOrders = () => {
+    const orders = [];
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 3; j++) {
+            const order = {
+                id: faker.datatype.uuid(),
+                status: faker.helpers.arrayElement(deliveryStatus),
+                userId: user[i].id,
+                addressId: user[i].addressId,
+                workerId: worker[i].id,
+                shopId: "dd597cdc-d939-4829-a78a-66197bc40e5f",
+            }
+            orders.push(order);
+        }
+    }
+    fs.writeFileSync('./data/orders.json', JSON.stringify(orders, null, 2));
+}
+
+const generateOrderItems = () => {
+    const orderItems = [];
+    for (let i = 0; i < 30; i++) {
+        for (let j = 0; j < 3; j++) {
+            const orderItem = {
+                orderId: orders[i].id,
+                productId: product[j].id,
+                quantity: +faker.random.numeric(1),
+                unitPrice: product[j].unitPrice
+            }
+            orderItems.push(orderItem);
+        }
+    }
+    // console.log(orderItems);
+    fs.writeFileSync('./data/orderItem.json', JSON.stringify(orderItems, null, 2));
+}
 
 // brandgenerator();
 // productGenrator();
@@ -117,4 +232,14 @@ const productCategoriesGenerator = () => {
 // attributeGenerator();
 // categoryGenerator();
 // productCategoriesGenerator();
+// addressGenerator();
+// generateUsers();
+
+// generateWorkers();
+// cartItemsGenerator();
+
+// generateOrders();
+// generateOrderItems();
+console.log(orders.length);
+
 

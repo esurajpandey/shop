@@ -74,7 +74,7 @@ function Login() {
 
   useEffect(() => {
     const user = JSON.stringify(localStorage.getItem("user"));
-    if (user) {
+    if (user.name) {
       navigate("/all");
     }
   }, []);
