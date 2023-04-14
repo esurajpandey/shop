@@ -14,6 +14,8 @@ import cartItem from './data/cartItems.json' assert {type: 'json'};
 import order from './data/orders.json' assert {type: 'json'};
 import orderItem from './data/orderItem.json' assert {type: 'json'};
 import workerAddress from './data/workerAddress.json' assert {type: 'json'};
+
+import supplier from './data/supplier.json' assert {type: 'json'};
 import bcrypt from 'bcrypt';
 
 const shopSeeder = async () => {
@@ -115,9 +117,16 @@ const orderItemSeeder = async () => {
 }
 
 
+const supplierSeeder = async () => {
+    return await prisma.supplier.createMany({
+        data: supplier
+    })
+}
+
 
 
 async function main() {
+    console.log("Seeding start...");
     await shopSeeder();
     await brandSeeder();
     await colorSeeder();
@@ -129,9 +138,12 @@ async function main() {
     await userSeeder();
     await workerAddressSeeder();
     await workersSeeder();
+
     await cartItemSeeder();
     await orderSeeder();
     await orderItemSeeder();
+    await supplierSeeder()
+    console.log("Seeding done");
 }
 
 await main();

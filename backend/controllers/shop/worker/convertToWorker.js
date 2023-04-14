@@ -1,5 +1,5 @@
-import prisma from '../../init/db.js';
-import { errorResponse, successResponse } from '../../utils/helper/response.js';
+import prisma from '../../../init/db.js';
+import { errorResponse, successResponse } from '../../../utils/helper/response.js';
 
 
 export default async (req, reply) => {

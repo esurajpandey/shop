@@ -1,11 +1,13 @@
-import addWorkers from './addWorkers.js';
+import addWorkers from './worker/addWorkers.js';
 import allOrders from './allOrders.js';
-import allWorkers from './allWorkers.js';
-import convertToWorker from './convertToWorker.js';
+import allWorkers from './worker/allWorkers.js';
+import convertToWorker from './worker/convertToWorker.js';
 import getOrderDetails from './getOrderDetails.js';
 import manageOrder from './manageOrder.js';
-import manageWorker from './removeWorker.js';
-import removeWorker from './removeWorker.js';
+import removeWorker from './worker/removeWorker.js';
+import addSupplier from './supply/addSupplier.js';
+import allSupplier from './supply/allSuppliers.js';
+import removeSupplier from './supply/removeSupplier.js';
 export default {
     allOrders,
     addWorkers,
@@ -13,6 +15,8 @@ export default {
     convertToWorker,
     getOrderDetails,
     manageOrder,
-    manageWorker,
-    removeWorker
+    removeWorker,
+    addSupplier,
+    allSupplier,
+    removeSupplier
 }

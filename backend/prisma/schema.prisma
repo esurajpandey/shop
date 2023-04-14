@@ -37,10 +37,10 @@ model User {
 
   owner    Shop?      @relation(fields: [ownerId], references: [id], name: "own")
   ownerId  String?    @unique
-  cartItem CartItem[]
   orders   Order[]    @relation(name: "customer")
   delivery Order[]    @relation(name: "worker")
   otp      Otp?
+  cartItem CartItem[]
 }
 
 model Otp {
@@ -93,6 +93,7 @@ model Product {
   ProductCategories ProductCategories[]
   CartItem          CartItem[]
   OrderItem         OrderItem[]
+  Supplies          Supplies[]
 }
 
 model Color {
@@ -132,14 +133,15 @@ model ProductCategories {
 }
 
 model CartItem {
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  quantity  Int
+  unitPrice Float
 
   product   Product @relation(fields: [productId], references: [id])
   productId String
 
-  quantity  Int
-  unitPrice Float
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -187,5 +189,50 @@ model OrderItem {
   quantity  Int
   unitPrice Float
 
+  review   Review? @relation(fields: [reviewId], references: [id])
+  reviewId String? @unique
+
   @@id([orderId, productId])
+}
+
+model Supplier {
+  id       String     @id @default(uuid())
+  name     String
+  mobile   String     @unique
+  email    String     @unique
+  Supplies Supplies[]
+}
+
+model Supplies {
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  supplierId String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  suppliedAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  quantity  Int
+  unitPrice Float
+
+  @@id([supplierId, productId])
+  @@map("supplies")
+}
+
+enum Rating {
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
+}
+
+model Review {
+  id        String     @id @default(uuid())
+  comment   String?
+  rating    Rating?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  orderItem OrderItem?
 }

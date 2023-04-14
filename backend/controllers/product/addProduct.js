@@ -4,7 +4,6 @@ import { errorResponse, successResponse } from '../../utils/helper/response.js';
 export default async (req, reply) => {
     try {
         // console.log(JSON.parse(req.body.pictures));
-
         const product = await addProduct(req.body);
         // const product = {};
         if (!product)
@@ -24,7 +23,10 @@ export default async (req, reply) => {
 
 const addProduct = async (body) => {
     return prisma.$transaction(async tx => {
-        const { name, pictures, quantity, unitPrice, description, weight, colorId, shopId, brandId, attributes } = body;
+        const { name, pictures, quantity,
+            unitPrice, description, weight,
+            colorId, shopId, brandId, attributes,
+            supplierId } = body;
 
         const product = await tx.product.create({
             data: {
@@ -59,6 +61,18 @@ const addProduct = async (body) => {
                 attributes: true,
             }
         });
+
+        if (supplierId) {
+            await tx.supplies.create({
+                data: {
+                    supplierId,
+                    quantity,
+                    productId: product.id,
+                    unitPrice,
+                }
+            });
+        }
+
         return product;
     })
 }

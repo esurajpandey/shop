@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "nodemon server.js",
-    "seed" : "node seeder.js"
+    "seed": "node seeder.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
   },
   "homepage": "https://github.com/esurajpandey/shop#readme",
   "dependencies": {
+    "@fastify/autoload": "^5.7.1",
     "@fastify/cors": "^8.2.1",
+    "@fastify/request-context": "^4.2.0",
     "@prisma/client": "^4.12.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",

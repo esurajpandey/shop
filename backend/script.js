@@ -226,6 +226,22 @@ const generateOrderItems = () => {
     fs.writeFileSync('./data/orderItem.json', JSON.stringify(orderItems, null, 2));
 }
 
+
+const generateSupplier = () => {
+    const suppliers = [];
+    for (let i = 0; i < 10; i++) {
+        const supplier = {
+            id: faker.datatype.uuid(),
+            name: faker.name.fullName(),
+            mobile: faker.phone.number('+91##########'),
+            email: faker.internet.email(),
+        }
+        suppliers.push(supplier);
+    }
+    fs.writeFileSync('./data/supplier.json', JSON.stringify(suppliers, null, 2));
+}
+
+
 // brandgenerator();
 // productGenrator();
 // colorGenerator();
@@ -240,6 +256,10 @@ const generateOrderItems = () => {
 
 // generateOrders();
 // generateOrderItems();
-console.log(orders.length);
+
+
+generateSupplier();
+cartItemsGenerator();
+// console.log(orders.length);
 
 
