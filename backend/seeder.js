@@ -140,8 +140,8 @@ async function main() {
     await workersSeeder();
 
     await cartItemSeeder();
-    await orderSeeder();
-    await orderItemSeeder();
+    // await orderSeeder();
+    // await orderItemSeeder();
     await supplierSeeder()
     console.log("Seeding done");
 }

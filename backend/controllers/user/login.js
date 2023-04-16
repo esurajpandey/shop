@@ -26,25 +26,6 @@ export default async (req, reply) => {
                 email: true,
                 mobile: true,
                 isEmailVerified: true,
-                cartItem: {
-                    select: {
-                        product: true,
-                        quantity: true,
-                        createdAt: true
-                    }
-                },
-                orders: {
-                    select: {
-                        address: true,
-                        orderAt: true,
-                        status: true,
-                        OrderItem: {
-                            select: {
-                                product: true
-                            }
-                        }
-                    }
-                }
             }
         });
 

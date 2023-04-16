@@ -40,7 +40,8 @@ export default async (req, reply, next) => {
         req.requestContext.set('name', user.name);
         req.requestContext.set('email', user.email);
 
-        next();
+        console.log("In Handler");
+        // next();
     } catch (err) {
         console.log(err);
         reply.code(err?.status ?? 500).send(errorResponse(err));

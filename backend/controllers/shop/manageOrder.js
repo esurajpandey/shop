@@ -4,7 +4,7 @@ import { errorResponse } from '../../utils/helper/response.js';
 export default async (req, reply) => {
     try {
         const orderId = req.params.orderId;
-        const { status } = req.body;
+        const { deliveryStatus, orderStatus } = req.body;
 
         const shopId = req.shop.id;
 
@@ -25,7 +25,8 @@ export default async (req, reply) => {
         const updatedOrder = await prisma.order.update({
             where: { id: order.id },
             data: {
-                status
+                deliveryStatus: deliveryStatus,
+                orderStatus: orderStatus
             }
         });
 

@@ -5,6 +5,7 @@ dotenv.config();
 import cors from '@fastify/cors';
 import fastifyRequestContext from '@fastify/request-context';
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 
 import productRoutes from './routes/productRoutes.js'
@@ -28,6 +29,7 @@ fastify.register(userRoutes, { prefix: '/api/user' });
 fastify.register(productRoutes, { prefix: "/api/product" });
 fastify.register(adminRoutes, { prefix: "/api/admin" });
 fastify.register(cartRoutes, { prefix: "/api/cart" });
+fastify.register(orderRoutes, { prefix: "/api/order" });
 
 fastify.register(fastifyRequestContext, { hook: 'onRequest', defaultStoreValues: context });
 
