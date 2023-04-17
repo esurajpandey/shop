@@ -18,6 +18,7 @@ export default async (req, reply) => {
                     create: {
                         comment,
                         rating,
+                        productId
                     }
                 }
             },
@@ -27,7 +28,7 @@ export default async (req, reply) => {
                     select: {
                         id: true,
                         name: true,
-                        pictures: true
+                        pictures: true,
                     }
                 },
                 review: true,

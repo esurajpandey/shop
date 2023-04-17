@@ -13,9 +13,19 @@ export default async (req, reply) => {
                 attributes: true,
                 color: true,
                 brand: true,
+                Review: true,
             }
         });
 
+        const category = await prisma.productCategories.findMany({
+            where: {
+                productId
+            },
+            select: {
+                category: true
+            }
+        })
+        product.category = category.map(item => item.category);
         if (!product)
             throw { msg: "Product not found", status: 404 };
 

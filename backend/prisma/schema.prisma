@@ -95,6 +95,7 @@ model Product {
   CartItem          CartItem[]
   OrderItem         OrderItem[]
   Supplies          Supplies[]
+  Review            Review[]
 }
 
 model Color {
@@ -266,4 +267,6 @@ model Review {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   orderItem OrderItem?
+  product   Product    @relation(fields: [productId], references: [id])
+  productId String
 }

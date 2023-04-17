@@ -16,6 +16,7 @@ import orderItem from './data/orderItem.json' assert {type: 'json'};
 import workerAddress from './data/workerAddress.json' assert {type: 'json'};
 
 import supplier from './data/supplier.json' assert {type: 'json'};
+import reviews from './data/reviews.json' assert {type: 'json'};
 import bcrypt from 'bcrypt';
 
 const shopSeeder = async () => {
@@ -123,6 +124,11 @@ const supplierSeeder = async () => {
     })
 }
 
+const reviewSeeder = async () => {
+    return await prisma.review.createMany({
+        data: reviews
+    })
+}
 
 
 async function main() {
@@ -143,6 +149,7 @@ async function main() {
     // await orderSeeder();
     // await orderItemSeeder();
     await supplierSeeder()
+    await reviewSeeder();
     console.log("Seeding done");
 }
 

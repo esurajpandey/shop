@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BottomNavbar from "./BottomNavbar";
@@ -8,6 +8,7 @@ import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { TbLogin } from "react-icons/tb";
 import { FaShopify } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -31,15 +32,28 @@ import {
 import EmailVerifierLink from "./EmailVerifierLink";
 
 function Navbar() {
-  const user = {
-    name: "Suraj Pandey",
-    picture: "",
-    isEmailVerified: true,
-  };
+  const [user, setUser] = useState(null);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userDetails = JSON.parse(localStorage.getItem("user"));
+    console.log("In Nva ", userDetails);
+    if (!userDetails) {
+      navigate("/login");
+      return;
+    }
+    setUser((prev) => userDetails);
+  }, []);
+
+  const handleLogout = async () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
+  };
   return (
     <NavContainer>
-      {user.name && !user?.isEmailVerified && <EmailVerifierLink />}
+      {user && !user?.isEmailVerified && <EmailVerifierLink />}
       <MiddleContainer>
         <div className="leftBar">
           <ShopName>
@@ -53,7 +67,8 @@ function Navbar() {
             </button>
           </SearchBox>
         </div>
-        {user.name ? (
+
+        {user && (
           <RightBar>
             <Menu>
               <MenuButton
@@ -93,7 +108,9 @@ function Navbar() {
                   <MenuItem css={MenuItemCss}>My Wishlist</MenuItem>
                   <MenuItem css={MenuItemCss}>My Message</MenuItem>
                   <MenuItem css={MenuItemCss}>My Account</MenuItem>
-                  <MenuItem css={MenuItemCss}>Logout</MenuItem>
+                  <MenuItem css={MenuItemCss} onClick={handleLogout}>
+                    Logout
+                  </MenuItem>
                 </ProfileModel>
               </MenuList>
             </Menu>
@@ -106,13 +123,14 @@ function Navbar() {
             </div>
 
             <div className="nav-btns cart">
-              <Link>
+              <Link to="/cart">
                 <AiOutlineShoppingCart fontSize={"1.5rem"} />
                 <span className="cart-count">{0}</span>
               </Link>
             </div>
           </RightBar>
-        ) : (
+        )}
+        {user === null && (
           <LoginBtnContainer>
             <Link to="/login">
               <span>Login</span>

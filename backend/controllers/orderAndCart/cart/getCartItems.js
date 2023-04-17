@@ -16,6 +16,11 @@ export default async (req, reply) => {
                         pictures: true,
                         brand: true,
                         name: true,
+                        quantityInStock: true,
+                        unitPrice: true,
+                        attributes: true,
+                        color: true,
+                        weight: true,
                     }
                 },
                 quantity: true,

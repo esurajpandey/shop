@@ -241,6 +241,25 @@ const generateSupplier = () => {
     fs.writeFileSync('./data/supplier.json', JSON.stringify(suppliers, null, 2));
 }
 
+const rating = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "ZERO"];
+
+const reviewGenerator = () => {
+    const reviews = [];
+
+    for (let i = 0; i < product.length; i++) {
+        for (let j = 0; j < 8; j++) {
+            const review = {
+                id: faker.datatype.uuid(),
+                rating: faker.helpers.arrayElement(rating),
+                comment: faker.lorem.words(5),
+                productId: product[i].id
+            }
+            reviews.push(review);
+        }
+    }
+
+    fs.writeFileSync('./data/reviews.json', JSON.stringify(reviews, null, 2));
+}
 
 // brandgenerator();
 // productGenrator();
@@ -258,8 +277,9 @@ const generateSupplier = () => {
 // generateOrderItems();
 
 
-generateSupplier();
-cartItemsGenerator();
+// generateSupplier();
+// cartItemsGenerator();
 // console.log(orders.length);
 
+reviewGenerator();
 

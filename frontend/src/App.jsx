@@ -11,6 +11,8 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import axios from "axios";
 import OtpVerify from "./components/OtpVerification/OtpVerify";
+import Cart from "./components/cart/cart-items/Cart";
+import Product from "./components/product/Product";
 function App() {
   const navigate = useNavigate();
 
@@ -20,6 +22,7 @@ function App() {
     if (!user) {
       navigate("/login");
     }
+    axios.defaults.headers.common = { Authorization: `bearer ${user.token}` };
   }, []);
 
   return (
@@ -34,6 +37,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify-account" element={<OtpVerify />} />
+
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:productId" element={<Product />} />
       </Routes>
     </div>
   );

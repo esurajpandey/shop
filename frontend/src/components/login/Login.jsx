@@ -15,6 +15,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState();
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -46,6 +47,7 @@ function Login() {
           name: data.data.name,
           email: data.data.email,
           token: data.token,
+          isEmailVerified: data.data.isEmailVerified,
         })
       );
 
@@ -56,6 +58,7 @@ function Login() {
         isClosable: true,
         position: "bottom",
       });
+      window.location.reload(true);
       setLoading(false);
       navigate("/all");
     } catch (err) {
@@ -73,60 +76,63 @@ function Login() {
   };
 
   useEffect(() => {
-    const user = JSON.stringify(localStorage.getItem("user"));
-    if (user.name) {
+    const userDetails = JSON.parse(localStorage.getItem("user"));
+    if (userDetails) {
+      setUser(user);
       navigate("/all");
     }
   }, []);
 
   return (
-    <LoginContainer>
-      <div className="main-login-container">
-        <div className="left-image">
-          <img src={loginImage} alt="Login" />
-        </div>
-        <div className="form-container">
-          <h2 className="login-text">Login your account</h2>
-          <LoginForm>
-            <InputContainer>
-              <Lable color="white">Email</Lable>
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </InputContainer>
-            <InputContainer>
-              <Lable>Password</Lable>
-              <Input
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </InputContainer>
+    !user && (
+      <LoginContainer>
+        <div className="main-login-container">
+          <div className="left-image">
+            <img src={loginImage} alt="Login" />
+          </div>
+          <div className="form-container">
+            <h2 className="login-text">Login your account</h2>
+            <LoginForm>
+              <InputContainer>
+                <Lable color="white">Email</Lable>
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  name="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </InputContainer>
+              <InputContainer>
+                <Lable>Password</Lable>
+                <Input
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </InputContainer>
 
-            <Button
-              variant="solid"
-              colorScheme="cyan"
-              width={"100%"}
-              style={{ marginTop: 15 }}
-              onClick={handleSubmit}
-              isLoading={loading}
-            >
-              Login
-            </Button>
-          </LoginForm>
+              <Button
+                variant="solid"
+                colorScheme="cyan"
+                width={"100%"}
+                style={{ marginTop: 15 }}
+                onClick={handleSubmit}
+                isLoading={loading}
+              >
+                Login
+              </Button>
+            </LoginForm>
 
-          <RegisterLink>
-            <Link to="/register">Create account</Link>
-          </RegisterLink>
+            <RegisterLink>
+              <Link to="/register">Create account</Link>
+            </RegisterLink>
+          </div>
         </div>
-      </div>
-    </LoginContainer>
+      </LoginContainer>
+    )
   );
 }
 
