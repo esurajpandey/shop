@@ -26,6 +26,7 @@ export default async (req, reply) => {
                 email: true,
                 mobile: true,
                 isEmailVerified: true,
+                type: true,
             }
         });
 

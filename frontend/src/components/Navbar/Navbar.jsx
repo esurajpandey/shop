@@ -34,11 +34,11 @@ import EmailVerifierLink from "./EmailVerifierLink";
 function Navbar() {
   const [user, setUser] = useState(null);
 
+  const type = "admin";
   const navigate = useNavigate();
 
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem("user"));
-    console.log("In Nva ", userDetails);
     if (!userDetails) {
       navigate("/login");
       return;
@@ -62,7 +62,7 @@ function Navbar() {
           </ShopName>
           <SearchBox>
             <input type="text" placeholder="Search..." />
-            <button class="search-button">
+            <button className="search-button">
               <AiOutlineSearch className="search-icon" />
             </button>
           </SearchBox>
@@ -70,6 +70,20 @@ function Navbar() {
 
         {user && (
           <RightBar>
+            <div className="nav-btns favr">
+              <Link to="/favorites">
+                <MdOutlineFavorite fontSize={"1.5rem"} />
+                <span className="favorite">Favorites</span>
+              </Link>
+            </div>
+
+            <div className="nav-btns cart">
+              <Link to="/cart">
+                <AiOutlineShoppingCart fontSize={"1.5rem"} />
+                <span className="cart-count">{0}</span>
+              </Link>
+            </div>
+
             <Menu>
               <MenuButton
                 as={Button}
@@ -114,20 +128,6 @@ function Navbar() {
                 </ProfileModel>
               </MenuList>
             </Menu>
-
-            <div className="nav-btns favr">
-              <Link to="/favorites">
-                <MdOutlineFavorite fontSize={"1.5rem"} />
-                <span className="favorite">Favorites</span>
-              </Link>
-            </div>
-
-            <div className="nav-btns cart">
-              <Link to="/cart">
-                <AiOutlineShoppingCart fontSize={"1.5rem"} />
-                <span className="cart-count">{0}</span>
-              </Link>
-            </div>
           </RightBar>
         )}
         {user === null && (
@@ -139,12 +139,15 @@ function Navbar() {
           </LoginBtnContainer>
         )}
       </MiddleContainer>
-
-      <BottomNavbar />
+      {type === "admin" && <NavButtomLine></NavButtomLine>}
+      {type !== "admin" && <BottomNavbar />}
     </NavContainer>
   );
 }
 
+const NavButtomLine = styled.div`
+  border: 1px solid black;
+`;
 const LoginBtnContainer = styled.div`
   display: flex;
   flex-direction: row;

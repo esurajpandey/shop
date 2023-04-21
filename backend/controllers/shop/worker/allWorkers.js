@@ -3,22 +3,29 @@ import { errorResponse, successResponse } from '../../../utils/helper/response.j
 
 export default async (req, reply) => {
     try {
-        const page = +(req.query?.page ?? "0");
+        const page = (+(req.query?.page ?? "1") - 1);
 
-        const shopId = req.shop.id;
-        const workers = await prisma.shop.findUnique({
+        const shopId = req.requestContext.get('shopId');
+        const shopWorkers = await prisma.shop.findUnique({
             where: { id: shopId },
             select: {
-                workers: true,
+                workers: {
+                    take: 10,
+                    skip: 10 * page,
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        mobile: true,
+                        createdAt: true,
+                    }
+                },
             }
         });
 
-        if (workers.workers.length === 0) {
-            throw { msg: "No workers found", status: 404 };
-        }
         reply
             .code(200)
-            .send(successResponse(workers.workers, "Workers details"));
+            .send(successResponse(shopWorkers.workers, "Workers details"));
     } catch (err) {
         reply
             .code(err?.status ?? 500).send(errorResponse(err));

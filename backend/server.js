@@ -18,9 +18,10 @@ const fastify = Fastify();//{ logger: true }
 await fastify.register(cors);
 
 const context = {
-    userId: "Suraj",
+    userId: null,
     name: null,
-    email: null
+    email: null,
+    shopId: null
 }
 
 

@@ -35,12 +35,13 @@ export default async (req, reply, next) => {
         if (!user) {
             throw { msg: "Login again", status: 422 };
         }
+        console.log("In Handler");
 
         req.requestContext.set('userId', user.id);
         req.requestContext.set('name', user.name);
         req.requestContext.set('email', user.email);
 
-        console.log("In Handler");
+
         // next();
     } catch (err) {
         console.log(err);

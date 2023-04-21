@@ -10,6 +10,7 @@ import {
 } from "../register/register.styled";
 import { Lable, LoginContainer, LoginForm, RegisterLink } from "./login.styled";
 import styled from "styled-components";
+import { getLogin } from "../../api/User";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-
+    console.log("Hello");
     if (!(email && password)) {
       toast({
         title: "Enter the email and password",
@@ -36,7 +37,7 @@ function Login() {
     }
 
     try {
-      const { data } = await axios.post("/api/user/login", {
+      const data = await getLogin({
         email,
         password,
       });
@@ -48,6 +49,7 @@ function Login() {
           email: data.data.email,
           token: data.token,
           isEmailVerified: data.data.isEmailVerified,
+          type: data.data.type,
         })
       );
 
@@ -62,9 +64,9 @@ function Login() {
       setLoading(false);
       navigate("/all");
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
       toast({
-        title: err?.response?.data?.message,
+        title: err.message,
         description: "Inavlid email and password",
         status: "error",
         duration: 5000,

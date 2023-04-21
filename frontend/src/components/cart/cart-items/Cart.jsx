@@ -91,36 +91,38 @@ const Cart = () => {
           </CartItems>
         )}
 
-        <CartTotal>
-          <h3 className="price-heading">PRICE DETAILS</h3>
+        {cartItems.length > 0 && (
+          <CartTotal>
+            <h3 className="price-heading">PRICE DETAILS</h3>
 
-          <div className="cart-total-rows">
-            <span className="row-value">Price ({cartTotalCount} items)</span>{" "}
-            <span className="value"> &#8377; {getTotalPrice(cartItems)}</span>
-          </div>
-          <div className="cart-total-rows">
-            <span className="row-value">Delivery Charges</span>{" "}
-            <span className="value">
-              {" "}
-              &#8377; {getTotalPrice(cartItems) > 1500 ? "Free" : "100"}
-            </span>
-          </div>
+            <div className="cart-total-rows">
+              <span className="row-value">Price ({cartTotalCount} items)</span>{" "}
+              <span className="value"> &#8377; {getTotalPrice(cartItems)}</span>
+            </div>
+            <div className="cart-total-rows">
+              <span className="row-value">Delivery Charges</span>{" "}
+              <span className="value">
+                {" "}
+                &#8377; {getTotalPrice(cartItems) > 1500 ? "Free" : "100"}
+              </span>
+            </div>
 
-          <div className="cart-total-rows">
-            <span className="row-value">Total Amount</span>{" "}
-            <span className="value">
-              {" "}
-              &#8377;{" "}
-              {getTotalPrice(cartItems) > 1500
-                ? getTotalPrice(cartItems)
-                : getTotalPrice(cartItems) + 100}
-            </span>
-          </div>
+            <div className="cart-total-rows">
+              <span className="row-value">Total Amount</span>{" "}
+              <span className="value">
+                {" "}
+                &#8377;{" "}
+                {getTotalPrice(cartItems) > 1500
+                  ? getTotalPrice(cartItems)
+                  : getTotalPrice(cartItems) + 100}
+              </span>
+            </div>
 
-          <div className="place-order-btn">
-            <OrderButton>PLACE ORDER</OrderButton>
-          </div>
-        </CartTotal>
+            <div className="place-order-btn">
+              <OrderButton>PLACE ORDER</OrderButton>
+            </div>
+          </CartTotal>
+        )}
       </div>
     </CartContainer>
   );
@@ -129,14 +131,12 @@ const Cart = () => {
 const CartItems = styled.div`
   background-color: white;
   width: 70%;
-  padding: 1rem;
+  height: 100%;
+  /* padding: 1rem; */
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 1em;
   border-radius: 5px;
-  box-shadow: 3px 1px 27px -2px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 3px 1px 27px -2px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 3px 1px 27px -2px rgba(0, 0, 0, 0.75);
 
   @media (max-width: 700px) {
     width: 100%;
@@ -145,16 +145,13 @@ const CartItems = styled.div`
 
 const CartTotal = styled.div`
   background-color: white;
-  width: 22em;
-  height: 20em;
   display: flex;
+  width: 30%;
+  height: fit-content;
   flex-direction: column;
-  padding: 1em;
+  padding: 1em 2.5em;
   gap: 0.7em;
-  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.75);
-  border-radius: 5px;
+
   .price-heading {
     font-family: "Roboto Mono";
     font-size: 1.5rem;
@@ -179,6 +176,13 @@ const CartTotal = styled.div`
   @media (max-width: 700px) {
     display: none;
   }
+
+  &:hover {
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+  }
 `;
 
 const CartContainer = styled.div`
@@ -186,16 +190,20 @@ const CartContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 1em 4em;
-
+  box-sizing: border-box;
+  background-color: #dadada;
+  min-height: 77vh;
   .heading {
     font-family: "Roboto Mono";
     font-weight: 700;
-    text-decoration: underline;
+    font-size: 2rem;
   }
   .main-cart-container {
     display: flex;
     flex-direction: row;
     gap: 3em;
+    /* height: 100vh;
+    width: 100%; */
   }
 `;
 

@@ -4,7 +4,7 @@ import { errorResponse, successResponse } from '../../utils/helper/response.js';
 export default async (req, reply) => {
     try {
         const productId = req.params.productId;
-
+        console.log("WQlcome")
         const product = await prisma.product.findUnique({
             where: {
                 id: productId

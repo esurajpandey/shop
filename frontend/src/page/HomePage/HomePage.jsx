@@ -4,14 +4,7 @@ const HomePage = () => {
   const { searchQuery } = useParams();
   // alert(searchQuery);
   const myStyle = {};
-  return (
-    <div style={myStyle}>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, deleniti
-      facilis. Ab necessitatibus nesciunt veritatis sequi iste asperiores,
-      suscipit accusamus velit consequatur distinctio voluptatibus expedita
-      quasi saepe dolor ipsa excepturi.{" "}
-    </div>
-  );
+  return <div style={myStyle}></div>;
 };
 
 export default HomePage;

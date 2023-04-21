@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./page/HomePage/HomePage";
 import AdminPage from "./page/AdminPage/AdminPage";
@@ -13,20 +13,23 @@ import axios from "axios";
 import OtpVerify from "./components/OtpVerification/OtpVerify";
 import Cart from "./components/cart/cart-items/Cart";
 import Product from "./components/product/Product";
+import styled from "styled-components";
 function App() {
   const navigate = useNavigate();
-
+  const type = "admin";
   useEffect(() => {
-    axios.defaults.baseURL = "http://127.0.0.1:5000";
+    axios.defaults.baseURL = "http://192.168.0.111:5000";
+
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
-      navigate("/login");
+      return navigate("/login");
     }
+
     axios.defaults.headers.common = { Authorization: `bearer ${user.token}` };
   }, []);
 
   return (
-    <div>
+    <MainApp>
       <Navbar />
       <Routes>
         <Route path="/:searchQuery" exact element={<HomePage />} />
@@ -40,9 +43,15 @@ function App() {
 
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:productId" element={<Product />} />
+        {type === "admin" && <Route path="admin/*" element={<AdminPage />} />}
       </Routes>
-    </div>
+    </MainApp>
   );
 }
+
+const MainApp = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+`;
 
 export default App;

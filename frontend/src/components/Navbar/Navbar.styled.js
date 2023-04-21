@@ -66,6 +66,7 @@ export const NavContainer = styled.div`
   flex-direction: column;
   position: sticky;
   z-index: 20;
+  width: 100%;
 `;
 
 export const MiddleContainer = styled.div`
@@ -103,7 +104,7 @@ export const ShopName = styled.div`
   display: flex;
   /* border: 1px solid green; */
   h1{
-    font-family: "Anton";
+    font-family: 'Brush Script';
     font-weight: 900;
     /* color:white; */
   }

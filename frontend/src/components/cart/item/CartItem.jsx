@@ -145,12 +145,19 @@ const CartItemsConatiner = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 9fr;
-  border-bottom: 1px solid grey;
-  padding: 0.4em;
+  /* border-bottom: 1px solid grey; */
+  padding: 0.8em 0.4em;
+  transition-duration: 250ms;
 
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
+  }
+
+  &:hover {
+    box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.75);
   }
 `;
 
