@@ -1,10 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import { ContainerForAdmin, AddSupplierForm } from "../supplier/AddSupplier";
-import styled from "styled-components";
 import { useFormik } from "formik";
 import { workerSchema } from "../../../../validation/AdminValidation";
+import {
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import { createWorker, convertCustToWorker } from "../../../../api/Admin";
+import styled from "styled-components";
+
 const AddWorker = () => {
-  const handleSubmitForm = (action, values) => {};
+  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [convertWorkerEmail, setConvertWorkerEmail] = useState("");
+
+  const handleSubmitForm = async (values, action) => {
+    try {
+      const data = await createWorker(values);
+      toast({
+        title: data?.message,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } finally {
+      action.resetForm();
+    }
+  };
+
+  const convertCustomerToWorker = async (email, onSuccess) => {
+    try {
+      if (!email) {
+        toast({
+          title: "Email is required to add",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+
+        return;
+      }
+      const userData = {
+        email,
+      };
+
+      const data = await convertCustToWorker(userData);
+      toast({
+        title: data?.message,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } finally {
+    }
+  };
 
   const handleCancel = (action, values) => {
     action.resetForm();
@@ -104,9 +185,69 @@ const AddWorker = () => {
           </button>
         </div>
       </AddSupplierForm>
+
+      <ConvertUserToWorker>
+        {/* <Button mt={4} onClick={onOpen}>
+          Open Modal
+        </Button> */}
+        <span onClick={onOpen} className="user-to-worker">
+          Convert customer to worker
+        </span>
+        <Modal isOpen={isOpen} onClose={onClose} mt={10} isCentered>
+          <ModalOverlay
+            bg="blackAlpha.300"
+            backdropFilter="blur(1px) hue-rotate(90deg)"
+          />
+          <ModalContent>
+            <ModalHeader>User email</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Input
+                placeholder="Enter email"
+                size="md"
+                border={"1px solid #a1d4db"}
+                _focus={{ border: "1px solid #a3d2d8" }}
+                onChange={(e) => setConvertWorkerEmail(e.target.value)}
+              />
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                onClick={() =>
+                  convertCustomerToWorker(convertWorkerEmail, onClose)
+                }
+              >
+                Add workeroutline
+              </Button>
+              <Button variant="outline" onClick={onClose}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </ConvertUserToWorker>
     </ContainerForAdmin>
   );
 };
 
-const AddWorkerForm = styled.form``;
+const ConvertUserToWorker = styled.div`
+  display: flex;
+  align-content: center;
+  margin-top: 0.5em;
+  .user-to-worker {
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2em 8.8em;
+    border-radius: 5px;
+    background-color: #95d1cc;
+    color: #173f49;
+    &:hover {
+      background-color: #78c5bf;
+    }
+  }
+`;
 export default AddWorker;

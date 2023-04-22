@@ -65,6 +65,7 @@ export const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: sticky;
+  top: 0;
   z-index: 20;
   width: 100%;
 `;

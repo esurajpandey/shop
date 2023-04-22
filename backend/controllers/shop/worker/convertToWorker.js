@@ -5,7 +5,7 @@ import { errorResponse, successResponse } from '../../../utils/helper/response.j
 export default async (req, reply) => {
     try {
         const { email } = req.body;
-
+        const shopId = req.requestContext.get("shopId");
         const isUserExists = await prisma.user.findUnique({ where: { email } });
 
         if (!isUserExists)
@@ -19,13 +19,19 @@ export default async (req, reply) => {
                 id: isUserExists.id
             },
             data: {
-                type: "WORKER"
+                type: "WORKER",
+                worker: {
+                    connect: {
+                        id: shopId
+                    }
+                }
             },
             select: {
                 id: true,
                 name: true,
                 email: true,
-                type: true,
+                mobile: true,
+                type: true
             }
         });
 

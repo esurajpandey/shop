@@ -35,11 +35,15 @@ model User {
   worker   Shop?   @relation(fields: [workerId], references: [id], name: "works")
   workerId String?
 
-  owner     Shop?      @relation(fields: [ownerId], references: [id], name: "own")
-  ownerId   String?    @unique
-  orders    Order[]    @relation(name: "customer")
-  delivery  Order[]    @relation(name: "worker")
-  otp       Otp?
+  owner   Shop?   @relation(fields: [ownerId], references: [id], name: "own")
+  ownerId String? @unique
+
+  otp   Otp?    @relation(fields: [otpId], references: [id])
+  otpId String? @unique
+
+  orders   Order[] @relation(name: "customer")
+  delivery Order[] @relation(name: "worker")
+
   cartItem  CartItem[]
   payements Payement[]
 }
@@ -49,8 +53,7 @@ model Otp {
   value     Int
   createdAt DateTime @default(now())
   expireIn  Int
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @unique
+  user      User?
 }
 
 model Address {

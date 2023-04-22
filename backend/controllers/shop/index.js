@@ -9,6 +9,7 @@ import addSupplier from './supply/addSupplier.js';
 import allSupplier from './supply/allSuppliers.js';
 import removeSupplier from './supply/removeSupplier.js';
 import updateWorker from './worker/updateWorker.js';
+import updateSupplier from './supply/updateSupplier.js';
 export default {
     allOrders,
     addWorkers,
@@ -20,5 +21,6 @@ export default {
     addSupplier,
     allSupplier,
     removeSupplier,
-    updateWorker
+    updateWorker,
+    updateSupplier
 }

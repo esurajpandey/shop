@@ -1,25 +1,11 @@
 import styled from "styled-components";
-export const SubmitButton = styled.button`
-  border: 0;
-  outline: 1px solid black;
-  border-radius: 2px;
-  font-family: "Roboto Mono";
-  padding: 0.4em;
-  margin: 0.3rem 0;
-  background-color: #3c4a66;
-  outline: 0;
 
-  span {
-    font-size: 1rem;
-    font-weight: 700;
-    color: white;
-  }
-`;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: "Roboto Mono";
+  font-family: "Hind";
+
 `;
 export const Lable = styled.label`
   font-family: inherit;
@@ -29,14 +15,20 @@ export const Lable = styled.label`
 `;
 
 export const Input = styled.input`
-  font-family: inherit;
+  font-family: "Hind";
   font-size: 1rem;
-  padding: 0.4em;
+  padding: 0.5em 0.3em;
   width: 24rem;
   border-radius: 3px;
   :focus {
     border: 0;
     outline: none;
+  }
+
+  &:active,&:focus{
+    box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.75);
   }
   @media (max-width: 700px) {
     /* border: 2px solid red;/ */
@@ -49,18 +41,22 @@ export const ResgisterFormContainer = styled.form`
   gap: 0.4rem;
   padding: 0;
   .login-link {
-    font-family: "Roboto Mono";
+    font-family: "Hind";
     a {
       color: blue;
     }
+  }
+  .input-error{
+    border: 2px solid red;
   }
 `;
 export const RegisterContainer = styled.div`
   display: flex;
   width: 100vw;
+  height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: #93a2ac;
+  background-color: #C4DDFF;
 
   .main-container {
     /* padding: 0.8rem 2rem; */
@@ -70,12 +66,12 @@ export const RegisterContainer = styled.div`
     gap: 1rem;
     border-radius: 3px;
     margin-block: 2em;
-    border: 1px solid #3c4a66;
+    /* border: 1px solid #3c4a66; */
     border-radius: 25px;
 
-    box-shadow: 9px 12px 17px 6px rgba(0, 0, 0, 0.79);
-    -webkit-box-shadow: 9px 12px 17px 6px rgba(0, 0, 0, 0.79);
-    -moz-box-shadow: 9px 12px 17px 6px rgba(0, 0, 0, 0.79);
+    box-shadow: 0px 0px 19px -2px rgba(127,181,255,0.75);
+    -webkit-box-shadow: 0px 0px 19px -2px rgba(127,181,255,0.75);
+    -moz-box-shadow: 0px 0px 19px -2px rgba(127,181,255,0.75);
   }
 
   .register-form {
@@ -93,13 +89,15 @@ export const RegisterContainer = styled.div`
 
   .register-text {
     font-family: "Alkatra";
-    color: white;
-    text-shadow: 2px 3px 15px rgba(230, 8, 8, 0.6);
+    color: #383838;
+    text-shadow: 3px 3px 3px rgba(56,56,56,0.6);
   }
   .register-side-image {
     img {
       width: 28rem;
-      height: 31rem;
+      /* height: 34rem; */
+      min-height: 34rem;
+      max-width: 34rem;
       border-top-left-radius: 25px;
       border-bottom-left-radius: 25px;
       @media (max-width: 700px) {

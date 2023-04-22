@@ -25,8 +25,8 @@ export default async (req, reply) => {
                 password: hashPassword,
                 otp: {
                     create: {
-                        value: +otpValue,
-                        expireIn: 10
+                        expireIn: 10,
+                        value: +otpValue
                     }
                 }
             },
@@ -35,6 +35,8 @@ export default async (req, reply) => {
                 email: true,
                 mobile: true,
                 name: true,
+                isEmailVerified: true,
+                type: true,
                 otp: true
             }
         });
@@ -54,6 +56,8 @@ export default async (req, reply) => {
             .send(responseData);
 
     } catch (err) {
+
+
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }

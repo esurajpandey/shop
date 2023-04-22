@@ -41,15 +41,15 @@ function Navbar() {
     const userDetails = JSON.parse(localStorage.getItem("user"));
     if (!userDetails) {
       navigate("/login");
-      return;
     }
-    setUser((prev) => userDetails);
+    setUser(userDetails);
   }, []);
 
   const handleLogout = async () => {
     localStorage.removeItem("user");
     setUser(null);
-    navigate("/login");
+    window.location.reload(true);
+    return navigate("/login");
   };
   return (
     <NavContainer>
@@ -139,8 +139,8 @@ function Navbar() {
           </LoginBtnContainer>
         )}
       </MiddleContainer>
-      {type === "admin" && <NavButtomLine></NavButtomLine>}
-      {type !== "admin" && <BottomNavbar />}
+      {user && user?.type === "ADMIN" && <NavButtomLine></NavButtomLine>}
+      {user && user?.type !== "ADMIN" && <BottomNavbar />}
     </NavContainer>
   );
 }

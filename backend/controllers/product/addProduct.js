@@ -3,9 +3,9 @@ import { errorResponse, successResponse } from '../../utils/helper/response.js';
 
 export default async (req, reply) => {
     try {
-        // console.log(JSON.parse(req.body.pictures));
-        const product = await addProduct(req.body);
-        // const product = {};
+        const shopId = req.requestContext.get('shopId');
+
+        const product = await addProduct(req.body, shopId);
         if (!product)
             throw { msg: "Unable to create product", status: 422 };
 
@@ -21,12 +21,12 @@ export default async (req, reply) => {
 }
 
 
-const addProduct = async (body) => {
+const addProduct = async (body, shopId) => {
     return prisma.$transaction(async tx => {
         const { name, pictures, quantity,
             unitPrice, description, weight,
-            colorId, shopId, brandId, attributes,
-            supplierId } = body;
+            colorId, brandId, attributes,
+            supplierId, categoryId } = body;
 
         const product = await tx.product.create({
             data: {
@@ -56,11 +56,22 @@ const addProduct = async (body) => {
                         id: shopId
                     }
                 },
+                ProductCategories: {
+                    create: {
+                        categoryId,
+                    }
+                }
             },
             include: {
                 attributes: true,
+                ProductCategories: {
+                    include: {
+                        category: true
+                    }
+                }
             }
         });
+
 
         if (supplierId) {
             await tx.supplies.create({

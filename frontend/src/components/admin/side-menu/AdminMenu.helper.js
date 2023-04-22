@@ -1,7 +1,6 @@
 import { SiGoogleanalytics, SiTemporal } from 'react-icons/si';
 import { HiViewGrid, HiViewGridAdd } from 'react-icons/hi';
 import { MdOutlineStreetview } from 'react-icons/md';
-import { TbBrandFlipboard } from 'react-icons/tb';
 import { GrDocumentUpdate } from 'react-icons/gr';
 import { GoListUnordered } from 'react-icons/go';
 import { IoPersonAddSharp } from 'react-icons/io5';
@@ -19,13 +18,8 @@ export const MenuContents = [
     },
     {
         icon: HiViewGrid,
-        title: "View Product",
+        title: "View Products",
         path: "/admin/product-list"
-    },
-    {
-        icon: TbBrandFlipboard,
-        title: "Add Brand",
-        path: "/admin/add-brand"
     },
     {
         icon: GrDocumentUpdate,

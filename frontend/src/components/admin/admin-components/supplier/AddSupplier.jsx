@@ -2,11 +2,31 @@ import React from "react";
 import { useFormik } from "formik";
 import styled from "styled-components";
 import { supplierSchema } from "../../../../validation/AdminValidation";
-
+import { createSupplier } from "../../../../api/Admin";
+import { useToast } from "@chakra-ui/react";
 const AddSupplier = () => {
-  const handleSubmitForm = (values, action) => {
-    console.log("submitted");
-    action.resetForm();
+  const toast = useToast();
+  const handleSubmitForm = async (values, action) => {
+    try {
+      const data = await createSupplier(values);
+      toast({
+        title: data?.message,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } finally {
+      action.resetForm();
+    }
   };
 
   const handleCancel = (values, action) => {
@@ -31,7 +51,7 @@ const AddSupplier = () => {
     onSubmit: handleSubmitForm,
   });
 
-  console.log(errors);
+  // console.log(errors);
   return (
     <ContainerForAdmin>
       <div className="add-supplier-title">
@@ -50,6 +70,11 @@ const AddSupplier = () => {
             onBlur={handleBlur}
             className={errors?.name && touched.name ? "input-error" : ""}
           />
+          {errors?.name && touched.name ? (
+            <span className="error-class">Name is required</span>
+          ) : (
+            ""
+          )}
         </div>
         <div className="email-field field">
           <label htmlFor="email">Email</label>
@@ -63,6 +88,11 @@ const AddSupplier = () => {
             onBlur={handleBlur}
             className={errors?.email && touched.email ? "input-error" : ""}
           />
+          {errors?.email && touched.email ? (
+            <span className="error-class">Email is required</span>
+          ) : (
+            ""
+          )}
         </div>
         <div className="mobile-field field">
           <label htmlFor="mobile">Mobile Number</label>
@@ -76,6 +106,11 @@ const AddSupplier = () => {
             onBlur={handleBlur}
             className={errors?.mobile && touched.mobile ? "input-error" : ""}
           />
+          {errors?.mobile && touched.mobile ? (
+            <span className="error-class">Mobile number is required</span>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="buttons">
@@ -116,6 +151,9 @@ export const ContainerForAdmin = styled.div`
       font-family: "Hind";
       font-weight: 600;
     }
+  }
+  .error-class {
+    color: red;
   }
 `;
 

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 import registerImage from "../../assets/signup.jpg";
 import {
   Input,
@@ -8,22 +7,66 @@ import {
   Lable,
   RegisterContainer,
   ResgisterFormContainer,
-  SubmitButton,
 } from "./register.styled";
+import { Button, useToast } from "@chakra-ui/react";
+import { registerSchema } from "../../validation/UserValidation";
+import { useFormik } from "formik";
+import { postRegister } from "../../api/User";
 
 const Register = () => {
-  const [formValue, setFormValue] = useState({
-    email: "",
-    name: "",
-    mobile: "",
-    password: "",
-    cnfPassword: "",
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  const handleSubmitForm = async (values, action) => {
+    try {
+      const data = await postRegister(values);
+
+      console.log(data);
+      toast({
+        title: data?.message,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: data.data.name,
+          email: data.data.email,
+          token: data.token,
+          isEmailVerified: data.data.isEmailVerified,
+          type: data.data.type,
+        })
+      );
+      window.location.reload(true);
+      return navigate("/all");
+    } catch (error) {
+    } finally {
+      action.resetForm();
+    }
+  };
+  const {
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    touched,
+    errors,
+    values,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      mobile: "",
+      cnfPassword: "",
+    },
+    validationSchema: registerSchema,
+    onSubmit: handleSubmitForm,
   });
 
-  const handleFormValueChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
-  };
   return (
     <RegisterContainer>
       <div className="main-container">
@@ -38,9 +81,11 @@ const Register = () => {
               <Input
                 type="email"
                 placeholder="Enter your email"
-                value={formValue.email}
+                value={values.email}
                 name="email"
-                onChange={handleFormValueChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors?.email && touched.email ? "input-error" : ""}
               />
             </InputContainer>
 
@@ -49,9 +94,11 @@ const Register = () => {
               <Input
                 type="text"
                 placeholder="Enter your name"
-                value={formValue.name}
+                value={values.name}
                 name="name"
-                onChange={handleFormValueChange}
+                id="name"
+                onChange={handleChange}
+                className={errors?.name && touched.name ? "input-error" : ""}
               />
             </InputContainer>
 
@@ -60,9 +107,14 @@ const Register = () => {
               <Input
                 type="phone"
                 placeholder="Enter your mobile number"
-                value={formValue.mobile}
+                value={values.mobile}
                 name="mobile"
-                onChange={handleFormValueChange}
+                id="mobile"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors?.mobile && touched.mobile ? "input-error" : ""
+                }
               />
             </InputContainer>
             <InputContainer>
@@ -70,9 +122,14 @@ const Register = () => {
               <Input
                 type="password"
                 placeholder="Enter your password"
-                value={formValue.password}
+                value={values.password}
                 name="password"
-                onChange={handleFormValueChange}
+                id="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors?.password && touched.password ? "input-error" : ""
+                }
               />
             </InputContainer>
 
@@ -81,15 +138,34 @@ const Register = () => {
               <Input
                 type="password"
                 placeholder="Confirm your password"
-                value={formValue.cnfPassword}
+                value={values.cnfPassword}
                 name="cnfPassword"
-                onChange={handleFormValueChange}
+                id="cnfPassword"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors?.cnfPassword && touched.cnfPassword
+                    ? "input-error"
+                    : ""
+                }
               />
+              {errors?.cnfPassword && touched.cnfPassword ? (
+                <span>{errors.cnfPassword}</span>
+              ) : (
+                <></>
+              )}
             </InputContainer>
 
-            <SubmitButton>
-              <span>Register</span>
-            </SubmitButton>
+            <Button
+              variant="solid"
+              colorScheme="cyan"
+              width={"100%"}
+              style={{ marginTop: 15 }}
+              onClick={handleSubmit}
+              isLoading={isSubmitting}
+            >
+              Register
+            </Button>
 
             <span className="login-link">
               Have an account <Link to="/login">login</Link>

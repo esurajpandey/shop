@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Button, useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import loginImage from "../../assets/login-image.jpg";
-import {
-  Input,
-  InputContainer,
-  SubmitButton,
-} from "../register/register.styled";
+import { Input, InputContainer } from "../register/register.styled";
 import { Lable, LoginContainer, LoginForm, RegisterLink } from "./login.styled";
-import styled from "styled-components";
 import { getLogin } from "../../api/User";
 
 function Login() {
@@ -23,7 +17,6 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log("Hello");
     if (!(email && password)) {
       toast({
         title: "Enter the email and password",
@@ -138,10 +131,4 @@ function Login() {
   );
 }
 
-const LoaderEffect = styled.span`
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #7983ff;
-  width: 16px;
-  height: 16px;
-`;
 export default Login;

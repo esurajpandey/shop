@@ -19,6 +19,7 @@ export const Fetch = async (urlPath, bodyData, method) => {
         headers: config,
         body: JSON.stringify(bodyData)
     });
+
     return await res.json();
 }
 
@@ -43,17 +44,60 @@ export const updateWorker = async (workerId, workerData) => {
 }
 
 export const createWorker = async (workerData) => {
+    const data = await Fetch(`/admin/worker`, workerData, "POST");
+    return data;
+}
 
+export const convertCustToWorker = async (workerData) => {
+    const data = await Fetch(`/admin/customer-to-worker`, workerData, "POST");
+    return data;
 }
 
 export const getSuppliers = async () => {
-
+    const data = await FetchGET(`/admin/suppliers`);
+    return data;
 }
 
 export const createSupplier = async (supplierData) => {
-
+    const data = await Fetch(`/admin/supplier`, supplierData, "POST");
+    return data;
 }
 
-export const updateSupplier = async (supplierData) => {
-
+export const updateSupplier = async (supplierId, supplierData) => {
+    const data = await Fetch(`/admin/update-supplier/${supplierId}`, supplierData, "PUT")
+    return data;
 }
+
+export const getBrands = async () => {
+    const data = await FetchGET('/product/brands');
+    return data;
+}
+
+export const getColors = async () => {
+    const data = await FetchGET('/product/colors');
+    return data;
+}
+
+export const getCategories = async () => {
+    const data = await FetchGET('/product/categories');
+    return data;
+}
+
+export const addProduct = async (productData) => {
+    try {
+        const data = await Fetch('/product', productData, "POST");
+        return data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export const getProductList = async () => {
+    const data = await FetchGET('/product/all');
+    return data;
+}
+
+
+
+
+

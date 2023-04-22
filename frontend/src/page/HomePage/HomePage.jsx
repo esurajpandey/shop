@@ -4,7 +4,7 @@ const HomePage = () => {
   const { searchQuery } = useParams();
   // alert(searchQuery);
   const myStyle = {};
-  return <div style={myStyle}></div>;
+  return <div style={myStyle}>Heloo</div>;
 };
 
 export default HomePage;

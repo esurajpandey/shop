@@ -3,18 +3,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CartItem from "../item/CartItem";
 import styled from "styled-components";
+import {
+  getCartItems,
+  removeItemFromCart,
+  updateCartItem,
+} from "../../../api/User";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const [token, setToken] = useState("");
 
   const fetchCarts = async () => {
     try {
-      const { data } = await axios.get("/api/cart/items");
-      console.log(data.data[0].product);
-      setCartItems(data.data);
+      const res = await getCartItems();
+      setCartItems(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -22,27 +24,16 @@ const Cart = () => {
 
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem("user"));
-
     if (!userDetails) {
       return navigate("/login");
     }
-    setToken(userDetails.token);
-
     fetchCarts();
-    console.log(cartItems.length);
   }, []);
 
   const handleQuantityChange = async (productId, newQuantity) => {
     try {
-      if (!token) {
-        const user = JSON.parse(localStorage.getItem("user"));
-        setToken(user.token);
-      }
-      const { data } = await axios.put(`/api/cart/update-item/${productId}`, {
-        quantity: newQuantity,
-      });
+      const data = await updateCartItem(productId, newQuantity);
       await fetchCarts();
-      console.log(data), "geo";
     } catch (err) {
       console.log(err);
     }
@@ -50,11 +41,11 @@ const Cart = () => {
 
   const handleRemove = async (productId) => {
     try {
-      const { data } = await axios.delete(`/api/cart/remove-item/${productId}`);
+      const data = await removeItemFromCart(productId);
       alert(data.message);
       await fetchCarts();
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
     }
   };
 

@@ -5,8 +5,8 @@ import { generateToken } from '../../utils/helper/jwtHelper.js';
 
 export default async (req, reply) => {
     try {
+
         const { email, password } = req.body;
-        console.log("Hello");
         const user = await prisma.user.findUnique({ where: { email } });
 
         if (!user)

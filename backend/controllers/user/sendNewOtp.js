@@ -5,6 +5,7 @@ import sendOtp from "../../utils/email/sendOtp.js";
 
 export default async (req, reply) => {
     try {
+        console.log("Hello");
         const responseObj = await sendNew(req);
         reply.code(200).send(responseObj);
     } catch (err) {

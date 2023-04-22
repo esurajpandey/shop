@@ -8,8 +8,14 @@ export default async (fastify, otps, done) => {
 
     fastify.get("/order/orderId", shop.getOrderDetails);
     fastify.get("/orders", shop.allOrders);
-    fastify.post("/customer-to-worker", shop.convertToWorker);
+    fastify.post("/customer-to-worker", { preHandler: [verifyToken, adminVerifier], handler: shop.convertToWorker });
     fastify.put('/update-order/:orderId', shop.manageOrder);
     fastify.put('/remove-worker/:workerId', shop.removeWorker);
     fastify.put('/update-worker/:workerId', shop.updateWorker);
+
+    fastify.post("/supplier", { preHandler: [verifyToken, adminVerifier], handler: shop.addSupplier });
+    fastify.get("/suppliers", { preHandler: [verifyToken, adminVerifier], handler: shop.allSupplier });
+    fastify.delete('/remove-supplier/:supplierId', { preHandler: [verifyToken, adminVerifier], handler: shop.removeSupplier });
+    fastify.put('/update-supplier/:supplierId', { preHandler: [verifyToken, adminVerifier], handler: shop.updateSupplier });
+    done();
 }
