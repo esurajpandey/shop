@@ -76,6 +76,12 @@ model Shop {
   orders   Order[]
 }
 
+enum ProductTag {
+  SALE
+  BEST_PRICE
+  BEST_SELLER
+}
+
 model Product {
   id              String   @id @default(uuid())
   name            String
@@ -92,6 +98,8 @@ model Product {
 
   brand   Brand  @relation(fields: [brandId], references: [id])
   brandId String
+
+  tag ProductTag?
 
   attributes        Attributes[]
   ProductCategories ProductCategories[]

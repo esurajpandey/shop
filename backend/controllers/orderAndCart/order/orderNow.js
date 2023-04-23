@@ -5,7 +5,6 @@ import payementLink from '../../../utils/helper/payementLink.js';
 
 export default async (req, reply) => {
     try {
-        console.log("Hello");
         const link = await orderTransaction(req);
         console.log(link);
         reply.code(200).send(successResponse(link, "Order is pending please do payment to confirm"));

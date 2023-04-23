@@ -189,18 +189,22 @@ const cartItemsGenerator = () => {
     fs.writeFileSync('./data/cartItems.json', JSON.stringify(carts, null, 2));
 }
 
-const deliveryStatus = ["PACKED", "SHIPPED", "OUT_FOR_DELIVERY", "DELIVERED"];
-
+const deliveryStatus = ["PACKED", "SHIPPED", "OUT_FOR_DELIVERY", "DELIVERED", "CANCELED", "ORDERED"];
+const orderStatus = ["INITIATED", "CONFIRMED", "FAILED", "CANCELED"]
+const payment_mode = ["ONLINE", "COD"]
 const generateOrders = () => {
     const orders = [];
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 3; j++) {
             const order = {
                 id: faker.datatype.uuid(),
-                status: faker.helpers.arrayElement(deliveryStatus),
+                deliveryStatus: faker.helpers.arrayElement(deliveryStatus),
+                orderStatus: faker.helpers.arrayElement(orderStatus),
+                payment_mode: faker.helpers.arrayElement(payment_mode),
                 userId: user[i].id,
                 addressId: user[i].addressId,
                 workerId: worker[i].id,
+                amount: +(faker.commerce.price()),
                 shopId: "dd597cdc-d939-4829-a78a-66197bc40e5f",
             }
             orders.push(order);
@@ -281,5 +285,7 @@ const reviewGenerator = () => {
 // cartItemsGenerator();
 // console.log(orders.length);
 
-reviewGenerator();
+// reviewGenerator();
+
+
 

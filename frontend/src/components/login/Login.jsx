@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Button, useToast } from "@chakra-ui/react";
+import { Button, useDisclosure, useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import loginImage from "../../assets/login-image.jpg";
 import { Input, InputContainer } from "../register/register.styled";
 import { Lable, LoginContainer, LoginForm, RegisterLink } from "./login.styled";
 import { getLogin } from "../../api/User";
+import ForgetPassword from "./ForgetPassword";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState();
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -124,6 +127,19 @@ function Login() {
             <RegisterLink>
               <Link to="/register">Create account</Link>
             </RegisterLink>
+            <button
+              style={{
+                font: "Hind",
+                fontSize: "1rem",
+                padding: "0.1em 1em",
+                border: "0",
+              }}
+              className="forget-password"
+              onClick={onOpen}
+            >
+              Forget your password
+            </button>
+            <ForgetPassword isOpen={isOpen} onClose={onClose} />
           </div>
         </div>
       </LoginContainer>

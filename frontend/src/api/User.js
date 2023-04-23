@@ -135,3 +135,20 @@ export const getUserDetails = async () => {
     console.log(data);
     return data;
 }
+
+export const getOrderList = async () => {
+    const data = await FetchGET(`/order/all`);
+
+    if (data?.status === "ERROR" || data.status === "FAILURE") {
+        throw data;
+    }
+    return data;
+}
+
+export const getOrderItems = async (orderId) => {
+    const data = await FetchGET(`/order/items/${orderId}`);
+    if (data?.status === "ERROR" || data.status === "FAILURE") {
+        throw data;
+    }
+    return data;
+}

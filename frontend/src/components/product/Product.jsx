@@ -8,47 +8,53 @@ import { TiFlash } from "react-icons/ti";
 
 const baseUrl = import.meta.env.VITE_defaultURL;
 const Product = () => {
-  //   const { productId } = useParams();
+  const { productId } = useParams();
   const [product, setProduct] = useState();
+  const [loading, setLoading] = useState(false);
 
   const fetchProduct = async () => {
-    const productId = "55276ed6-8847-443b-a8ae-0ffe843e4316";
+    setLoading(true);
     try {
       const response = await fetch(`${baseUrl}/product/${productId}`);
       const data = await response.json();
-      console.log(data);
       setProduct(data.data);
     } catch (err) {
       console.log(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [productId]);
 
   return (
     <ProductContainer>
-      <div className="main-container-product">
-        <ProductImagesBuy>
-          <Images />
-          <Buybuttons>
-            <button>
-              <AiOutlineShoppingCart />
-              <span>Add to cart </span>
-            </button>
-            <button>
-              <TiFlash />
-              <span>Order Now</span>
-            </button>
-          </Buybuttons>
-        </ProductImagesBuy>
-        {product && <ProductSideContainer product={product} />}
-      </div>
+      {loading && <ShowLoading />}
+      {!loading && product && (
+        <div className="main-container-product">
+          <ProductImagesBuy>
+            <Images pictures={product.pictures} />
+            <Buybuttons>
+              <button>
+                <AiOutlineShoppingCart />
+                <span>Add to cart </span>
+              </button>
+              <button>
+                <TiFlash />
+                <span>Order Now</span>
+              </button>
+            </Buybuttons>
+          </ProductImagesBuy>
+          {product && <ProductSideContainer product={product} />}
+        </div>
+      )}
     </ProductContainer>
   );
 };
 
+const ShowLoading = styled.div``;
 const ProductImagesBuy = styled.div`
   min-width: 500px;
   display: flex;

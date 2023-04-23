@@ -29,10 +29,11 @@ const AccountMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 76.9vh;
+  min-height: ${({ type }) => (type !== "ADMIN" ? "76.9vh" : "85vh")};
   min-width: 17em;
   align-items: center;
   gap: 0.5em;
+
   overflow-y: scroll;
   overflow-x: hidden;
   padding-inline: 1.5em;

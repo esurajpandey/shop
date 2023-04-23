@@ -83,7 +83,7 @@ function Navbar() {
             <div className="nav-btns cart">
               <Link to="/cart">
                 <AiOutlineShoppingCart fontSize={"1.5rem"} />
-                <span className="cart-count">{0}</span>
+                {/* <span className="cart-count">{0}</span> */}
               </Link>
             </div>
 
@@ -120,16 +120,22 @@ function Navbar() {
 
               <MenuList css={MenuCss}>
                 <ProfileModel>
-                  <MenuItem css={MenuItemCss}>My Orders</MenuItem>
-                  <MenuItem css={MenuItemCss}>My Wishlist</MenuItem>
-                  <MenuItem css={MenuItemCss}>My Message</MenuItem>
-                  <MenuItem css={MenuItemCss} onClick={handleMyAccount}>
-                    My Account
-                  </MenuItem>
+                  <Link to={"/orders"} className="menu-link">
+                    <MenuItem css={MenuItemCss}>My Orders</MenuItem>
+                  </Link>
+                  {user.type === "WORKER" && (
+                    <Link to={"/deliveries"} className="menu-link">
+                      <MenuItem css={MenuItemCss}>Deliveries</MenuItem>
+                    </Link>
+                  )}
+                  <Link to={"/account"} className="menu-link">
+                    <MenuItem css={MenuItemCss}>My Account</MenuItem>
+                  </Link>
+
                   {user.type === "ADMIN" && (
-                    <MenuItem css={MenuItemCss} onClick={handleMyAccount}>
-                      Admin Control
-                    </MenuItem>
+                    <Link to="/admin" className="menu-link">
+                      <MenuItem css={MenuItemCss}>Admin Control</MenuItem>
+                    </Link>
                   )}
                   <MenuItem css={MenuItemCss} onClick={handleLogout}>
                     Logout

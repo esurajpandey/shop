@@ -68,6 +68,15 @@ export const NavContainer = styled.div`
   top: 0;
   z-index: 20;
   width: 100%;
+  /* max-width: 95vw; */
+
+  .menu-link{
+    text-decoration: none;
+    &:hover{
+      color: black;
+    }
+  }
+  
 `;
 
 export const MiddleContainer = styled.div`
@@ -75,15 +84,16 @@ export const MiddleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  width: 100vw;
+  max-width: 100vw;
+  min-width: 100vw;
   padding: 1rem 0;
   overflow:hidden;
-
   .leftBar {
     display: flex;
     align-items: center;
     gap : 1rem;
     height: 100%;
+    /* width: 50%; */
     padding-left: 1rem;
     /* border: 1px solid green; */
   }
@@ -94,7 +104,6 @@ export const MiddleContainer = styled.div`
     /* background-color: black; */
 
     .leftBar{
-      /* width: 100vw; */
       justify-content: space-between;
       flex-direction: column;
     }
@@ -166,9 +175,12 @@ export const SearchBox = styled.div`
 export const RightBar = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   padding-right: 2rem;
   /* border: 1px solid blue; */
   gap : 1rem;
+  width: 50%;
+  height: 100%;
   .nav-btns {
     display: flex;
     align-items: center;
@@ -198,7 +210,7 @@ export const RightBar = styled.div`
 
   @media (max-width: 800px){
     /* padding-bottom: 1rem; */
-    flex-direction: row-reverse;
+    /* flex-direction: row-reverse; */
     .cart{
       margin-left: 1rem;
     }

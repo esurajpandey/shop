@@ -14,6 +14,8 @@ import Cart from "./components/cart/cart-items/Cart";
 import Product from "./components/product/Product";
 import styled from "styled-components";
 import Account from "./components/account/Account";
+import { OrderedList } from "@chakra-ui/react";
+import Order from "./components/order/Order";
 
 function App() {
   const [user, setUser] = useState();
@@ -34,7 +36,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/:searchQuery" exact element={<HomePage />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/orders" element={<Order />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/help" element={<Help />} />

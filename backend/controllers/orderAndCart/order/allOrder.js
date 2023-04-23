@@ -16,6 +16,11 @@ export default async (req, reply) => {
                 payment_mode: true,
                 amount: true,
                 orderAt: true,
+                _count: {
+                    select: {
+                        OrderItem: true
+                    }
+                }
             }
         });
 

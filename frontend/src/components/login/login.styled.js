@@ -51,6 +51,16 @@ export const LoginContainer = styled.div`
       width: 25rem;
     }
   }
+
+  .forget-password{
+    display: flex;
+    color : #394867;
+
+    &:hover{
+      text-decoration: underline;
+      color : #6C9BCF;
+    }
+  }
 `;
 
 export const LoginForm = styled.form`

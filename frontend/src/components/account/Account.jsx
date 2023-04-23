@@ -19,9 +19,9 @@ const Account = () => {
     }
   }, []);
   return (
-    <AccountMainContainer type={user.type}>
+    <>
       {user && (
-        <>
+        <AccountMainContainer type={user.type}>
           <AccountSideMenu type={user.type} />
           <AccountBody type={user?.type}>
             <Routes>
@@ -36,9 +36,9 @@ const Account = () => {
               <Route path="/my-data" exact element={<MyData />} />
             </Routes>
           </AccountBody>
-        </>
+        </AccountMainContainer>
       )}
-    </AccountMainContainer>
+    </>
   );
 };
 
@@ -46,6 +46,8 @@ const AccountMainContainer = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #fff;
+  min-height: 75.5vh;
+  max-height: 85.5vh;
   max-height: ${({ type }) => (type !== "ADMIN" ? "75.5vh" : "85.5vh")};
 `;
 
