@@ -6,7 +6,9 @@ import register from "./register.js";
 import verifyMail from "./verifyMail.js";
 import getUser from "./getUser.js";
 import sendNewOtp from "./sendNewOtp.js";
-
+import addAddress from "./addAddress.js";
+import updateAddress from "./updateAddress.js";
+import getAddress from "./getAddress.js";
 export default {
     changeEmail,
     changePassword,
@@ -15,5 +17,8 @@ export default {
     register,
     verifyMail,
     getUser,
-    sendNewOtp
+    sendNewOtp,
+    addAddress,
+    updateAddress,
+    getAddress
 }

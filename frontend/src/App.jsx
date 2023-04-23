@@ -13,6 +13,7 @@ import OtpVerify from "./components/OtpVerification/OtpVerify";
 import Cart from "./components/cart/cart-items/Cart";
 import Product from "./components/product/Product";
 import styled from "styled-components";
+import Account from "./components/account/Account";
 
 function App() {
   const [user, setUser] = useState();
@@ -44,6 +45,7 @@ function App() {
             {user?.type === "ADMIN" && (
               <Route path="/admin/*" element={<AdminPage />} />
             )}
+            <Route path="/account/*" element={<Account />} />
           </Routes>
         </>
       ) : (

@@ -37,6 +37,9 @@ function Navbar() {
   const type = "admin";
   const navigate = useNavigate();
 
+  const handleMyAccount = () => {
+    return navigate("/account");
+  };
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem("user"));
     if (!userDetails) {
@@ -118,10 +121,16 @@ function Navbar() {
               <MenuList css={MenuCss}>
                 <ProfileModel>
                   <MenuItem css={MenuItemCss}>My Orders</MenuItem>
-                  <MenuItem css={MenuItemCss}>My Address</MenuItem>
                   <MenuItem css={MenuItemCss}>My Wishlist</MenuItem>
                   <MenuItem css={MenuItemCss}>My Message</MenuItem>
-                  <MenuItem css={MenuItemCss}>My Account</MenuItem>
+                  <MenuItem css={MenuItemCss} onClick={handleMyAccount}>
+                    My Account
+                  </MenuItem>
+                  {user.type === "ADMIN" && (
+                    <MenuItem css={MenuItemCss} onClick={handleMyAccount}>
+                      Admin Control
+                    </MenuItem>
+                  )}
                   <MenuItem css={MenuItemCss} onClick={handleLogout}>
                     Logout
                   </MenuItem>
@@ -130,14 +139,14 @@ function Navbar() {
             </Menu>
           </RightBar>
         )}
-        {user === null && (
+        {/* {user === null && (
           <LoginBtnContainer>
             <Link to="/login">
               <span>Login</span>
               <TbLogin />
             </Link>
           </LoginBtnContainer>
-        )}
+        )} */}
       </MiddleContainer>
       {user && user?.type === "ADMIN" && <NavButtomLine></NavButtomLine>}
       {user && user?.type !== "ADMIN" && <BottomNavbar />}

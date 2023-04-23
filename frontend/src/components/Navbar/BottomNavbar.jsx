@@ -32,7 +32,9 @@ const BottomNavbar = () => {
 };
 
 const BottomNavContainer = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
+  display: flex;
+  flex-direction: column;
   .navbar {
     display: flex;
     justify-content: space-between;
