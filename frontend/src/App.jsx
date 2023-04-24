@@ -16,6 +16,7 @@ import styled from "styled-components";
 import Account from "./components/account/Account";
 import { OrderedList } from "@chakra-ui/react";
 import Order from "./components/order/Order";
+import OrderDetails from "./components/order/OrderDetails";
 
 function App() {
   const [user, setUser] = useState();
@@ -35,8 +36,10 @@ function App() {
         <>
           <Navbar />
           <Routes>
-            <Route path="/:searchQuery" exact element={<HomePage />} />
+            <Route path="/" exact element={<HomePage />} />
+            <Route path="/:searchQuery" exact element={<></>} />
             <Route path="/orders" element={<Order />} />
+            <Route path="/order/:orderId" element={<OrderDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/help" element={<Help />} />

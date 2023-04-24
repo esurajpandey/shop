@@ -31,12 +31,18 @@ export const placeOrder = () => {
 
 }
 
-export const cancelOrder = async () => {
-
+export const cancelOrder = async (orderId) => {
+    const data = await Fetch(`/order/cancel/${orderId}`, {}, "PUT");
+    if (data.status === "ERROR" || data.status === "FAILURE")
+        throw data;
+    return data;
 }
 
-export const addReview = async () => {
-
+export const addReview = async (reviewData) => {
+    const data = await Fetch('/order/add-review', reviewData, "POST");
+    if (data.status === "ERROR" || data.status === "FAILURE")
+        throw data;
+    return data;
 }
 
 export const editReview = async () => {

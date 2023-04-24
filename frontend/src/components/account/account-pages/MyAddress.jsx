@@ -9,21 +9,24 @@ import {
 } from "../../../api/User";
 import { Button, useToast } from "@chakra-ui/react";
 const MyAddress = () => {
-  const [address, setAddress] = useState({
+  const [formType, setFormType] = useState("new");
+
+  let address = {
     id: "",
     city: "",
     address_line1: "",
     country: "",
     state: "",
     zip: "",
-  });
+  };
 
   const toast = useToast();
   const fetchAddress = async () => {
     try {
       const data = await getAddress();
       if (data.data) {
-        setAddress((prev) => data.data);
+        setValues({ ...data.data });
+        setFormType("old");
       }
     } catch (err) {
       console.log(err);
@@ -41,7 +44,8 @@ const MyAddress = () => {
     try {
       const data = await updateAddressData(values.id, values);
       if (data.data) {
-        setAddress((prev) => ({ ...data.data }));
+        setValues({ ...data.data });
+        setFormType("old");
       }
       toast({
         title: data.message,
@@ -60,16 +64,16 @@ const MyAddress = () => {
         position: "bottom",
       });
     } finally {
-      action.resetForm();
+      // action.resetForm();
     }
   };
 
   const createAddress = async (values, action) => {
     try {
-      console.log(values);
       const data = await createUserAddress(values);
       if (data.data) {
-        setAddress(data.data);
+        setValues({ ...data.data });
+        setFormType("old");
         toast({
           title: data.message,
           status: "success",
@@ -100,10 +104,11 @@ const MyAddress = () => {
     handleSubmit,
     touched,
     errors,
+    setValues,
   } = useFormik({
     initialValues: address,
     validationSchema: AddressSchema,
-    onSubmit: address.address_line1 ? updateAddress : createAddress,
+    onSubmit: formType === "old" ? updateAddress : createAddress,
   });
 
   useEffect(() => {
@@ -198,7 +203,7 @@ const MyAddress = () => {
             onClick={handleSubmit}
             isLoading={isSubmitting}
           >
-            {address.address_line1 ? "Update address" : "Create address"}
+            {formType === "old" ? "Update address" : "Create address"}
           </Button>
         </div>
       </AddressForm>

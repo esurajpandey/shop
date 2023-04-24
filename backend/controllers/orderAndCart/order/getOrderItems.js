@@ -13,6 +13,9 @@ export default async (req, reply) => {
                     select: {
                         id: true,
                         name: true,
+                        pictures: true,
+                        brand: true,
+                        color: true,
                     }
                 },
                 quantity: true,
@@ -23,6 +26,12 @@ export default async (req, reply) => {
                         comment: true,
                         rating: true,
                         createdAt: true,
+                    }
+                },
+                order: {
+                    select: {
+                        id: true,
+                        orderAt: true
                     }
                 }
             }

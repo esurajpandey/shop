@@ -4,7 +4,6 @@ import { DeliveryStatus, OrderStatus } from '@prisma/client';
 export default async (req, reply) => {
     try {
         const { orderId } = req.params;
-
         const order = await prisma.order.findUnique({
             where: { id: orderId },
             select: {

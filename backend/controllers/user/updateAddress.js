@@ -10,8 +10,7 @@ export default async (req, reply) => {
             state,
             zip
         } = req.body;
-        const addressId = req.params.addresId;
-
+        const addressId = req.params.addressId;
         const address = await prisma.address.update({
             where: {
                 id: addressId
@@ -31,6 +30,7 @@ export default async (req, reply) => {
 
         reply.code(201).send(successResponse(address, "Updated address"));
     } catch (err) {
+        console.log(err);
         reply.code(err?.status ?? 500).send(errorResponse(err));
     }
 }

@@ -22,11 +22,6 @@ export const MenuContents = [
         path: "/admin/product-list"
     },
     {
-        icon: GrDocumentUpdate,
-        title: "Update Product",
-        path: "/admin/update-product"
-    },
-    {
         icon: GoListUnordered,
         title: "Orders",
         path: "/admin/order-list"
