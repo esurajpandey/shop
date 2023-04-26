@@ -10,6 +10,8 @@ import allSupplier from './supply/allSuppliers.js';
 import removeSupplier from './supply/removeSupplier.js';
 import updateWorker from './worker/updateWorker.js';
 import updateSupplier from './supply/updateSupplier.js';
+import assignOrderToWorker from './assignOrderToWorker.js';
+
 export default {
     allOrders,
     addWorkers,
@@ -22,5 +24,6 @@ export default {
     allSupplier,
     removeSupplier,
     updateWorker,
-    updateSupplier
+    updateSupplier,
+    assignOrderToWorker
 }

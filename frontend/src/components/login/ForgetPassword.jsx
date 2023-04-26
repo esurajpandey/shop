@@ -17,7 +17,7 @@ import styled from "styled-components";
 const ForgetPassword = ({ isOpen, onClose }) => {
   const [otpSent, setOtpSent] = useState(false);
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Forget password</ModalHeader>

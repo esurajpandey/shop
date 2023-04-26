@@ -7,19 +7,30 @@ const processDesc = (product) => {
 const ProductCard = ({ product }) => {
   //   console.log(product);
   return (
-    <ProductCardContaier>
-      <div className="card-tag">
-        <span>SALE</span>
-      </div>
-      <div className="image-section">
-        <img src={product?.pictures[0]} alt={product?.name} />
-      </div>
-      <div className="card-details-section">
-        <span className="p-name">{product.name}</span>
-        <span className="bnd">{product.brand.name}</span>
-        <span>&#8377;{product.unitPrice}</span>
-      </div>
-    </ProductCardContaier>
+    <>
+      {product && (
+        <ProductCardContaier>
+          <div className="card-tag">
+            <span>SALE</span>
+          </div>
+          <div className="image-section">
+            <img
+              src={
+                product.pictures &&
+                product.pictures.length > 0 &&
+                product?.pictures[0]
+              }
+              alt={product?.name}
+            />
+          </div>
+          <div className="card-details-section">
+            <span className="p-name">{product.name}</span>
+            <span className="bnd">{product.brand.name}</span>
+            <span>&#8377;{product.unitPrice}</span>
+          </div>
+        </ProductCardContaier>
+      )}
+    </>
   );
 };
 

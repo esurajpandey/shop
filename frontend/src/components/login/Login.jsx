@@ -77,7 +77,7 @@ function Login() {
     const userDetails = JSON.parse(localStorage.getItem("user"));
     if (userDetails) {
       setUser(user);
-      navigate("/all");
+      navigate("/");
     }
   }, []);
 

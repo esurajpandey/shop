@@ -22,7 +22,7 @@ export const LoginContainer = styled.div`
   .left-image {
     img {
       width: 25em;
-      height: 27rem;
+      height: 29rem;
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;
     }

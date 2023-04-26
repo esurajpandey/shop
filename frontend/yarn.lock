@@ -3395,6 +3395,11 @@
   "resolved" "https://registry.npmjs.org/react-otp-input/-/react-otp-input-3.0.0.tgz"
   "version" "3.0.0"
 
+"react-razorpay@^1.2.0":
+  "integrity" "sha512-UMQF8od/yKPPgXcbv5+IaCDeRrZdeu9HCYsKjALpSsPMtPP1LU0QBcjJVYsPi1vjdrlXbrUH9/YhOVMcvFVsIQ=="
+  "resolved" "https://registry.npmjs.org/react-razorpay/-/react-razorpay-1.2.0.tgz"
+  "version" "1.2.0"
+
 "react-refresh@^0.14.0":
   "integrity" "sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ=="
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"

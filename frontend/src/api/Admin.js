@@ -94,6 +94,22 @@ export const addProduct = async (productData) => {
 
 export const getProductList = async () => {
     const data = await FetchGET('/product/all');
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const updateDeliveryStatus = async (deliveryStatus, orderId) => {
+    const data = await Fetch(`/order/update-delivery-status/${orderId}`, { deliveryStatus }, "PUT");
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const getAllDelivery = async () => {
+    const data = await FetchGET('/order/delivery');
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
     return data;
 }
 

@@ -7,7 +7,8 @@ import cancelOrder from './cancelOrder.js';
 import getOrderItems from './getOrderItems.js';
 import removeReview from './removeReview.js';
 import updateReview from './updateReview.js';
-
+import updateDeliveryStatus from "./worker/updateDeliveryStatus.js";
+import orderOnMyName from "./worker/orderOnMyName.js";
 export default {
     orderNow,
     placeOrder,
@@ -17,5 +18,7 @@ export default {
     cancelOrder,
     getOrderItems,
     removeReview,
-    updateReview
+    updateReview,
+    updateDeliveryStatus,
+    orderOnMyName
 }

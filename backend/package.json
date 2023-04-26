@@ -27,6 +27,8 @@
   "dependencies": {
     "@fastify/autoload": "^5.7.1",
     "@fastify/cors": "^8.2.1",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/multipart": "^7.6.0",
     "@fastify/request-context": "^4.2.0",
     "@prisma/client": "^4.13.0",
     "bcrypt": "^5.1.0",

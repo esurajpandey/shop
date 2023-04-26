@@ -4,35 +4,35 @@ import { css } from "@emotion/react";
 export const navLinks = [
   {
     name: "Shop All",
-    path: "all"
+    path: "category"
   },
   {
     name: "Computers",
-    path: "computers"
+    path: "category/computers"
   },
   {
     name: "Tables",
-    path: "tablets"
+    path: "category/tablets"
   },
   {
     name: "Drones & Cameras",
-    path: "cameras"
+    path: "category/cameras"
   },
   {
     name: "Audio",
-    path: "audios"
+    path: "category/audios"
   },
   {
     name: "Mobile",
-    path: "mobiles"
+    path: "category/mobiles"
   },
   {
     name: "T.V. & Home Cinema",
-    path: "tvs"
+    path: "category/tvs"
   },
   {
     name: "Wearable Tech",
-    path: "wearables"
+    path: "category/wearables"
   }
 ]
 

@@ -17,6 +17,8 @@ import Account from "./components/account/Account";
 import { OrderedList } from "@chakra-ui/react";
 import Order from "./components/order/Order";
 import OrderDetails from "./components/order/OrderDetails";
+import PaymentSuccess from "./page/PaymentSuccess";
+import CategoryPage from "./page/Category/CategoryPage";
 
 function App() {
   const [user, setUser] = useState();
@@ -37,14 +39,14 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" exact element={<HomePage />} />
-            <Route path="/:searchQuery" exact element={<></>} />
+            <Route path="/category/:query" element={<CategoryPage />} />
             <Route path="/orders" element={<Order />} />
             <Route path="/order/:orderId" element={<OrderDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/help" element={<Help />} />
             <Route path="/verify-account" element={<OtpVerify />} />
-
+            <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/product/:productId" element={<Product />} />
             {user?.type === "ADMIN" && (

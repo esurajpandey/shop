@@ -1,5 +1,6 @@
 import order from "../controllers/orderAndCart/order/index.js";
 import verifyToken from '../middleware/verifyToken.js';
+import workerVerifier from "../middleware/workerVerifier.js";
 
 export default async (fastify, otps, done) => {
     fastify.post('/order-now', { preHandler: verifyToken, handler: order.orderNow });
@@ -13,5 +14,7 @@ export default async (fastify, otps, done) => {
     fastify.delete('/remove-review', { preHandler: [verifyToken], handler: order.removeReview });
     fastify.put('/update-review', { preHandler: [verifyToken], handler: order.updateReview });
 
+    fastify.put('/update-delivery-status/:orderId', { preHandler: [verifyToken, workerVerifier], handler: order.updateDeliveryStatus });
+    fastify.get('/delivery', { preHandler: [verifyToken, workerVerifier], handler: order.orderOnMyName });
     done();
 }

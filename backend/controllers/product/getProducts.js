@@ -1,17 +1,94 @@
 import prisma from '../../init/db.js';
 import { errorResponse, successResponse } from '../../utils/helper/response.js';
-
+import { } from '@prisma/client'
 export default async (req, reply) => {
     try {
         const page = +(req.query?.page ?? "0");
+        const { category, name, attrName, attrValue, lessThan, moreThan, brand } = req.query;
+
+        const where = {
+
+        }
+
+        if (category) {
+
+            const searchLike = `%${category.toLowerCase()}%`
+            where.ProductCategories = {
+                some: {
+                    category: {
+                        name: {
+                            contains: searchLike,
+                            mode: 'insensitive'
+                        },
+                    }
+                }
+            }
+        }
+
+        if (attrName && attrValue) {
+            const attrLike = `%${attrName.toLowerCase()}%`
+            const attrValueLike = `%${attrValue.toLowerCase()}%`
+            where.attributes = {
+                some: {
+                    name: { contains: attrLike, mode: 'insensitive' },
+                    value: { contains: attrValueLike, mode: 'insensitive' }
+                }
+            }
+        }
+
+        if (name) {
+            const searchLike = `%${name}%`
+            where.name = {
+                contains: searchLike,
+                mode: 'insensitive'
+            }
+
+        }
+
+        if (moreThan) {
+            where.unitPrice = {
+                gt: parseFloat(moreThan)
+            }
+        }
+
+        if (lessThan) {
+            where.unitPrice = {
+                lt: parseFloat(lessThan)
+            }
+        }
+
+        if (brand) {
+            const searchLike = `%${brand}%`
+            where.brand = {
+                name: {
+                    contains: searchLike,
+                    mode: 'insensitive'
+                }
+            }
+        }
+
+
 
         const products = await prisma.product.findMany({
+            where,
             take: 10,
             skip: 10 * page,
-            include: {
-                color: true,
+            select: {
+                id: true,
+                name: true,
                 brand: true,
+                unitPrice: true,
+                color: true,
                 attributes: true,
+                pictures: true,
+                quantityInStock: true,
+                description: true,
+                weight: true,
+                ProductCategories: {
+                    select: {
+                        category: true
+                    }
+                }
             }
         });
 
@@ -20,6 +97,7 @@ export default async (req, reply) => {
 
         reply.code(200).send(successResponse(products, "Product lists"));
     } catch (err) {
+        console.log(err);
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }

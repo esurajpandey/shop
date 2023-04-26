@@ -17,5 +17,6 @@ export default async (fastify, otps, done) => {
     fastify.get("/suppliers", { preHandler: [verifyToken, adminVerifier], handler: shop.allSupplier });
     fastify.delete('/remove-supplier/:supplierId', { preHandler: [verifyToken, adminVerifier], handler: shop.removeSupplier });
     fastify.put('/update-supplier/:supplierId', { preHandler: [verifyToken, adminVerifier], handler: shop.updateSupplier });
+    fastify.put('/assign-order-worker', { preHandler: [verifyToken, adminVerifier], handler: shop.assignOrderToWorker });
     done();
 }

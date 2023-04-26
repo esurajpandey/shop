@@ -93,11 +93,15 @@ export const RegisterContainer = styled.div`
     text-shadow: 3px 3px 3px rgba(56,56,56,0.6);
   }
   .register-side-image {
+    background-color: white;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
     img {
       width: 28rem;
       /* height: 34rem; */
       min-height: 34rem;
       max-width: 34rem;
+      object-fit: contain;
       border-top-left-radius: 25px;
       border-bottom-left-radius: 25px;
       @media (max-width: 700px) {

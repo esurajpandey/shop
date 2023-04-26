@@ -15,7 +15,8 @@ export default async (req, reply) => {
             },
             select: {
                 id: true,
-                status: true,
+                orderStatus: true,
+                deliveryStatus: true,
             }
         })
 

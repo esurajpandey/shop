@@ -6,7 +6,7 @@ import payementLink from '../../../utils/helper/payementLink.js';
 export default async (req, reply) => {
     try {
         const link = await orderTransaction(req);
-        console.log(link);
+        // console.log(link);
         reply.code(200).send(successResponse(link, "Order is pending please do payment to confirm"));
     } catch (err) {
         console.log(err.message);
@@ -17,9 +17,8 @@ export default async (req, reply) => {
 
 const orderTransaction = async (req) => {
     return await prisma.$transaction(async tx => {
-        const { productId, payementMode } = req.body;
+        const { productId, paymentMode } = req.body;
         const userId = req.requestContext.get('userId');
-
         const user = await tx.user.findUnique({
             where: { id: userId },
             select: {
@@ -52,7 +51,7 @@ const orderTransaction = async (req) => {
             data: {
                 deliveryStatus: DeliveryStatus.ORDERED,
                 orderStatus: OrderStatus.INITIATED,
-                payment_mode: payementMode,
+                payment_mode: paymentMode,
                 amount: product.unitPrice,
                 user: {
                     connect: {
@@ -76,6 +75,7 @@ const orderTransaction = async (req) => {
             throw { msg: "Unable to order now", status: 422 };
 
 
+        console.log("Order in orderId", order.id);
         const orderItems = await tx.orderItem.create({
             data: {
                 quantity: 1,
@@ -84,6 +84,13 @@ const orderTransaction = async (req) => {
                 productId: product.id
             }
         });
+
+        await tx.product.update({
+            where: { id: productId },
+            data: {
+                quantityInStock: product.quantityInStock - 1,
+            }
+        })
 
         const link = await payementLink(order.id, order.amount, user);
         return link;

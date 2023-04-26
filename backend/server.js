@@ -6,7 +6,7 @@ import cors from '@fastify/cors';
 import fastifyRequestContext from '@fastify/request-context';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
-
+import formBody from '@fastify/formbody';
 
 import productRoutes from './routes/productRoutes.js'
 import adminRoutes from './routes/adminRoutes.js';
@@ -25,7 +25,7 @@ const context = {
 }
 
 
-
+fastify.register(formBody);
 fastify.register(userRoutes, { prefix: '/api/user' });
 fastify.register(productRoutes, { prefix: "/api/product" });
 fastify.register(adminRoutes, { prefix: "/api/admin" });
