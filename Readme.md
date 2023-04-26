@@ -1,4 +1,4 @@
-# Start with backedn
+# Start with backend
 
 - After cloning
   - npm install
@@ -17,3 +17,8 @@
     - npm run seeder
   - Run sever
     - npm run devStart
+
+* Frontend
+  - cd frontend
+  - yarn
+  - yarn dev
