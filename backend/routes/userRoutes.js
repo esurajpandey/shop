@@ -12,6 +12,6 @@ export default async (fastify, otps, done) => {
     fastify.post('/address', { preHandler: [verifyToken], handler: user.addAddress });
     fastify.put('/address/:addressId', { preHandler: [verifyToken], handler: user.updateAddress });
     fastify.get('/address', { preHandler: [verifyToken], handler: user.getAddress });
-
+    fastify.put('/reset-password', { handler: user.resetPassword });
     done();
 }

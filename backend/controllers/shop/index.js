@@ -11,7 +11,7 @@ import removeSupplier from './supply/removeSupplier.js';
 import updateWorker from './worker/updateWorker.js';
 import updateSupplier from './supply/updateSupplier.js';
 import assignOrderToWorker from './assignOrderToWorker.js';
-
+import analystic from './analystic.js';
 export default {
     allOrders,
     addWorkers,
@@ -25,5 +25,6 @@ export default {
     removeSupplier,
     updateWorker,
     updateSupplier,
-    assignOrderToWorker
+    assignOrderToWorker,
+    analystic
 }

@@ -6,8 +6,8 @@ export default async (fastify, otps, done) => {
     fastify.post("/worker", { preHandler: [verifyToken, adminVerifier], handler: shop.addWorkers });
     fastify.get("/workers", { preHandler: [verifyToken, adminVerifier], handler: shop.allWorkers });
 
-    fastify.get("/order/orderId", shop.getOrderDetails);
-    fastify.get("/orders", shop.allOrders);
+    fastify.get("/order/orderId", { preHandler: [verifyToken, adminVerifier], handler: shop.getOrderDetails });
+    fastify.get("/orders", { preHandler: [verifyToken, adminVerifier], handler: shop.allOrders });
     fastify.post("/customer-to-worker", { preHandler: [verifyToken, adminVerifier], handler: shop.convertToWorker });
     fastify.put('/update-order/:orderId', shop.manageOrder);
     fastify.put('/remove-worker/:workerId', shop.removeWorker);
@@ -15,6 +15,7 @@ export default async (fastify, otps, done) => {
 
     fastify.post("/supplier", { preHandler: [verifyToken, adminVerifier], handler: shop.addSupplier });
     fastify.get("/suppliers", { preHandler: [verifyToken, adminVerifier], handler: shop.allSupplier });
+    fastify.get("/analytics", { preHandler: [verifyToken, adminVerifier], handler: shop.analystic });
     fastify.delete('/remove-supplier/:supplierId', { preHandler: [verifyToken, adminVerifier], handler: shop.removeSupplier });
     fastify.put('/update-supplier/:supplierId', { preHandler: [verifyToken, adminVerifier], handler: shop.updateSupplier });
     fastify.put('/assign-order-worker', { preHandler: [verifyToken, adminVerifier], handler: shop.assignOrderToWorker });

@@ -8,8 +8,6 @@ export default async (req, reply) => {
         const userId = req.requestContext.get("userId");
         const { paymentMode } = req.body;
         const order = await orderTrasaction(userId, paymentMode);
-
-        console.log(order);
         reply.code(200).send(successResponse(order, "Order placed successfully"))
     } catch (err) {
         reply.code(err?.status ?? 500).send(errorResponse(err));
@@ -66,7 +64,7 @@ const orderTrasaction = async (userId, payementMode) => {
             data: {
                 amount: totalAmount,
                 deliveryStatus: DeliveryStatus.ORDERED,
-                orderStatus: OrderStatus.INITIATED,
+                orderStatus: payementMode === PaymentMode.ONLINE ? OrderStatus.INITIATED : OrderStatus.CONFIRMED,
                 payment_mode: payementMode === PaymentMode.ONLINE ? PaymentMode.ONLINE : PaymentMode.COD,
                 address: {
                     connect: {
@@ -125,6 +123,9 @@ const orderTrasaction = async (userId, payementMode) => {
             })
         );
 
+        if (payementMode === PaymentMode.COD) {
+            return order;
+        }
 
         const link = await payementLink(order.id, order.amount, user);
         return link;

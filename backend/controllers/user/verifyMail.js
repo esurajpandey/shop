@@ -3,7 +3,7 @@ import { generateToken } from "../../utils/helper/jwtHelper.js";
 import { errorResponse, successResponse } from "../../utils/helper/response.js";
 
 
-function isValidOtp(expiredIn, creationTime) {
+export function isValidOtp(expiredIn, creationTime) {
     // Set the expiration period to 10 minutes (600,000 milliseconds)
     const expirationPeriod = expiredIn * 60 * 1000;
 
@@ -48,7 +48,6 @@ const verify = async (req) => {
             }
         });
 
-        console.log(user);
         if (!user) {
             throw { msg: "User not found", status: 404 };
         }

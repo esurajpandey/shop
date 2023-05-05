@@ -9,6 +9,8 @@ import sendNewOtp from "./sendNewOtp.js";
 import addAddress from "./addAddress.js";
 import updateAddress from "./updateAddress.js";
 import getAddress from "./getAddress.js";
+import resetPassword from "./resetPassword.js";
+
 export default {
     changeEmail,
     changePassword,
@@ -20,5 +22,6 @@ export default {
     sendNewOtp,
     addAddress,
     updateAddress,
-    getAddress
+    getAddress,
+    resetPassword
 }

@@ -3,11 +3,15 @@ import { errorResponse, successResponse } from '../../utils/helper/response.js';
 import { } from '@prisma/client'
 export default async (req, reply) => {
     try {
-        const page = +(req.query?.page ?? "0");
+
         const { category, name, attrName, attrValue, lessThan, moreThan, brand } = req.query;
 
-        const where = {
+        let page = 1;
+        if (req.query.page) {
+            page = +req.query.page
+        }
 
+        const where = {
         }
 
         if (category) {
@@ -67,12 +71,16 @@ export default async (req, reply) => {
             }
         }
 
-
+        const count = await prisma.product.aggregate({
+            _count: {
+                id: true
+            }
+        });
 
         const products = await prisma.product.findMany({
             where,
-            take: 10,
-            skip: 10 * page,
+            take: 9,
+            skip: 9 * page,
             select: {
                 id: true,
                 name: true,
@@ -95,7 +103,7 @@ export default async (req, reply) => {
         if (products.length === 0)
             throw { msg: "No product found", status: 404 };
 
-        reply.code(200).send(successResponse(products, "Product lists"));
+        reply.code(200).send(successResponse({ products, total: count._count.id }, "Product lists"));
     } catch (err) {
         console.log(err);
         reply
