@@ -152,3 +152,38 @@ export const getOrderItems = async (orderId) => {
     }
     return data;
 }
+
+export const forgetPassowrd = async (email) => {
+    const config = {
+        'Content-Type': 'application/json'
+    };
+    const data = await fetch(`${baseUrl}/user/forget-password`, {
+        headers: config,
+        body: JSON.stringify({ email }),
+        method: "POST"
+    });
+
+    const res = await data.json();
+
+    if (res.status === "FAILURE" || res.status === "ERROR")
+        throw res;
+    return res;
+}
+
+export const resetPassowrd = async (passwordData) => {
+
+    const config = {
+        'Content-Type': 'application/json'
+    };
+    const data = await fetch(`${baseUrl}/user/reset-password`, {
+        headers: config,
+        body: JSON.stringify(passwordData),
+        method: "PUT"
+    });
+
+    const res = await data.json();
+
+    if (res.status === "FAILURE" || res.status === "ERROR")
+        throw res;
+    return res;
+}

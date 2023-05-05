@@ -34,6 +34,7 @@ const Product = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const Razorpay = useRazorpay();
+
   const fetchProduct = async () => {
     setLoading(true);
     try {
@@ -71,14 +72,9 @@ const Product = () => {
         paymentMode,
       };
 
-      console.log(orderData);
-
       const data = await orderNow(orderData);
-
-      console.log(data.data);
       const user = getUser();
       const options = getPaymentOption(data.data, user);
-      console.log(options);
       const razor = new window.Razorpay(options);
 
       onClose();

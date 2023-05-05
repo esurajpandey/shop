@@ -8,12 +8,13 @@ import { Box, Spinner } from "@chakra-ui/react";
 const BestSeller = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const query = "page=0";
+      const query = "page=1";
       const data = await getProducts(query);
-      setProducts(data.data);
+      setProducts(data.data.products);
       console.log(data.data);
     } catch (err) {
       console.log(err.message);

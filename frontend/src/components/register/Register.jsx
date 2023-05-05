@@ -43,6 +43,13 @@ const Register = () => {
       window.location.reload(true);
       return navigate("/all");
     } catch (error) {
+      toast({
+        title: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
     } finally {
       action.resetForm();
     }

@@ -17,7 +17,7 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-
+import ReactPaginate from "react-paginate";
 import {
   getProductList,
   getSuppliers,
@@ -32,6 +32,10 @@ const ViewProduct = () => {
   const [productQuantity, setProductQuantity] = useState("");
   const [unitPrice, setUnitPrice] = useState("");
   const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    total: 0,
+  });
 
   const handleDelete = () => {};
 
@@ -46,21 +50,6 @@ const ViewProduct = () => {
 
   const handleSaveClick = async () => {
     try {
-      //   const data = await updateSupplier(selectedSupplier?.id, {
-      //     email: supplierEmail,
-      //     name: supplierName,
-      //     mobile: mobile,
-      //   });
-
-      //   setSuppliers((prev) =>
-      //     prev.map((supplier) => {
-      //       if (supplier?.id === data?.id) {
-      //         return { ...data };
-      //       }
-      //       return supplier;
-      //     })
-      //   );
-
       setShowModal(false);
     } catch (err) {
       console.log(err);
@@ -68,22 +57,34 @@ const ViewProduct = () => {
     }
   };
 
-  const fetchSupplier = async () => {
+  const fetchProducts = async (page) => {
     try {
-      const data = await getProductList();
-      setProducts(data.data);
+      const data = await getProductList(page);
+      setProducts(data.data.products);
+      // console.log(data.data.total);
+      setPagination((prev) => ({ ...prev, total: data.data.total }));
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    fetchSupplier();
+    fetchProducts(1);
   }, []);
+
+  const handlePageClick = async (event) => {
+    const newOffset = (event.selected * 10) % pagination.total;
+    console.log("Page numer", pagination.page, event.selected);
+    await fetchProducts(event.selected);
+    setPagination((prev) => ({ ...prev, page: event.selected }));
+  };
 
   return (
     <WorkerDetailsContainer>
-      <h2 className="supplier-title">Product List</h2>
+      <div className="top-header">
+        <h2 className="supplier-title">Product List</h2>
+      </div>
+
       {products.length > 0 && (
         <WorkerDetailsTable>
           <table className="supplier-table">
@@ -124,6 +125,29 @@ const ViewProduct = () => {
           </table>
         </WorkerDetailsTable>
       )}
+
+      <div className="pagination-container">
+        <ReactPaginate
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pagination.total / 9}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
+      </div>
 
       {showModal && (
         <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
@@ -169,6 +193,7 @@ const ViewProduct = () => {
 
 const WorkerDetailsContainer = styled.div`
   height: 100%;
+  position: relative;
   .supplier-title {
     color: #515152;
     font-family: "Hind";
@@ -177,6 +202,11 @@ const WorkerDetailsContainer = styled.div`
     padding-top: 0.2rem;
     margin: 0;
     font-size: 1.5em;
+  }
+  .pagination-container {
+    position: absolute;
+    right: 2rem;
+    bottom: 0.2em;
   }
 `;
 

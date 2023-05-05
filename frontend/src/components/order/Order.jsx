@@ -12,9 +12,9 @@ import {
 import { CiMenuKebab } from "react-icons/ci";
 import { cancelOrder } from "../../api/Shop";
 
-const getFormatedDate = (date) => {
+export const getFormatedDate = (date) => {
   const d = new Date(date);
-  return `${d.getDate()}- ${d.getMonth()}- ${d.getFullYear()}`;
+  return `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`;
 };
 const Order = () => {
   const [orders, setOrders] = useState([]);

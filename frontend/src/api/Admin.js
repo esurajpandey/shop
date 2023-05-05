@@ -92,8 +92,8 @@ export const addProduct = async (productData) => {
     }
 }
 
-export const getProductList = async () => {
-    const data = await FetchGET('/product/all');
+export const getProductList = async (page) => {
+    const data = await FetchGET(`/product/all?page=${page}`);
     if (data.status === "FAILURE" || data.status === "ERROR")
         throw data;
     return data;
@@ -113,6 +113,19 @@ export const getAllDelivery = async () => {
     return data;
 }
 
+export const getAllOrders = async (query) => {
+    const data = await FetchGET(`/admin/orders?${query}`);
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const getAnalytics = async (query) => {
+    const data = await FetchGET(`/admin/analytics?${query}`);
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
 
 
 

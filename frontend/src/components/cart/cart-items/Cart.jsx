@@ -1,22 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import CartItem from "../item/CartItem";
 import styled from "styled-components";
+import useRazorpay from "react-razorpay";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useDisclosure,
+  Select,
+  useToast,
+} from "@chakra-ui/react";
+import getPaymentOption from "../../../utils/getPaymentOption";
+const paymentKey = import.meta.env.VITE_payment_key;
+
 import {
   getCartItems,
   removeItemFromCart,
   updateCartItem,
 } from "../../../api/User";
+import { placeOrder } from "../../../api/Shop";
+import { getUser } from "../../../api/commonCall";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [paymentMode, setPaymentMode] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast({
+    duration: 7000,
+    isClosable: true,
+    position: "top-right",
+  });
 
   const fetchCarts = async () => {
     try {
       const res = await getCartItems();
       setCartItems(res.data);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -42,10 +69,16 @@ const Cart = () => {
   const handleRemove = async (productId) => {
     try {
       const data = await removeItemFromCart(productId);
-      alert(data.message);
       await fetchCarts();
+      toast({
+        title: "Item is removed",
+        status: "success",
+      });
     } catch (err) {
-      console.log(err);
+      toast({
+        title: err.message,
+        status: "error",
+      });
     }
   };
 
@@ -60,6 +93,47 @@ const Cart = () => {
       0
     );
     return total;
+  };
+
+  const handleOrderNow = async () => {
+    try {
+      setLoading(true);
+      if (!paymentMode) {
+        toast({
+          title: "Please select payment mode",
+          position: "bottom",
+          status: "warning",
+          duration: 9000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      const data = await placeOrder({ paymentMode });
+
+      if (paymentMode === "ONLINE") {
+        const user = getUser();
+        const options = getPaymentOption(data.data, user);
+        const razor = new window.Razorpay(options);
+        razor.open();
+        onClose();
+        return;
+      } else {
+        toast({
+          title: "Order is confirmed",
+          status: "success",
+        });
+        onClose();
+        return navigate("/order");
+      }
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -110,11 +184,36 @@ const Cart = () => {
             </div>
 
             <div className="place-order-btn">
-              <OrderButton>PLACE ORDER</OrderButton>
+              <OrderButton onClick={onOpen}>PLACE ORDER</OrderButton>
             </div>
           </CartTotal>
         )}
       </div>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Select Payment mode</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Select
+              placeholder="Select any payment mode"
+              variant="filled"
+              size="md"
+              onChange={(e) => setPaymentMode(e.target.value)}
+            >
+              <option value="ONLINE">Online</option>
+              <option value="COD">Cash on delivery</option>
+            </Select>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleOrderNow}>
+              Order now
+            </Button>
+            <Button variant="ghost">Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </CartContainer>
   );
 };
