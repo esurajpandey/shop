@@ -20,8 +20,6 @@ const Register = () => {
   const handleSubmitForm = async (values, action) => {
     try {
       const data = await postRegister(values);
-
-      console.log(data);
       toast({
         title: data?.message,
         status: "success",

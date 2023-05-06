@@ -124,7 +124,7 @@ const Cart = () => {
           status: "success",
         });
         onClose();
-        return navigate("/order");
+        return navigate("/orders");
       }
     } catch (err) {
       toast({

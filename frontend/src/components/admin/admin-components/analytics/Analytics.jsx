@@ -5,7 +5,10 @@ import styled from "@emotion/styled";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
+import { FaUserClock } from "react-icons/fa";
 import "react-day-picker/dist/style.css";
+import { TbTruckDelivery } from "react-icons/tb";
+import { MdDataThresholding, MdDataExploration } from "react-icons/md";
 import {
   Modal,
   ModalOverlay,
@@ -72,23 +75,79 @@ const Analytics = () => {
     <AnalyticsContainer>
       {details && (
         <>
-          <OrderData>
-            <h3 className="order-title">
-              Order details <BsFillCalendarDateFill onClick={onOpen} />
-            </h3>
-            {orderFilter.from && orderFilter.to && (
-              <span>
-                Orders between {formatDate(orderFilter.from)} and{" "}
-                {formatDate(orderFilter.to)}
-              </span>
-            )}
-            <span>Total Orders : {details?.order}</span>
-            <span>Order in this month : {details?.thisMonthOrder}</span>
-          </OrderData>
-          <UserData></UserData>
+          <AnalyticsCard>
+            <TbTruckDelivery fontSize={"3rem"} />
+            <OrderData>
+              <div className="order-title">
+                Order details <BsFillCalendarDateFill onClick={onOpen} />
+              </div>
+              {orderFilter.from && orderFilter.to && (
+                <span>
+                  Orders between {formatDate(orderFilter.from)} and{" "}
+                  {formatDate(orderFilter.to)}
+                </span>
+              )}
+              <div className="details-container">
+                <span className="titles">Total Orders :</span> :
+                <span className="details">{details?.order}</span>
+              </div>
+              <div className="details-container">
+                <span className="titles">Order in this month :</span> :
+                <span className="details">{details?.thisMonthOrder}</span>
+              </div>
+            </OrderData>
+          </AnalyticsCard>
 
-          <TotalSell></TotalSell>
-          <ProductData></ProductData>
+          <AnalyticsCard>
+            <FaUserClock fontSize={"3rem"} />
+
+            <UserData>
+              <div className="details-container">
+                <span className="titles">Registed Users</span> :
+                <span className="details">{details?.totalUser}</span>
+              </div>
+              <div className="details-container">
+                <span className="titles">New User in this month</span> :
+                <span className="details">{details?.newUsers}</span>
+              </div>
+            </UserData>
+          </AnalyticsCard>
+
+          <AnalyticsCard>
+            <MdDataExploration fontSize={"3rem"} />
+            <TotalSell>
+              <div className="details-container">
+                <span className="titles">Total Sell</span> :
+                <span className="details">
+                  &#x20B9;{details?.totalSell[0].totalsell}
+                </span>
+              </div>
+            </TotalSell>
+          </AnalyticsCard>
+
+          <AnalyticsCard>
+            <MdDataThresholding fontSize={"3rem"} />
+            <ProductData>
+              <div className="details-container">
+                <span className="titles">Total Supply :</span>
+                <span className="details">
+                  {details?.supply._sum?.quantity}
+                </span>
+              </div>
+              <div className="details-container">
+                <span className="titles">Total cost :</span>
+                <span className="details">
+                  &#x20B9;{details?.supply._sum?.unitPrice}
+                </span>
+              </div>
+              <div className="details-container">
+                <span className="titles">Product in Stock :</span>
+                <span className="details">
+                  {details?.product._sum?.quantityInStock}
+                </span>
+              </div>
+            </ProductData>
+          </AnalyticsCard>
           <SupplyData></SupplyData>
         </>
       )}
@@ -138,6 +197,12 @@ const AnalyticsContainer = styled.div`
   background-color: #c0dadf;
   min-height: 34em;
   padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-top: 4em;
+  align-items: center;
+  justify-content: center;
 `;
 
 const OrderData = styled.div`
@@ -145,7 +210,7 @@ const OrderData = styled.div`
   flex-direction: column;
   .order-title {
     display: flex;
-    gap: 1em;
+    gap: 2em;
     align-items: center;
     svg {
       font-size: 1.5rem;
@@ -159,8 +224,54 @@ const OrderData = styled.div`
 const OrderDatePicker = styled.div`
   display: flex;
 `;
-const UserData = styled.div``;
-const TotalSell = styled.div``;
-const ProductData = styled.div``;
-const SupplyData = styled.div``;
+const UserData = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+`;
+const TotalSell = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+`;
+const ProductData = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+`;
+const SupplyData = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+`;
+
+const AnalyticsCard = styled.div`
+  width: 15em;
+  height: 25em;
+  /* border: 1px solid black; */
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: white;
+  transition: 500ms ease-in-out;
+  .details-container {
+    display: flex;
+    gap: 0.5em;
+    .titles {
+      color: #045361;
+    }
+  }
+
+  box-shadow: 1px 1px 9px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 1px 9px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 9px 0px rgba(0, 0, 0, 0.75);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
 export default Analytics;
