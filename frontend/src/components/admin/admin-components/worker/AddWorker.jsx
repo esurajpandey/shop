@@ -129,6 +129,8 @@ const AddWorker = () => {
             onBlur={handleBlur}
             className={errors?.name && touched.name ? "input-error" : ""}
           />
+
+          {errors.name && touched.name ? <span>{errors.name}</span> : <></>}
         </div>
         <div className="email-field field">
           <label htmlFor="email">Email</label>
@@ -142,6 +144,7 @@ const AddWorker = () => {
             onBlur={handleBlur}
             className={errors?.email && touched.email ? "input-error" : ""}
           />
+          {errors.email && touched.email ? <span>{errors.email}</span> : <></>}
         </div>
         <div className="mobile-field field">
           <label htmlFor="mobile">Mobile Number</label>
@@ -155,6 +158,11 @@ const AddWorker = () => {
             onBlur={handleBlur}
             className={errors?.mobile && touched.mobile ? "input-error" : ""}
           />
+          {errors.mobile && touched.mobile ? (
+            <span>{errors.mobile}</span>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="password-field field">
           <label htmlFor="password">Password</label>
@@ -170,6 +178,11 @@ const AddWorker = () => {
               errors?.password && touched.password ? "input-error" : ""
             }
           />
+          {errors.password && touched.password ? (
+            <span>{errors.password}</span>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="buttons">
           <button
