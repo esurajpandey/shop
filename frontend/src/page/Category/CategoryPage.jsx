@@ -16,7 +16,7 @@ const CategoryPage = () => {
       const queryString = `category=${query}`;
       console.log(queryString);
       const data = await getProducts(queryString);
-      setProducts(data.data);
+      setProducts(data.data.products);
     } catch (err) {
       console.log("In category page", { message: err.message });
     } finally {

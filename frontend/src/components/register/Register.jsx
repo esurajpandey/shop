@@ -39,7 +39,7 @@ const Register = () => {
         })
       );
       window.location.reload(true);
-      return navigate("/all");
+      return navigate("/");
     } catch (error) {
       toast({
         title: error.message,
@@ -72,6 +72,7 @@ const Register = () => {
     onSubmit: handleSubmitForm,
   });
 
+  console.log(errors);
   return (
     <RegisterContainer>
       <div className="main-container">
@@ -92,6 +93,11 @@ const Register = () => {
                 onBlur={handleBlur}
                 className={errors?.email && touched.email ? "input-error" : ""}
               />
+              {errors?.email && touched.email ? (
+                <span className="error-class">{errors.email}</span>
+              ) : (
+                <></>
+              )}
             </InputContainer>
 
             <InputContainer>
@@ -103,8 +109,13 @@ const Register = () => {
                 name="name"
                 id="name"
                 onChange={handleChange}
-                className={errors?.name && touched.name ? "input-error" : ""}
+                className={errors?.name ? "input-error" : ""}
               />
+              {errors?.name ? (
+                <span className="error-class">{errors.name}</span>
+              ) : (
+                <></>
+              )}
             </InputContainer>
 
             <InputContainer>
@@ -121,6 +132,11 @@ const Register = () => {
                   errors?.mobile && touched.mobile ? "input-error" : ""
                 }
               />
+              {errors?.mobile && touched.mobile ? (
+                <span className="error-class">{errors.mobile}</span>
+              ) : (
+                <></>
+              )}
             </InputContainer>
             <InputContainer>
               <Lable>Password</Lable>
@@ -136,6 +152,11 @@ const Register = () => {
                   errors?.password && touched.password ? "input-error" : ""
                 }
               />
+              {errors?.password && touched.password ? (
+                <span className="error-class">{errors.password}</span>
+              ) : (
+                <></>
+              )}
             </InputContainer>
 
             <InputContainer>
@@ -155,7 +176,7 @@ const Register = () => {
                 }
               />
               {errors?.cnfPassword && touched.cnfPassword ? (
-                <span>{errors.cnfPassword}</span>
+                <span className="error-class">{errors.cnfPassword}</span>
               ) : (
                 <></>
               )}

@@ -57,7 +57,9 @@ export const RegisterContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #C4DDFF;
-
+  .error-class{
+    color: red;
+  }
   .main-container {
     /* padding: 0.8rem 2rem; */
     display: flex;

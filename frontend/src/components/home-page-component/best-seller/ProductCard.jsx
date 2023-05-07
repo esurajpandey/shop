@@ -4,6 +4,8 @@ import styled from "styled-components";
 const processDesc = (product) => {
   return "This is my product";
 };
+
+const modifyProductName = () => {};
 const ProductCard = ({ product }) => {
   //   console.log(product);
   return (

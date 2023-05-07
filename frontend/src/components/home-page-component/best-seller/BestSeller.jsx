@@ -14,8 +14,8 @@ const BestSeller = () => {
     try {
       const query = "page=1";
       const data = await getProducts(query);
-      setProducts(data.data.products);
       console.log(data.data);
+      setProducts(data.data.products);
     } catch (err) {
       console.log(err.message);
     } finally {

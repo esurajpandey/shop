@@ -1,8 +1,6 @@
 import { Button, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import otpImage from "../../assets/otp.webp";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   DetailsContainer,
@@ -87,7 +85,7 @@ const OtpVerify = () => {
         })
       );
       window.location.reload(true);
-      navigate("/all");
+      navigate("/");
     } catch (err) {
       console.log(err);
       toast({

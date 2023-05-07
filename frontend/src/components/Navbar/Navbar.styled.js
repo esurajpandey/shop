@@ -24,11 +24,11 @@ export const navLinks = [
   },
   {
     name: "Mobile",
-    path: "category/mobiles"
+    path: "category/smartphones"
   },
   {
     name: "T.V. & Home Cinema",
-    path: "category/tvs"
+    path: "category/home"
   },
   {
     name: "Wearable Tech",
@@ -98,6 +98,12 @@ export const MiddleContainer = styled.div`
     /* border: 1px solid green; */
   }
 
+  .shop-name{
+    &:hover{
+      color: black;
+    }
+  }
+
   @media (max-width: 800px) {
     flex-direction: column;
     gap:1rem;
@@ -109,10 +115,10 @@ export const MiddleContainer = styled.div`
     }
   }
 `;
-
 export const ShopName = styled.div`
   display: flex;
   /* border: 1px solid green; */
+  transition: 500ms ease-in;
   h1{
     font-family: 'Brush Script';
     font-weight: 900;
@@ -125,6 +131,9 @@ export const ShopName = styled.div`
     .shop-icon{
       font-size: 3rem;
     }
+  }
+  &:hover{
+    transform: scale(1.08);
   }
 `;
 

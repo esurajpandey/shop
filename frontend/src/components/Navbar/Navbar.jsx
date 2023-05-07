@@ -61,7 +61,9 @@ function Navbar() {
         <div className="leftBar">
           <ShopName>
             <FaShopify fontSize={"2.5rem"} className="shop-icon" />
-            <h1>Shop Name</h1>
+            <Link to="/" className="shop-name">
+              <h1>Shop Name</h1>
+            </Link>
           </ShopName>
           <SearchBox>
             <input type="text" placeholder="Search..." />

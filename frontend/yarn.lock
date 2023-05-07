@@ -4135,7 +4135,7 @@ yaml@^1.10.0:
 
 yup@^1.1.1:
   version "1.1.1"
-  resolved "https://registry.npmjs.org/yup/-/yup-1.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/yup/-/yup-1.1.1.tgz#49dbcf5ae7693ed0a36ed08a9e9de0a09ac18e6b"
   integrity sha512-KfCGHdAErqFZWA5tZf7upSUnGKuTOnsI3hUsLr7fgVtx+DK04NPV01A68/FslI4t3s/ZWpvXJmgXhd7q6ICnag==
   dependencies:
     property-expr "^2.0.5"

@@ -1,26 +1,32 @@
-import * as yup from 'yup';
+import * as Yup from 'yup';
 
-export const supplierSchema = yup.object().shape({
-    name: yup.string().required(),
-    email: yup.string().email('Please enter a valid email').required("Email is required"),
-    mobile: yup.string().min(10).max(12).required(),
+export const supplierSchema = Yup.object().shape({
+    name: Yup.string().required("Supplier name is required").matches(/^[a-zA-Z]+$/, 'Name should only contain alphabetical characters'),
+    email: Yup.string().matches(
+        /^[A-Z0-9._%+-]+@[A-Z.]+\.(com|edu|in)$/i,
+        'Invalid email address'
+    ).email('Please enter a valid email').required("Email is required"),
+    mobile: Yup.string().matches(/^[6-9]\d{9}$/, 'Mobile number is not valid').min(10).required(),
 })
 
-export const workerSchema = yup.object().shape({
-    name: yup.string().required(),
-    email: yup.string().email("Enter a valid email").required(),
-    mobile: yup.string().min(10).max(12).required(),
-    password: yup.string().min(4).required()
+export const workerSchema = Yup.object().shape({
+    name: Yup.string().required("worker name is required").matches(/^[a-zA-Z]+$/, 'Name should only contain alphabetical characters'),
+    email: Yup.string().matches(
+        /^[A-Z0-9._%+-]+@[A-Z.]+\.(com|edu|in)$/i,
+        'Invalid email address'
+    ).email("Enter a valid email").required(),
+    mobile: Yup.string().matches(/^[6-9]\d{9}$/, 'Mobile number is not valid').min(10).required(),
+    password: Yup.string().min(4).required()
 })
 
-export const productSchema = yup.object().shape({
-    name: yup.string().required(),
-    quantity: yup.number().min(0).required(),
-    unitPrice: yup.number().min(0).required(),
-    description: yup.string().min(10),
-    weight: yup.number().required(),
-    colorId: yup.string().required("Color is required"),
-    brandId: yup.string().required("Brand is required"),
-    supplierId: yup.string().required("Supplier is required"),
-    categoryId: yup.string().required("Category is required")
+export const productSchema = Yup.object().shape({
+    name: Yup.string().required(),
+    quantity: Yup.number().min(0).required(),
+    unitPrice: Yup.number().min(0).required(),
+    description: Yup.string().min(10),
+    weight: Yup.number().required(),
+    colorId: Yup.string().required("Color is required"),
+    brandId: Yup.string().required("Brand is required"),
+    supplierId: Yup.string().required("Supplier is required"),
+    categoryId: Yup.string().required("Category is required")
 })

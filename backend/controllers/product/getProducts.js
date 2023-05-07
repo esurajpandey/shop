@@ -14,9 +14,9 @@ export default async (req, reply) => {
         const where = {
         }
 
+        console.log(category)
         if (category) {
-
-            const searchLike = `%${category.toLowerCase()}%`
+            const searchLike = `%${category}%`
             where.ProductCategories = {
                 some: {
                     category: {
@@ -80,7 +80,7 @@ export default async (req, reply) => {
         const products = await prisma.product.findMany({
             where,
             take: 9,
-            skip: 9 * page,
+            skip: 9 * (page - 1),
             select: {
                 id: true,
                 name: true,

@@ -52,7 +52,7 @@ const orderTrasaction = async (userId, payementMode) => {
             if (item.product.quantityInStock < item.quantity) {
                 throw { msg: `${item.product.name} is out of stock`, status: 422 }
             }
-            totalAmount = totalAmount + Number(item.product.unitPrice);
+            totalAmount = totalAmount + (Number(item.product.unitPrice) * Number(item.quantity));
         });
 
         if (totalAmount === 0)

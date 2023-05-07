@@ -51,7 +51,7 @@ const AddSupplier = () => {
     onSubmit: handleSubmitForm,
   });
 
-  // console.log(errors);
+  console.log(errors);
   return (
     <ContainerForAdmin>
       <div className="add-supplier-title">
@@ -71,7 +71,7 @@ const AddSupplier = () => {
             className={errors?.name && touched.name ? "input-error" : ""}
           />
           {errors?.name && touched.name ? (
-            <span className="error-class">Name is required</span>
+            <span className="error-class">{errors.name}</span>
           ) : (
             ""
           )}
@@ -89,7 +89,7 @@ const AddSupplier = () => {
             className={errors?.email && touched.email ? "input-error" : ""}
           />
           {errors?.email && touched.email ? (
-            <span className="error-class">Email is required</span>
+            <span className="error-class">{errors.email}</span>
           ) : (
             ""
           )}
@@ -107,7 +107,7 @@ const AddSupplier = () => {
             className={errors?.mobile && touched.mobile ? "input-error" : ""}
           />
           {errors?.mobile && touched.mobile ? (
-            <span className="error-class">Mobile number is required</span>
+            <span className="error-class">{errors.mobile}</span>
           ) : (
             ""
           )}

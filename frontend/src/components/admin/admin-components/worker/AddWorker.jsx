@@ -33,6 +33,7 @@ const AddWorker = () => {
         isClosable: true,
         position: "bottom",
       });
+      action.resetForm();
     } catch (err) {
       toast({
         title: err.message,
@@ -42,7 +43,6 @@ const AddWorker = () => {
         position: "bottom",
       });
     } finally {
-      action.resetForm();
     }
   };
 
@@ -125,7 +125,7 @@ const AddWorker = () => {
             onChange={handleChange}
             id="name"
             name="name"
-            placeholder="Enter supplier name"
+            placeholder="Enter worker name"
             onBlur={handleBlur}
             className={errors?.name && touched.name ? "input-error" : ""}
           />

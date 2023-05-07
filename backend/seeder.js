@@ -133,10 +133,10 @@ const reviewSeeder = async () => {
 
 async function main() {
     console.log("Seeding start...");
-    await shopSeeder();
-    await brandSeeder();
-    await colorSeeder();
-    await productSeeder();
+    // await shopSeeder();
+    // await brandSeeder();
+    // await colorSeeder();
+    // await productSeeder();
     await categorySeeder();
     await productCategoriesSeeder();
     await attributesSeeder();
@@ -149,7 +149,7 @@ async function main() {
     await orderSeeder();
     await orderItemSeeder();
     await supplierSeeder()
-    await reviewSeeder();
+    // await reviewSeeder();
     console.log("Seeding done");
 }
 

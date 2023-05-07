@@ -1,9 +1,12 @@
 import * as yup from 'yup';
 
 export const registerSchema = yup.object().shape({
-    name: yup.string().required(),
-    email: yup.string().email('Enter a valid email').required(),
-    mobile: yup.string().min(10).max(12).required(),
+    name: yup.string().matches(/^[a-zA-Z]+$/, 'Name should only contain alphabetical characters').required(),
+    email: yup.string().matches(
+        /^[A-Z0-9._%+-]+@[A-Z.]+\.(com|edu|in)$/i,
+        'Invalid email address'
+    ).email('Enter a valid email').required(),
+    mobile: yup.string().matches(/^[6-9]\d{9}$/, 'Invalid mobile number').min(10).required(),
     password: yup.string().min(4, 'Password must be at least 4 characters long').required(),
     cnfPassword: yup.string().oneOf([yup.ref('password'), null], "Password doesn't matched").required()
 })

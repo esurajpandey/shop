@@ -19,7 +19,7 @@ export default async (req, reply) => {
 
         const user = await prisma.user.create({
             data: {
-                email,
+                email: email.toLowerCase(),
                 name,
                 mobile,
                 password: hashPassword,
