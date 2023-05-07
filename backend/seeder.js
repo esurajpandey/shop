@@ -2,10 +2,10 @@ import prisma from './init/db.js';
 import shop from './data/shop.json' assert {type: 'json'};
 import brand from './data/brand.json' assert {type: 'json'};
 import color from './data/color.json' assert {type: 'json'};
-import product from './data/product.json' assert {type: 'json'};
+import product from './data/product1.json' assert {type: 'json'};
 import category from './data/category.json' assert {type: 'json'};
-import productCategories from './data/productCategories.json' assert {type: 'json'};
-import attributes from './data/attributes.json' assert {type: 'json'};
+import productCategories from './data/productCategories1.json' assert {type: 'json'};
+import attributes from './data/attributes1.json' assert {type: 'json'};
 
 import address from './data/address.json' assert {type: 'json'};
 import users from './data/user.json' assert {type: 'json'};

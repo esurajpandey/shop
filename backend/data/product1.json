@@ -1,0 +1,202 @@
+[
+  {
+    "id": "b9dda138-0532-4eaf-8ed6-521cc7484a1a",
+    "name": "Logitech Keyboard",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437216/Product%20images/logitech_keyboard_qj4qfd.jpg"
+    ],
+    "description": "This keyboard connects wirelessly to up to three devices, so you can switch between them with the touch of a button.",
+    "quantityInStock": 92,
+    "unitPrice": 575,
+    "weight": 423,
+    "colorId": "3d733f24-bebb-4cca-8d3f-e6ddfb37a432",
+    "brandId": "569f02c9-d53e-4160-b0d2-9a0789968d11",
+    "shopId": "66b46a66-27d3-47f6-883d-607411226ed3"
+  },
+  {
+    "id": "b6bd815d-5222-4291-b362-2df18558115c",
+    "name": "Zebronics Blackwidow Elite Mechanical Gaming Keyboard",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/zebronics_images1_bvciu4.webp",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/zerbronics_image_2_yz6cl3.jpg"
+    ],
+    "description": "This keyboard features Razer's Green mechanical switches for a tactile typing experience and customizable RGB lighting.",
+    "quantityInStock": 43,
+    "unitPrice": 1379,
+    "weight": 1500,
+    "colorId": "16d2c775-9a49-4d84-b1f9-455199dcf7c8",
+    "brandId": "58c3028f-15fe-4898-a869-75e0fe25e604",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "03a7e887-3529-4b52-abc0-96e2db66f688",
+    "name": "Microsoft Wireless Desktop 900",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/microsoft_keyboard_iqdktj.jpg"
+    ],
+    "description": "This wireless keyboard and mouse combo provides a reliable connection and a sleek design.",
+    "quantityInStock": 48,
+    "unitPrice": 2800,
+    "weight": 590,
+    "colorId": "3cf11c5d-2a25-4039-8b05-7536731830ad",
+    "brandId": "11f3bf08-3cac-47f0-bea5-4e61206bf62f",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "750dee44-06b3-46b4-8605-c3365fc14aa5",
+    "name": "Apple Magic Keyboard with Numeric Keypad",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437217/Product%20images/apple_keyboard_pwkof0.jpg"
+    ],
+    "description": "This wireless keyboard features an extended layout with a full numeric keypad, and rechargeable batteries.",
+    "quantityInStock": 19,
+    "unitPrice": 872,
+    "weight": 390,
+    "colorId": "5353a207-841c-4cfa-9c11-9da5e36d5650",
+    "brandId": "f2b744c4-e151-4e75-a805-5c195e1d4574",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "41330200-e64b-4012-8135-f99cde648cda",
+    "name": "Samsung 32 inch HD Ready LED TV (UA32T4010ARXXL)",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437214/Product%20images/Samsung_TV1_g13npt.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437214/Product%20images/Samsung_TV1_g13npt.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/samsung_Tv2_m51zvn.jpg"
+    ],
+    "description": "This LED TV features a 32 inch screen with HD resolution, 2 HDMI ports and 1 USB port for connecting your devices.",
+    "quantityInStock": 76,
+    "unitPrice": 624,
+    "weight": 4100,
+    "colorId": "0c3fb3d5-9a53-4b15-86a7-d2bb0437cbf9",
+    "brandId": "5cb9b43d-1dfc-440d-842f-bf6b863a6b12",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "28b21a95-4182-4480-9ee9-6ee0979e28e1",
+    "name": "LG 55 inch 4K Ultra HD Smart OLED TV (OLED55C9PTA)",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437216/Product%20images/LG_Tv2_hzv2qe.webp",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437216/Product%20images/LG_Tv_3_cdpvyd.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437216/Product%20images/LG_TV1_ugvekn.jpg"
+    ],
+    "description": "This OLED TV features a 55 inch screen with 4K Ultra HD resolution, 4 HDMI ports and 3 USB ports, and smart TV functionality.",
+    "quantityInStock": 1500,
+    "unitPrice": 32000,
+    "weight": 19000,
+    "colorId": "623b4122-0f99-49da-bcd7-0a45f108e5a9",
+    "brandId": "15bb7b67-779e-4d60-8005-fa3cf84c206a",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "c9e236d7-412a-4099-bf82-9f628747df2a",
+    "name": "Sony 43 inch Full HD Smart LED TV (KDL-43W800F)",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437214/Product%20images/SonyTv1_nv3nly.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/Sony_TV3_mi1i9p.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/Sony_TV3_mi1i9p.jpg"
+    ],
+    "description": "This LED TV features a 43 inch screen with Full HD resolution, 4 HDMI ports and 3 USB ports, and smart TV functionality with Android TV.",
+    "quantityInStock": 47,
+    "unitPrice": 607,
+    "weight": 9000,
+    "colorId": "bc5ef294-d625-4bef-b709-f326c3aa8a57",
+    "brandId": "97eab47b-89ae-48aa-a03f-852feb65ba71",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "a4f4a035-17a3-42be-a7cd-f6c9482f8690",
+    "name": "Samsung Galaxy S21",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437214/Product%20images/Samsung-Galaxy-S21_1_r0c7bu.webp",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/Samsung-Galaxy-S21_3_onwszw.png",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/Samsung-Galaxy-S21_2_ftxsx9.jpg"
+    ],
+    "description": "Samsung Galaxy S21 is a high-end smartphone with a 6.2-inch Dynamic AMOLED 2X display, 8GB of RAM, and a 64-megapixel triple-camera system",
+    "quantityInStock": 34,
+    "unitPrice": 64000,
+    "weight": 169,
+    "colorId": "d3156a13-9155-4377-b653-22299829f03c",
+    "brandId": "5cb9b43d-1dfc-440d-842f-bf6b863a6b12",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "534bd6dd-444c-492e-a56a-69c2012695c9",
+    "name": "Apple iPhone 12 Pro Max",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437217/Product%20images/Apple_Iphone12_2_xlvy7k.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437217/Product%20images/Apple_Iphone12_3_dnwd2s.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437216/Product%20images/Apple_Iphone12_1_afxflv.jpg"
+    ],
+    "description": "Apple iPhone 12 Pro Max is a premium smartphone with a 6.7-inch Super Retina XDR display, 6GB of RAM, and a 12-megapixel triple-camera system.",
+    "quantityInStock": 69,
+    "unitPrice": 35000,
+    "weight": 226,
+    "colorId": "d9375625-bab3-4fcb-bc4a-97a484e15738",
+    "brandId": "f2b744c4-e151-4e75-a805-5c195e1d4574",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "32717181-d292-45e5-8b36-bdefd9a4b26b",
+    "name": "OnePlus 9 Pro",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/OnePlus_9Pro_2_fahcmy.webp",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/OnePlus_9Pro_3_edjhzg.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437216/Product%20images/OnePlus_9Pro_1_lolzcc.webp"
+    ],
+    "description": "OnePlus 9 Pro is a flagship smartphone with a 6.7-inch Fluid AMOLED display, 12GB of RAM, and a 48-megapixel quad-camera system",
+    "quantityInStock": 49,
+    "unitPrice": 855,
+    "weight": 197,
+    "colorId": "6d0833c3-f61d-4a6c-8b23-3c940abca5c6",
+    "brandId": "615d06d6-540c-4836-a52f-35e732c5790e",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "46674394-9614-4deb-a849-7b789bd87c0e",
+    "name": "Xiaomi Mi 11",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/Xiomi_Phone_3_wgm8pq.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437212/Product%20images/Xiomi_Phone_2_kt1sip.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/Xiomi_Phone_1_lnfvyr.webp"
+    ],
+    "description": "Xiaomi Mi 11 is a premium smartphone with a 6.81-inch AMOLED display, 8GB of RAM, and a 108-megapixel triple-camera system.",
+    "quantityInStock": 135,
+    "unitPrice": 18000,
+    "weight": 196,
+    "colorId": "d2dd5eb3-446a-43ff-8a77-65d6db70dca8",
+    "brandId": "2891db9f-acc3-4efa-b3a6-d77c39d862dd",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "a00e957f-4c9c-42f3-89cb-260e78fe6be3",
+    "name": "Samsung Galaxy A22 5G",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437214/Product%20images/Samsung-Galaxy-A22-5G_3_f7ktsx.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/Samsung_Galaxy_A22_5G_2_krflli.jpg",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/Samsung_Galaxy_A22_5G_1_wmoabi.jpg"
+    ],
+    "description": "The Samsung Galaxy A22 5G features a 6.6-inch full-HD+ display and is powered by the MediaTek Dimensity 700 SoC. It has a 48-megapixel primary camera and a 5,000mAh battery.",
+    "quantityInStock": 57,
+    "unitPrice": 27000,
+    "weight": 205,
+    "colorId": "3ad57595-45d9-4927-b10e-8ae8db636b47",
+    "brandId": "5cb9b43d-1dfc-440d-842f-bf6b863a6b12",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  },
+  {
+    "id": "80a09a94-095e-4622-a2ea-6be5188a6104",
+    "name": "Xiaomi Redmi Note 10S",
+    "pictures": [
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437213/Product%20images/xiomi_redmi_1_cacx7j.webp",
+      "https://res.cloudinary.com/durmhsdmz/image/upload/v1683437215/Product%20images/Redmi-Note_2_r5n610.webp"
+    ],
+    "description": "The Xiaomi Redmi Note 10S features a 6.43-inch full-HD+ AMOLED display and is powered by the MediaTek Helio G95 SoC. It has a 64-megapixel primary camera and a 5,000mAh battery",
+    "quantityInStock": 45,
+    "unitPrice": 22000,
+    "weight": 178.8,
+    "colorId": "e0155e22-8bed-4e61-8b1d-e088cf206da1",
+    "brandId": "2891db9f-acc3-4efa-b3a6-d77c39d862dd",
+    "shopId": "dd597cdc-d939-4829-a78a-66197bc40e5f"
+  }
+]
