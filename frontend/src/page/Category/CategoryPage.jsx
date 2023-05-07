@@ -3,31 +3,90 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getProducts } from "../../api/Shop";
 import ProductCard from "../../components/home-page-component/best-seller/ProductCard";
-import { Box, Spinner } from "@chakra-ui/react";
-
+import { Box, Spinner, useToast } from "@chakra-ui/react";
+import ProductCardContainer from "../../components/product/ProductCartContainer";
+import { getCategories } from "../../api/Admin";
+import { Select } from "@chakra-ui/react";
+import { getBrands } from "../../api/Admin";
 const CategoryPage = () => {
   const { query } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const handleFetchProducts = async () => {
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [queries, setQueries] = useState({
+    lessThan: "",
+    moreThan: "",
+    brand: "",
+    category: "",
+  });
+
+  const toast = useToast({
+    duration: 5000,
+    position: "top-right",
+    isClosable: true,
+    variant: "subtle",
+  });
+
+  const fetchCategoryAndBrand = async () => {
     try {
-      if (query === "all") {
-      }
-      const queryString = `category=${query}`;
-      console.log(queryString);
-      const data = await getProducts(queryString);
-      setProducts(data.data.products);
+      setLoading(true);
+      const data = await getCategories();
+      const brands = await getBrands();
+      setBrands(brands.data);
+      setCategories(data.data);
     } catch (err) {
-      console.log("In category page", { message: err.message });
+      toast({
+        title: err.message || "No category found",
+        status: "error",
+      });
     } finally {
       setLoading(false);
     }
   };
+
+  const handleFetchProducts = async (query) => {
+    try {
+      const data = await getProducts(query);
+      setProducts(data.data.products);
+    } catch (err) {
+      toast({
+        title: err.message || "No product found",
+        status: "info",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    console.log(query);
-    handleFetchProducts();
+    fetchCategoryAndBrand();
+  }, []);
+
+  useEffect(() => {
+    handleFetchProducts(`category=${query}`);
   }, [query]);
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams();
+    console.log(queries);
+    if (queries.brand) {
+      queryParams.append("brand", queries.brand);
+    }
+
+    if (queries.category) {
+      queryParams.append("category", queries.category);
+    }
+
+    if (queries.lessThan) {
+      queryParams.append("lessThan", queries.lessThan);
+    }
+    if (queries.moreThan) {
+      queryParams.append("moreThan", queries.moreThan);
+    }
+    console.log(queryParams.toString());
+    handleFetchProducts(queryParams.toString());
+  }, [queries]);
   return (
     <CategoryPageContainer>
       {loading ? (
@@ -36,13 +95,70 @@ const CategoryPage = () => {
         </div>
       ) : (
         <>
-          <Filters></Filters>
+          <Filters>
+            <Select
+              placeholder="Brands"
+              size="sm"
+              onChange={(e) =>
+                setQueries((prev) => ({ ...prev, brand: e.target.value }))
+              }
+            >
+              {brands.length > 0 &&
+                brands.map((item) => {
+                  return (
+                    <option key={item.id} value={item.name}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+            </Select>
+            <Select
+              placeholder="Categories"
+              size="sm"
+              onChange={(e) =>
+                setQueries((prev) => ({ ...prev, category: e.target.value }))
+              }
+            >
+              {categories.length > 0 &&
+                categories.map((item) => {
+                  return (
+                    <option key={item.id} value={item.name}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+            </Select>
+            <Select
+              placeholder="Price less than"
+              size="sm"
+              onChange={(e) =>
+                setQueries((prev) => ({ ...prev, lessThan: e.target.value }))
+              }
+            >
+              <option value={500}>&#8377; 500</option>
+              <option value={1000}>&#8377; 1000</option>
+              <option value={5000}>&#8377; 5000</option>
+              <option value={10000}>&#8377; 10000</option>
+            </Select>
+            <Select
+              placeholder="Price more than"
+              size="sm"
+              onChange={(e) =>
+                setQueries((prev) => ({ ...prev, moreThan: e.target.value }))
+              }
+            >
+              <option value={500}>&#8377; 500</option>
+              <option value={1000}>&#8377; 1000</option>
+              <option value={5000}>&#8377; 5000</option>
+              <option value={10000}>&#8377; 10000</option>
+            </Select>
+          </Filters>
           <ProductLists>
             {products.length > 0 &&
               products.map((product) => {
                 return (
                   <Link to={`/product/${product.id}`} key={product.id}>
-                    <ProductCard product={product} key={product.id} />
+                    <ProductCardContainer product={product} key={product.id} />
                   </Link>
                 );
               })}
@@ -56,7 +172,7 @@ const CategoryPage = () => {
 const CategoryPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-
+  position: relative;
   .loader {
     display: flex;
     align-items: center;
@@ -65,16 +181,45 @@ const CategoryPageContainer = styled.div`
   }
 `;
 
-const Filters = styled.div``;
+const Filters = styled.div`
+  position: sticky;
+  top: 9em;
+  display: flex;
+  backdrop-filter: blur(15px);
+  background-color: #eef1f4;
+  padding: 0.4em;
+  padding-left: 1em;
+  padding-right: 2em;
+  z-index: 10;
+  gap: 2em;
+  select {
+    border: 1px solid black;
+    border-radius: 5px;
+    &:focus,
+    &:hover {
+      border: 1px solid black;
+      outline: 0;
+    }
+  }
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    top: 14.6em;
+  }
+  @media (max-width: 1000px) {
+    top: 14.6em;
+  }
+`;
 
 const ProductLists = styled.div`
   display: flex;
   flex-wrap: wrap;
   color: black;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   padding: 2rem;
-  gap: 1em;
+  gap: 3em;
   /* border: 1px solid red; */
 `;
 

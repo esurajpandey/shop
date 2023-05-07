@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Images from "../image/Images";
 import styled from "styled-components";
 import ProductSideContainer from "./ProductSideContainer";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { TiFlash } from "react-icons/ti";
 import { addToCart, orderNow } from "../../api/Shop";
@@ -32,7 +32,13 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   const [paymentMode, setPaymentMode] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
+  const toast = useToast({
+    duration: 7000,
+    isClosable: true,
+    position: "top-right",
+  });
+  const navigate = useNavigate();
+
   const Razorpay = useRazorpay();
 
   const fetchProduct = async () => {
@@ -42,7 +48,10 @@ const Product = () => {
       const data = await response.json();
       setProduct(data.data);
     } catch (err) {
-      console.log(err.message);
+      toast({
+        title: err.message,
+        status: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -59,10 +68,7 @@ const Product = () => {
       if (!paymentMode) {
         toast({
           title: "Please select payment mode",
-          position: "bottom",
           status: "warning",
-          duration: 9000,
-          isClosable: true,
         });
         return;
       }
@@ -73,19 +79,27 @@ const Product = () => {
       };
 
       const data = await orderNow(orderData);
-      const user = getUser();
-      const options = getPaymentOption(data.data, user);
-      const razor = new window.Razorpay(options);
 
-      onClose();
-      razor.open();
+      if (paymentMode === "ONLINE") {
+        const user = getUser();
+        const options = getPaymentOption(data.data, user);
+        const razor = new window.Razorpay(options);
+        onClose();
+        razor.open();
+      } else {
+        toast({
+          title: data.message,
+          status: "success",
+        });
+        onClose();
+        setTimeout(() => {
+          navigate("/orders");
+        }, 500);
+      }
     } catch (err) {
       toast({
         title: err.message,
-        position: "bottom",
         statussuccess: "error",
-        duration: 9000,
-        isClosable: true,
       });
     } finally {
       setLoading(false);

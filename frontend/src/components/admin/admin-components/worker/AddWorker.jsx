@@ -140,7 +140,7 @@ const AddWorker = () => {
             onChange={handleChange}
             id="email"
             name="email"
-            placeholder="Enter supplier email"
+            placeholder="Enter worker email"
             onBlur={handleBlur}
             className={errors?.email && touched.email ? "input-error" : ""}
           />
@@ -154,7 +154,7 @@ const AddWorker = () => {
             onChange={handleChange}
             id="mobile"
             name="mobile"
-            placeholder="Enter supplier contact number"
+            placeholder="Enter worker contact number"
             onBlur={handleBlur}
             className={errors?.mobile && touched.mobile ? "input-error" : ""}
           />

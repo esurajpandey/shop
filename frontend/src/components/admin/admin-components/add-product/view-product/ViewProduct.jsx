@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
+
+import ReactPaginate from "react-paginate";
+import { getProductList, updateProduct } from "../../../../../api/Admin";
+import styled from "@emotion/styled";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   FormControl,
   FormLabel,
   Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import ReactPaginate from "react-paginate";
-import {
-  getProductList,
-  getSuppliers,
-  updateSupplier,
-} from "../../../../../api/Admin";
-import styled from "@emotion/styled";
+import { useFormik } from "formik";
+import { productUpdateSchema } from "../../../../../validation/AdminValidation";
 
 const ViewProduct = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [selectedSProduct, setSelectedProduct] = useState(null);
-  const [productName, setProductName] = useState("");
-  const [productQuantity, setProductQuantity] = useState("");
-  const [unitPrice, setUnitPrice] = useState("");
+  const toast = useToast({
+    isClosable: true,
+    duration: 7000,
+    position: "top-right",
+  });
+  const [selectedProduct, setSelectedProduct] = useState();
   const [products, setProducts] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [pagination, setPagination] = useState({
     page: 1,
     total: 0,
@@ -39,20 +42,24 @@ const ViewProduct = () => {
 
   const handleDelete = () => {};
 
-  const handleEditClick = (product) => {
-    setSelectedProduct(product);
-    setShowModal(true);
-
-    setProductName(product.name);
-    setProductQuantity(product.quantityInStock);
-    setUnitPrice(product.unitPrice);
-  };
-
-  const handleSaveClick = async () => {
+  const handleProductEdit = async (values, action) => {
     try {
-      setShowModal(false);
+      const data = await updateProduct(values.id, {
+        name: values.name,
+        quantityInStock: values.quantityInStock,
+        unitPrice: values.unitPrice,
+      });
+      await fetchProducts(pagination.page);
+      onClose();
+      toast({
+        title: data.message,
+        status: "success",
+      });
     } catch (err) {
-      console.log(err);
+      toast({
+        title: err.message,
+        status: "error",
+      });
     } finally {
     }
   };
@@ -61,7 +68,6 @@ const ViewProduct = () => {
     try {
       const data = await getProductList(page);
       setProducts(data.data.products);
-      // console.log(data.data.total);
       setPagination((prev) => ({ ...prev, total: data.data.total }));
     } catch (err) {
       console.log(err);
@@ -75,119 +81,151 @@ const ViewProduct = () => {
   const handlePageClick = async (event) => {
     const newOffset = (event.selected * 10) % pagination.total;
     console.log("Page numer", pagination.page, event.selected);
-    await fetchProducts(event.selected);
+    await fetchProducts(event.selected + 1);
     setPagination((prev) => ({ ...prev, page: event.selected }));
   };
 
+  const {
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    touched,
+    errors,
+    values,
+  } = useFormik({
+    initialValues: {
+      id: "",
+      name: selectedProduct?.name ?? "",
+      quantityInStock: selectedProduct?.quantityInStock ?? 0,
+      unitPrice: selectedProduct?.unitPrice ?? 0,
+    },
+    validationSchema: productUpdateSchema,
+    onSubmit: handleProductEdit,
+  });
+
+  const handleEditClick = (product) => {
+    setSelectedProduct((prev) => product);
+    values.id = product.id;
+    values.name = product.name;
+    values.quantityInStock = product.quantityInStock;
+    values.unitPrice = product.unitPrice;
+    onOpen();
+  };
   return (
-    <WorkerDetailsContainer>
-      <div className="top-header">
-        <h2 className="supplier-title">Product List</h2>
-      </div>
+    <>
+      <WorkerDetailsContainer>
+        <div className="top-header">
+          <h2 className="supplier-title">Product List</h2>
+        </div>
 
-      {products.length > 0 && (
-        <WorkerDetailsTable>
-          <table className="supplier-table">
-            <thead className="sticky-header">
-              <tr className="top-header">
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Stock Quantity</th>
-                <th>Unit Price</th>
-                <th> </th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product?.brand?.name}</td>
-                  <td>{product?.quantityInStock}</td>
-                  <td>{product.unitPrice}</td>
-                  <td>
-                    <Menu>
-                      <MenuButton>
-                        <CiMenuKebab />
-                      </MenuButton>
-                      <MenuList maxWidth={"50px"} maxW={"50px"} w={"2rem"}>
-                        <MenuItem onClick={() => handleEditClick(product)}>
-                          Edit
-                        </MenuItem>
-                        <MenuItem onClick={() => handleDelete(product.id)}>
-                          Delete
-                        </MenuItem>
-                      </MenuList>
-                    </Menu>
-                  </td>
+        {products.length > 0 && (
+          <WorkerDetailsTable>
+            <table className="supplier-table">
+              <thead className="sticky-header">
+                <tr className="top-header">
+                  <th>Name</th>
+                  <th>Brand</th>
+                  <th>Stock Quantity</th>
+                  <th>Unit Price</th>
+                  <th> </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </WorkerDetailsTable>
-      )}
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.id}>
+                    <td>{product.name}</td>
+                    <td>{product?.brand?.name}</td>
+                    <td>{product?.quantityInStock}</td>
+                    <td>{product.unitPrice}</td>
+                    <td>
+                      <Menu>
+                        <MenuButton>
+                          <CiMenuKebab />
+                        </MenuButton>
+                        <MenuList maxWidth={"50px"} maxW={"50px"} w={"2rem"}>
+                          <MenuItem onClick={() => handleEditClick(product)}>
+                            Edit
+                          </MenuItem>
+                          <MenuItem onClick={() => handleDelete(product.id)}>
+                            Delete
+                          </MenuItem>
+                        </MenuList>
+                      </Menu>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </WorkerDetailsTable>
+        )}
 
-      <div className="pagination-container">
-        <ReactPaginate
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={pagination.total / 9}
-          previousLabel="< previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-        />
-      </div>
+        <div className="pagination-container">
+          <ReactPaginate
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pagination.total / 9}
+            previousLabel="< previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
+        </div>
+      </WorkerDetailsContainer>
 
-      {showModal && (
-        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Edit supplier Details</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <FormControl>
-                <FormLabel>Product</FormLabel>
-                <Input
-                  value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
-                />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Quantity </FormLabel>
-                <Input
-                  value={productQuantity}
-                  onChange={(e) => setProductQuantity(e.target.value)}
-                />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Unit Price</FormLabel>
-                <Input
-                  value={unitPrice}
-                  onChange={(e) => setUnitPrice(e.target.value)}
-                />
-              </FormControl>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={handleSaveClick}>
-                Save
-              </Button>
-              <Button onClick={() => setShowModal(false)}>Cancel</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      )}
-    </WorkerDetailsContainer>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit Produc Details</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl>
+              <FormLabel>Product</FormLabel>
+              <Input
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="name"
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Quantity </FormLabel>
+              <Input
+                value={values.quantityInStock}
+                name="quantityInStock"
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Unit Price</FormLabel>
+              <Input
+                value={values.unitPrice}
+                onChange={handleChange}
+                name="unitPrice"
+                onBlur={handleBlur}
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

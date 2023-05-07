@@ -7,11 +7,12 @@ export default async (req, reply) => {
         const { category, name, attrName, attrValue, lessThan, moreThan, brand } = req.query;
 
         let page = 1;
+        let limit = 9;
         if (req.query.page) {
             page = +req.query.page
         }
 
-        const where = {
+        let where = {
         }
 
         console.log(category)
@@ -27,7 +28,13 @@ export default async (req, reply) => {
                     }
                 }
             }
+
+            if (category === 'all') {
+                where = {}
+                limit = 40;
+            }
         }
+
 
         if (attrName && attrValue) {
             const attrLike = `%${attrName.toLowerCase()}%`
@@ -79,8 +86,8 @@ export default async (req, reply) => {
 
         const products = await prisma.product.findMany({
             where,
-            take: 9,
-            skip: 9 * (page - 1),
+            take: limit,
+            skip: limit * (page - 1),
             select: {
                 id: true,
                 name: true,
@@ -97,6 +104,9 @@ export default async (req, reply) => {
                         category: true
                     }
                 }
+            },
+            orderBy: {
+                name: "asc"
             }
         });
 

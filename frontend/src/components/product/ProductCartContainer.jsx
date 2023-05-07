@@ -14,15 +14,11 @@ const modifyProductName = (name) => {
     return name;
   }
 };
-const ProductCard = ({ product }) => {
-  //   console.log(product);
+const ProductCardContainer = ({ product }) => {
   return (
     <>
       {product && (
         <ProductCardContaier>
-          <div className="card-tag">
-            <span>SALE</span>
-          </div>
           <div className="image-section">
             <img
               src={
@@ -56,6 +52,9 @@ const ProductCardContaier = styled.div`
   gap: 0.5rem;
   overflow-y: hidden;
   border-radius: 3px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   cursor: pointer;
   .card-tag {
     span {
@@ -104,4 +103,4 @@ const ProductCardContaier = styled.div`
     }
   }
 `;
-export default ProductCard;
+export default ProductCardContainer;

@@ -1,6 +1,6 @@
 import prisma from '../../../init/db.js';
 import { errorResponse, successResponse } from '../../../utils/helper/response.js'
-import { DeliveryStatus, OrderStatus } from '@prisma/client';
+import { DeliveryStatus, OrderStatus, PaymentMode } from '@prisma/client';
 import payementLink from '../../../utils/helper/payementLink.js';
 
 export default async (req, reply) => {
@@ -50,7 +50,7 @@ const orderTransaction = async (req) => {
         const order = await tx.order.create({
             data: {
                 deliveryStatus: DeliveryStatus.ORDERED,
-                orderStatus: OrderStatus.INITIATED,
+                orderStatus: paymentMode === PaymentMode.ONLINE ? OrderStatus.INITIATED : OrderStatus.CONFIRMED,
                 payment_mode: paymentMode,
                 amount: product.unitPrice,
                 user: {
@@ -75,7 +75,6 @@ const orderTransaction = async (req) => {
             throw { msg: "Unable to order now", status: 422 };
 
 
-        console.log("Order in orderId", order.id);
         const orderItems = await tx.orderItem.create({
             data: {
                 quantity: 1,
@@ -92,6 +91,9 @@ const orderTransaction = async (req) => {
             }
         })
 
+        if (paymentMode === PaymentMode.COD) {
+            return order;
+        }
         const link = await payementLink(order.id, order.amount, user);
         return link;
     })

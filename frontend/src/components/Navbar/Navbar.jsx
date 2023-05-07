@@ -156,8 +156,8 @@ function Navbar() {
           </LoginBtnContainer>
         )} */}
       </MiddleContainer>
-      {user && user?.type === "ADMIN" && <NavButtomLine></NavButtomLine>}
-      {user && user?.type !== "ADMIN" && <BottomNavbar />}
+      {/* {user && user?.type === "ADMIN" && <NavButtomLine></NavButtomLine>} */}
+      <BottomNavbar />
     </NavContainer>
   );
 }

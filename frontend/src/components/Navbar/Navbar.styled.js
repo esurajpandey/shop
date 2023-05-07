@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 export const navLinks = [
   {
     name: "Shop All",
-    path: "category"
+    path: "category/all"
   },
   {
     name: "Computers",

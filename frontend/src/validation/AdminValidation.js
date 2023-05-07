@@ -30,3 +30,9 @@ export const productSchema = Yup.object().shape({
     supplierId: Yup.string().required("Supplier is required"),
     categoryId: Yup.string().required("Category is required")
 })
+
+export const productUpdateSchema = Yup.object().shape({
+    name: Yup.string().required(),
+    quantityInStock: Yup.number().min(0).required(),
+    unitPrice: Yup.number().min(0).required()
+})

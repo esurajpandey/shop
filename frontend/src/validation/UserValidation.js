@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const registerSchema = yup.object().shape({
-    name: yup.string().matches(/^[a-zA-Z]+$/, 'Name should only contain alphabetical characters').required(),
+    name: yup.string().matches(/^[a-zA-Z ]+$/, 'Name should only contain alphabetical characters').required(),
     email: yup.string().matches(
         /^[A-Z0-9._%+-]+@[A-Z.]+\.(com|edu|in)$/i,
         'Invalid email address'

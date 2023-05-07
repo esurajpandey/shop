@@ -127,6 +127,9 @@ export const getAnalytics = async (query) => {
     return data;
 }
 
-
-
-
+export const updateProduct = async (productId, productData) => {
+    const data = await Fetch(`/product/update/${productId}`, productData, "PUT");
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}

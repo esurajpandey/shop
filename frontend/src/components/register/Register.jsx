@@ -25,7 +25,7 @@ const Register = () => {
         status: "success",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "bottom-right",
       });
 
       localStorage.setItem(
@@ -38,15 +38,15 @@ const Register = () => {
           type: data.data.type,
         })
       );
+      navigate("/");
       window.location.reload(true);
-      return navigate("/");
     } catch (error) {
       toast({
         title: error.message,
         status: "error",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top-right",
       });
     } finally {
       action.resetForm();
