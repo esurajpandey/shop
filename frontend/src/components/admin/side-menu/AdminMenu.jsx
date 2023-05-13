@@ -38,8 +38,6 @@ const AdminSideMenuMainConatiner = styled.div`
   overflow-x: hidden;
   padding-inline: 1.5em;
   padding-top: 1em;
-  height: 50vh;
-
   .active-menu {
     background-color: #ebf0fe;
 

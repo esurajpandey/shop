@@ -15,6 +15,8 @@ import Product from "./components/product/Product";
 import styled from "styled-components";
 import Account from "./components/account/Account";
 import { OrderedList } from "@chakra-ui/react";
+import Wishlist from "./components/wishlist/Wishlist";
+
 import Order from "./components/order/Order";
 import OrderDetails from "./components/order/OrderDetails";
 import PaymentSuccess from "./page/PaymentSuccess";
@@ -48,7 +50,9 @@ function App() {
             <Route path="/verify-account" element={<OtpVerify />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/favorites" element={<Wishlist />} />
             <Route path="/product/:productId" element={<Product />} />
+
             {user?.type === "ADMIN" && (
               <Route path="/admin/*" element={<AdminPage />} />
             )}

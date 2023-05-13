@@ -1,5 +1,7 @@
 import user from '../controllers/user/index.js';
 import verifyToken from '../middleware/verifyToken.js'
+import wishlist from '../controllers/wishlist/index.js';
+
 export default async (fastify, otps, done) => {
     fastify.put('/change-email', { preHandler: [verifyToken], handler: user.changeEmail });
     fastify.put('/change-password', { preHandler: [verifyToken], handler: user.changePassword });
@@ -13,5 +15,8 @@ export default async (fastify, otps, done) => {
     fastify.put('/address/:addressId', { preHandler: [verifyToken], handler: user.updateAddress });
     fastify.get('/address', { preHandler: [verifyToken], handler: user.getAddress });
     fastify.put('/reset-password', { handler: user.resetPassword });
+    fastify.post('/wishlist/:productId', { preHandler: [verifyToken], handler: wishlist.addProductToWishlist });
+    fastify.delete('/wishlist/:productId', { preHandler: [verifyToken], handler: wishlist.removedProductFromWishlist });
+    fastify.get('/wishlist', { preHandler: [verifyToken], handler: wishlist.getWishlist });
     done();
 }

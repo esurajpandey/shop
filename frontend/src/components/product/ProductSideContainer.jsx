@@ -48,6 +48,10 @@ const ProductSideContainer = ({ product }) => {
     let total = ratings.reduce((acc, curr) => acc + rate[curr.rating], 0);
     return total;
   };
+
+  const handleAddToFavorite = async (productId) => {
+    alert(productId);
+  };
   return (
     <>
       {product && (
@@ -65,6 +69,12 @@ const ProductSideContainer = ({ product }) => {
               {getRatingCount(product.Review)} Ratings & {product.Review.length}{" "}
               Reviews
             </span>
+            <button
+              className="wishlistbtn"
+              onClick={() => handleAddToFavorite(product.id)}
+            >
+              Add to wishlist
+            </button>
           </OverallRating>
           <PriceDetails>
             <span className="spcl">Special Price</span>
@@ -104,8 +114,8 @@ const ProductSideContainer = ({ product }) => {
             </div>
           </Details>
           <Description className="detail-class">
-            <span className="left-title">Decscription : </span>
-            <span>{product.description}</span>
+            <span className="left-title">Decscription </span>
+            <span> : {product.description}</span>
           </Description>
 
           <Description className="detail-class">
@@ -154,6 +164,18 @@ const ProductDetails = styled.div`
   .detail-class {
     display: flex;
     gap: 0.7rem;
+  }
+
+  .wishlistbtn {
+    display: flex;
+    border: 0;
+    color: #043e40;
+    font-family: "Zilla Slab";
+    font-size: 1.1rem;
+    &:hover {
+      border: 0;
+      text-decoration: underline;
+    }
   }
 `;
 

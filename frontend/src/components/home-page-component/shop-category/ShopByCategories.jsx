@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { data } from "./Category.helper";
+import { Link } from "react-router-dom";
 import CategoryCard from "./CategoryCard";
 const ShopByCategories = () => {
   return (
@@ -11,11 +12,13 @@ const ShopByCategories = () => {
       <CategoryContainer>
         {data.map((item) => {
           return (
-            <CategoryCard
-              imgSrc={item.imgSrc}
-              title={item.title}
-              key={item.title}
-            />
+            <Link to={`/${item.path}`}>
+              <CategoryCard
+                imgSrc={item.imgSrc}
+                title={item.title}
+                key={item.title}
+              />
+            </Link>
           );
         })}
       </CategoryContainer>

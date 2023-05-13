@@ -41,11 +41,11 @@ model User {
   otp   Otp?    @relation(fields: [otpId], references: [id])
   otpId String? @unique
 
-  orders   Order[] @relation(name: "customer")
-  delivery Order[] @relation(name: "worker")
-
+  orders    Order[]    @relation(name: "customer")
+  delivery  Order[]    @relation(name: "worker")
   cartItem  CartItem[]
   payements Payement[]
+  wishlist  Wishlist[]
 }
 
 model Otp {
@@ -54,6 +54,17 @@ model Otp {
   createdAt DateTime @default(now())
   expireIn  Int
   user      User?
+}
+
+model Wishlist {
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  user    User     @relation(fields: [userId], references: [id])
+  addedAt DateTime @default(now())
+  userId  String
+
+  @@id([productId, userId])
 }
 
 model Address {
@@ -107,6 +118,7 @@ model Product {
   OrderItem         OrderItem[]
   Supplies          Supplies[]
   Review            Review[]
+  Wishlist          Wishlist[]
 }
 
 model Color {

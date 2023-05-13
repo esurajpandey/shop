@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-const processDesc = (product) => {
-  return "This is my product";
-};
+import { FaHeart } from "react-icons/fa";
 
 const modifyProductName = (name) => {
   let text = "";
@@ -19,15 +16,18 @@ const ProductCardContainer = ({ product }) => {
     <>
       {product && (
         <ProductCardContaier>
-          <div className="image-section">
-            <img
-              src={
-                product.pictures &&
-                product.pictures.length > 0 &&
-                product?.pictures[0]
-              }
-              alt={product?.name}
-            />
+          <div className="top-section">
+            <div className="image-section">
+              <img
+                src={
+                  product.pictures &&
+                  product.pictures.length > 0 &&
+                  product?.pictures[0]
+                }
+                alt={product?.name}
+              />
+            </div>
+            {/* <FaHeart className="favoritebtn" /> */}
           </div>
           <div className="card-details-section">
             <span className="p-name">{modifyProductName(product.name)}</span>
@@ -80,6 +80,18 @@ const ProductCardContaier = styled.div`
     }
   }
 
+  .top-section {
+    position: relative;
+  }
+
+  .favoritebtn {
+    position: absolute;
+    top: 0;
+    left: 4.5em;
+    z-index: 2;
+    font-size: 2rem;
+    color: #033b39;
+  }
   .card-details-section {
     display: flex;
     flex-direction: column;
