@@ -61,7 +61,6 @@ const Analytics = () => {
     if (orderFilter.from && orderFilter.to) {
       queryParams.append("from", orderFilter.from);
       queryParams.append("to", orderFilter.to);
-      alert(queryParams.toString());
       await handleFetchDetails(queryParams.toString());
     }
     onClose();
