@@ -20,7 +20,12 @@ const MyAddress = () => {
     zip: "",
   };
 
-  const toast = useToast();
+  const toast = useToast({
+    isClosable :  true,
+    duration : 3000,
+    position : 'top-right'
+  });
+
   const fetchAddress = async () => {
     try {
       const data = await getAddress();
@@ -29,13 +34,9 @@ const MyAddress = () => {
         setFormType("old");
       }
     } catch (err) {
-      console.log(err);
       toast({
         title: err.message,
         status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
       });
     }
   };
@@ -50,18 +51,11 @@ const MyAddress = () => {
       toast({
         title: data.message,
         status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
       });
     } catch (err) {
-      console.log(err);
       toast({
         title: err.message,
         status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
       });
     } finally {
       // action.resetForm();
@@ -77,9 +71,6 @@ const MyAddress = () => {
         toast({
           title: data.message,
           status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "bottom",
         });
       }
     } catch (err) {
@@ -87,9 +78,6 @@ const MyAddress = () => {
       toast({
         title: err.message,
         status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
       });
     } finally {
       action.resetForm();

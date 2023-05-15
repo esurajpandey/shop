@@ -7,7 +7,7 @@ export default async (name, value, email) => {
             name,
             value
         }
-        ejs.renderFile('/home/stark/Projects/CollegeProject/My Project/backend/utils/helpers/sendEmail/otpFile.ejs', data, async (err, html) => {
+        ejs.renderFile('D:/my Shop/shop/backend/utils/email/otp.ejs', data, async (err, html) => {
             if (err) {
                 console.log("Html rendering file", err.message);
                 throw err;
