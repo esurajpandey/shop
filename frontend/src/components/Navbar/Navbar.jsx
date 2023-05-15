@@ -33,13 +33,11 @@ import EmailVerifierLink from "./EmailVerifierLink";
 
 function Navbar() {
   const [user, setUser] = useState(null);
+  const [search,setSearch] = useState('');
 
   const type = "admin";
   const navigate = useNavigate();
 
-  const handleMyAccount = () => {
-    return navigate("/account");
-  };
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem("user"));
     if (!userDetails) {
@@ -54,6 +52,13 @@ function Navbar() {
     window.location.reload(true);
     return navigate("/login");
   };
+
+  const handleSearch = () => {
+    if(search !== ''){
+      setSearch('');
+      navigate(`/search/${search}`)
+    }
+  }
   return (
     <NavContainer>
       {user && !user?.isEmailVerified && <EmailVerifierLink />}
@@ -62,12 +67,12 @@ function Navbar() {
           <ShopName>
             <FaShopify fontSize={"2.5rem"} className="shop-icon" />
             <Link to="/" className="shop-name">
-              <h1>Shop Name</h1>
+              <h1>Sathish Mill Stores</h1>
             </Link>
           </ShopName>
           <SearchBox>
-            <input type="text" placeholder="Search..." />
-            <button className="search-button">
+            <input type="text" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)}/>
+            <button className="search-button" onClick={handleSearch}>
               <AiOutlineSearch className="search-icon" />
             </button>
           </SearchBox>
@@ -147,14 +152,6 @@ function Navbar() {
             </Menu>
           </RightBar>
         )}
-        {/* {user === null && (
-          <LoginBtnContainer>
-            <Link to="/login">
-              <span>Login</span>
-              <TbLogin />
-            </Link>
-          </LoginBtnContainer>
-        )} */}
       </MiddleContainer>
       {/* {user && user?.type === "ADMIN" && <NavButtomLine></NavButtomLine>} */}
       <BottomNavbar />

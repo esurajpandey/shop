@@ -14,6 +14,7 @@ export default async (req, reply) => {
                         id: true,
                         name: true,
                         quantityInStock: true,
+                        pictures : true,
                         brand: {
                             select: { name: true }
                         },

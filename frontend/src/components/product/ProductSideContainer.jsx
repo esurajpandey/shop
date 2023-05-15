@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { AiFillStar } from "react-icons/ai";
 import { DiMeteor } from "react-icons/di";
+import {useToast} from '@chakra-ui/react';
+import { addToWishlist } from "../../api/User";
 const rate = {
   ONE: 1,
   TWO: 2,
@@ -28,6 +30,12 @@ const offers = [
 ];
 
 const ProductSideContainer = ({ product }) => {
+
+  const toast = useToast({
+    duration : 4000,
+    isClosable : true,
+    position : "top-right"
+  });
   const processProductHeader = (product) => {
     let category = product?.attributes?.reduce(
       (total, item) => total + " | " + item.value,
@@ -50,7 +58,20 @@ const ProductSideContainer = ({ product }) => {
   };
 
   const handleAddToFavorite = async (productId) => {
-    alert(productId);
+    try{
+      const data = await addToWishlist(productId);
+      toast({
+        title : data.message,
+        status : "success"
+      })
+    }catch(err){
+      toast({
+        title : err.message,
+        status : "error"
+      })
+    }finally{
+
+    }
   };
   return (
     <>

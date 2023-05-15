@@ -137,7 +137,7 @@ async function main() {
     // await brandSeeder();
     // await colorSeeder();
     // await productSeeder();
-    await categorySeeder();
+    // await categorySeeder();
     await productCategoriesSeeder();
     await attributesSeeder();
     await addressSeeder();

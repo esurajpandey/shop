@@ -11,7 +11,7 @@ export default async (req, reply) => {
             throw { msg: "Product not found", status: 404 };
         }
 
-        const wishlist = client.wishlist.create({
+        const wishlist = await client.wishlist.create({
             data: {
                 productId,
                 userId
@@ -24,6 +24,12 @@ export default async (req, reply) => {
 
         reply.code(200).send(successResponse(wishlist, "Product is added in wishlist"))
     } catch (err) {
+        console.log(err);
+        if(err.code === 'P2002'){
+            err.msg = "Already product is added in wishlist",
+            err.status = 400;
+        }
+        
         reply.code(err?.status ?? 500).send(errorResponse(err));
     }
 }

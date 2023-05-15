@@ -24,11 +24,9 @@ const Order = () => {
   const fetchOrders = async () => {
     try {
       const data = await getOrderList();
-      console.log(data);
       setOrders(data.data);
       showToast(data.message, "success");
     } catch (err) {
-      console.log(err);
     } finally {
       setLoading(false);
     }

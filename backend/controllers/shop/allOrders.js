@@ -47,13 +47,24 @@ export default async (req, reply) => {
                                 mobile: true,
                             }
                         },
+                        worker : {
+                            select : {
+                                id : true,
+                                name : true,
+
+                            }
+                        }
+                    },
+                    orderBy : {
+                        updatedAt : "asc"
                     }
                 },
                 _count: {
                     select: {
                         orders: true
                     }
-                }
+                },
+                
             }
         })
 

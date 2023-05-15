@@ -1,17 +1,17 @@
 import prisma from '../../init/db.js';
-import { errorResponse } from '../../utils/helper/response.js';
+import { errorResponse, successResponse } from '../../utils/helper/response.js';
 
 export default async (req, reply) => {
     try {
         const orderId = req.params.orderId;
         const { deliveryStatus, orderStatus } = req.body;
 
-        const shopId = req.shop.id;
+        console.log({deliveryStatus, orderStatus});
+        const shopId = req.requestContext.get("shopId");
 
         const order = await prisma.order.findUnique({
             where: {
                 id: orderId,
-                shopId: shopId
             },
             select: {
                 id: true,
@@ -39,6 +39,7 @@ export default async (req, reply) => {
             .send(successResponse(updatedOrder, "Order details is updated"));
 
     } catch (err) {
+        console.log(err);
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }

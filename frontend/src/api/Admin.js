@@ -106,6 +106,22 @@ export const updateDeliveryStatus = async (deliveryStatus, orderId) => {
     return data;
 }
 
+export const updateOrder = async (updatedata,orderId) => {
+    const data = await Fetch(`/admin/update-order/${orderId}`,updatedata,"PUT");
+
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const assignWorker = async (orderId,workerId)=>{
+    const data = await Fetch(`/admin/assign-order-worker/${orderId}`,{workerId},"PUT");
+
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
 export const getAllDelivery = async () => {
     const data = await FetchGET('/order/delivery');
     if (data.status === "FAILURE" || data.status === "ERROR")

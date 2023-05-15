@@ -6,6 +6,7 @@ export default async (req, reply) => {
         const { orderId } = req.params;
         const { workerId } = req.body;
 
+        console.log({workerId,orderId})
         const order = await prisma.order.findUnique({
             where: {
                 id: orderId

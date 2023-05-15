@@ -31,7 +31,8 @@ export default async (req, reply) => {
                 order: {
                     select: {
                         id: true,
-                        orderAt: true
+                        orderAt: true,
+                        deliveryStatus : true,
                     }
                 }
             }

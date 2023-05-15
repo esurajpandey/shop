@@ -212,7 +212,7 @@ const Filters = styled.div`
   }
 `;
 
-const ProductLists = styled.div`
+export const ProductLists = styled.div`
   display: flex;
   flex-wrap: wrap;
   color: black;

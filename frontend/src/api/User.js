@@ -138,7 +138,6 @@ export const getUserDetails = async () => {
 
 export const getOrderList = async () => {
     const data = await FetchGET(`/order/all`);
-
     if (data?.status === "ERROR" || data.status === "FAILURE") {
         throw data;
     }
@@ -186,4 +185,28 @@ export const resetPassowrd = async (passwordData) => {
     if (res.status === "FAILURE" || res.status === "ERROR")
         throw res;
     return res;
+}
+
+export const getWishlist = async () => {
+    const data = await FetchGET(`/user/wishlist`);
+    if (data?.status === "ERROR" || data.status === "FAILURE") {
+        throw data;
+    }
+    return data;
+}
+
+export const addToWishlist = async (productId) => {
+    const data = await Fetch(`/user/wishlist/${productId}`,{},"POST");
+    if (data?.status === "ERROR" || data.status === "FAILURE") {
+        throw data;
+    }
+    return data;
+}
+
+export const removeFromWishlist = async (productId) => {
+    const data = await Fetch(`/user/wishlist/${productId}`,{},"DELETE");
+    if (data?.status === "ERROR" || data.status === "FAILURE") {
+        throw data;
+    }
+    return data;
 }

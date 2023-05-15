@@ -4,7 +4,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./page/HomePage/HomePage";
 import AdminPage from "./page/AdminPage/AdminPage";
 import Navbar from "./components/Navbar/Navbar";
-import About from "./page/About";
 import Contact from "./page/Contact";
 import Help from "./page/Help";
 import Login from "./components/login/Login";
@@ -21,6 +20,7 @@ import Order from "./components/order/Order";
 import OrderDetails from "./components/order/OrderDetails";
 import PaymentSuccess from "./page/PaymentSuccess";
 import CategoryPage from "./page/Category/CategoryPage";
+import Search from "./page/Search";
 
 function App() {
   const [user, setUser] = useState();
@@ -44,15 +44,13 @@ function App() {
             <Route path="/category/:query" element={<CategoryPage />} />
             <Route path="/orders" element={<Order />} />
             <Route path="/order/:orderId" element={<OrderDetails />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/help" element={<Help />} />
             <Route path="/verify-account" element={<OtpVerify />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/favorites" element={<Wishlist />} />
             <Route path="/product/:productId" element={<Product />} />
-
+            <Route path="/search/:searchParams" element={<Search/>}/>
             {user?.type === "ADMIN" && (
               <Route path="/admin/*" element={<AdminPage />} />
             )}
