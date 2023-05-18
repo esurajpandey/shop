@@ -23,7 +23,6 @@ const ContactContent = styled.div`
 const ShopInfoContainer = styled.div`
   flex: 1;
   margin-right: 40px;
-  border: 2px solid red;
 `;
 
 const ShopTitle = styled.h1`
@@ -91,21 +90,6 @@ const ContactUsPage = () => {
   return (
     <ContactContainer>
       <ContactContent>
-        <ShopInfoContainer>
-          <ShopTitle>Sathieh Mill Stores</ShopTitle>
-          <ShopDescription>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac
-            dui eget sapien viverra sodales vel in ipsum. Proin blandit
-            convallis nisi, id hendrerit arcu pharetra nec. Morbi volutpat,
-            sapien nec aliquet facilisis, nisi enim consectetur turpis, vitae
-            placerat neque dui ut ex.
-          </ShopDescription>
-          <ShopContactInfo>
-            <p>Address: 123 Main Street, City, Country</p>
-            <p>Phone: +1 234 567 890</p>
-            <p>Email: info@sathiehmillstores.com</p>
-          </ShopContactInfo>
-        </ShopInfoContainer>
         <ContactFormContainer>
           <ContactForm onSubmit={handleSubmit}>
             <ContactLabel htmlFor="name">Name</ContactLabel>
