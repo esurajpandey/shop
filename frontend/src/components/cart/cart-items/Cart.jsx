@@ -34,7 +34,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast({
-    duration: 7000,
+    duration: 2000,
     isClosable: true,
     position: "top-right",
   });

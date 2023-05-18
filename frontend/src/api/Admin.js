@@ -106,16 +106,16 @@ export const updateDeliveryStatus = async (deliveryStatus, orderId) => {
     return data;
 }
 
-export const updateOrder = async (updatedata,orderId) => {
-    const data = await Fetch(`/admin/update-order/${orderId}`,updatedata,"PUT");
+export const updateOrder = async (updatedata, orderId) => {
+    const data = await Fetch(`/admin/update-order/${orderId}`, updatedata, "PUT");
 
     if (data.status === "FAILURE" || data.status === "ERROR")
         throw data;
     return data;
 }
 
-export const assignWorker = async (orderId,workerId)=>{
-    const data = await Fetch(`/admin/assign-order-worker/${orderId}`,{workerId},"PUT");
+export const assignWorker = async (orderId, workerId) => {
+    const data = await Fetch(`/admin/assign-order-worker/${orderId}`, { workerId }, "PUT");
 
     if (data.status === "FAILURE" || data.status === "ERROR")
         throw data;
@@ -149,3 +149,42 @@ export const updateProduct = async (productId, productData) => {
         throw data;
     return data;
 }
+
+export const deleteProduct = async (productId) => {
+    const data = await Fetch(`/admin/product/${productId}`, {}, "DELETE");
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const removeSupplier = async (supplierId) => {
+    const data = await Fetch(`/admin/remove-supplier/${supplierId}`, {}, "DELETE");
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const removeWorker = async (workerId) => {
+
+    const data = await Fetch(`/admin/remove-worker/${workerId}`, {}, "DELETE");
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const addBrand = async (brandName) => {
+    const data = await Fetch('/product/brand', { brandName }, "POST");
+    if (data.status === "FAILURE" || data.status === "ERROR")
+        throw data;
+    return data;
+}
+
+export const addCategory = async (category) => {
+    const data = await Fetch('/product/category', { category }, "POST");
+
+    if (data.status === "FAILURE" || data.status === "ERROR") {
+        throw data;
+    }
+    return data;
+}
+

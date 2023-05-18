@@ -31,3 +31,7 @@ export const ChangeEmailSchema = yup.object().shape({
     newEmail: yup.string().email().required("New email is required"),
     password: yup.string().required()
 })
+export const ProfilUpdateSchema = yup.object().shape({
+    name: yup.string().matches(/^[a-zA-Z ]+$/, 'Name should only contain alphabetical characters').required(),
+    mobile: yup.string().matches(/^[6-9]\d{9}$/, 'Invalid mobile number').min(10).required(),
+})

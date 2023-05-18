@@ -2,16 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { AiFillStar } from "react-icons/ai";
 import { DiMeteor } from "react-icons/di";
-import {useToast} from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
 import { addToWishlist } from "../../api/User";
-const rate = {
-  ONE: 1,
-  TWO: 2,
-  THREE: 3,
-  FOUR: 4,
-  FIVE: 5,
-  ZERO: 0,
-};
+import RatingCard from "./RatingCard";
 
 const offers = [
   {
@@ -30,11 +23,10 @@ const offers = [
 ];
 
 const ProductSideContainer = ({ product }) => {
-
   const toast = useToast({
-    duration : 4000,
-    isClosable : true,
-    position : "top-right"
+    duration: 4000,
+    isClosable: true,
+    position: "top-right",
   });
   const processProductHeader = (product) => {
     let category = product?.attributes?.reduce(
@@ -46,31 +38,30 @@ const ProductSideContainer = ({ product }) => {
   };
 
   const getOverAllRating = (ratings) => {
-    let total = ratings.reduce((acc, curr) => acc + rate[curr.rating], 0);
+    let total = ratings.reduce((acc, curr) => acc + curr.rating, 0);
     let averageRating = total / ratings.length;
     let roundedRating = Math.round(averageRating * 100) / 100;
     return roundedRating;
   };
 
   const getRatingCount = (ratings) => {
-    let total = ratings.reduce((acc, curr) => acc + rate[curr.rating], 0);
+    let total = ratings.reduce((acc, curr) => acc + curr.rating, 0);
     return total;
   };
 
   const handleAddToFavorite = async (productId) => {
-    try{
+    try {
       const data = await addToWishlist(productId);
       toast({
-        title : data.message,
-        status : "success"
-      })
-    }catch(err){
+        title: data.message,
+        status: "success",
+      });
+    } catch (err) {
       toast({
-        title : err.message,
-        status : "error"
-      })
-    }finally{
-
+        title: err.message,
+        status: "error",
+      });
+    } finally {
     }
   };
   return (
@@ -156,7 +147,13 @@ const ProductSideContainer = ({ product }) => {
               })}
             </div>
           </Categories>
-          <Ratings></Ratings>
+          <Ratings>
+            <span className="rev-heading">Reviews</span>
+            {product?.Review?.length > 0 &&
+              product.Review.map((item) => {
+                return <RatingCard rating={item} key={item.id} />;
+              })}
+          </Ratings>
         </ProductDetails>
       )}
     </>
@@ -320,6 +317,14 @@ const Categories = styled.div`
   }
 `;
 
-const Ratings = styled.div``;
+const Ratings = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  .rev-heading {
+    font-size: 1.2rem;
+    font-family: "Alkatra";
+  }
+`;
 
 export default ProductSideContainer;

@@ -3,17 +3,17 @@ import styled from "styled-components";
 import { navLinks } from "../Navbar/Navbar.styled";
 import { Link } from "react-router-dom";
 
-const address = "Kongu College Erode, Perundurai Tamilnadu 638060";
+const address = "15 Main Road Gobichettipalayam, Erode 638452, Tamil Nadu";
 const customerSupportLink = [
-  { title: "Contact Us" },
-  { title: "Help Center" },
-  { title: "About Us" },
+  { title: "Contact Us", path: "/contactus" },
+  { title: "Help Center", path: "/help" },
+  { title: "About Us", path: "/about" },
 ];
 
 const policyLink = [
-  { title: "Return policy" },
-  { title: "Terms & conditions" },
-  { title: "Payment method" },
+  { title: "Return policy", path: "/return-policy" },
+  { title: "Terms & conditions", path: "terms" },
+  { title: "Payment method", path: "payment-method" },
   { title: "FAQ" },
 ];
 
@@ -41,7 +41,7 @@ const Footer = () => {
         <FooterBody>
           {customerSupportLink.map((item) => {
             return (
-              <Link to={"/all"} key={item.title}>
+              <Link to={item.path} key={item.title}>
                 {item.title}
               </Link>
             );
@@ -53,7 +53,7 @@ const Footer = () => {
         <FooterBody>
           {policyLink.map((item) => {
             return (
-              <Link to={"/all"} key={item.title}>
+              <Link to={item.path} key={item.title}>
                 {item.title}
               </Link>
             );

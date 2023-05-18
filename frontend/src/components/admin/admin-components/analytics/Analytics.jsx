@@ -26,11 +26,10 @@ const Analytics = () => {
     from: "",
     to: "",
   });
-  const [selected, setSelected] = useState();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast({
-    duration: 7000,
+    duration: 3000,
     position: "top-right",
     isClosable: true,
   });
@@ -61,7 +60,6 @@ const Analytics = () => {
     if (orderFilter.from && orderFilter.to) {
       queryParams.append("from", orderFilter.from);
       queryParams.append("to", orderFilter.to);
-      alert(queryParams.toString());
       await handleFetchDetails(queryParams.toString());
     }
     onClose();

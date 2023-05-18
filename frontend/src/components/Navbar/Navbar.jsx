@@ -33,7 +33,7 @@ import EmailVerifierLink from "./EmailVerifierLink";
 
 function Navbar() {
   const [user, setUser] = useState(null);
-  const [search,setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const type = "admin";
   const navigate = useNavigate();
@@ -54,11 +54,11 @@ function Navbar() {
   };
 
   const handleSearch = () => {
-    if(search !== ''){
-      setSearch('');
-      navigate(`/search/${search}`)
+    if (search !== "") {
+      setSearch("");
+      navigate(`/search/${search}`);
     }
-  }
+  };
   return (
     <NavContainer>
       {user && !user?.isEmailVerified && <EmailVerifierLink />}
@@ -67,11 +67,16 @@ function Navbar() {
           <ShopName>
             <FaShopify fontSize={"2.5rem"} className="shop-icon" />
             <Link to="/" className="shop-name">
-              <h1>Sathish Mill Stores</h1>
+              <h1>Sathieh Mill Stores</h1>
             </Link>
           </ShopName>
           <SearchBox>
-            <input type="text" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)}/>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
             <button className="search-button" onClick={handleSearch}>
               <AiOutlineSearch className="search-icon" />
             </button>

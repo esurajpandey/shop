@@ -6,7 +6,7 @@ import ReviewModal from "./ReviewModal";
 
 const OrderItem = ({ order }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log({gtf: order});
+  console.log({ gtf: order });
   return (
     <OrderItemContainer>
       <Picsection>
@@ -36,9 +36,13 @@ const OrderItem = ({ order }) => {
           </div>
         </div>
       </OrderData>
-      {<div className="review-btns">
-        {order.deliveryStatus === "DELIVERED" && <button onClick={onOpen}>Review</button>}
-      </div>}
+      {
+        <div className="review-btns">
+          {order?.order?.deliveryStatus == "DELIVERED" && (
+            <button onClick={onOpen}>Review</button>
+          )}
+        </div>
+      }
       <ReviewModal
         isOpen={isOpen}
         onClose={onClose}

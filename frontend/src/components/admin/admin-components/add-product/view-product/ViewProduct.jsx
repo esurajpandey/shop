@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 
 import ReactPaginate from "react-paginate";
-import { getProductList, updateProduct } from "../../../../../api/Admin";
+import {
+  deleteProduct,
+  getProductList,
+  updateProduct,
+} from "../../../../../api/Admin";
 import styled from "@emotion/styled";
 import {
   Button,
@@ -40,8 +44,6 @@ const ViewProduct = () => {
     total: 0,
   });
 
-  const handleDelete = () => {};
-
   const handleProductEdit = async (values, action) => {
     try {
       const data = await updateProduct(values.id, {
@@ -71,6 +73,22 @@ const ViewProduct = () => {
       setPagination((prev) => ({ ...prev, total: data.data.total }));
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const data = await deleteProduct(productId);
+      await fetchProducts(pagination.page);
+      toast({
+        title: data.message,
+        status: "success",
+      });
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+      });
     }
   };
 
@@ -147,7 +165,9 @@ const ViewProduct = () => {
                           <MenuItem onClick={() => handleEditClick(product)}>
                             Edit
                           </MenuItem>
-                          <MenuItem onClick={() => handleDelete(product.id)}>
+                          <MenuItem
+                            onClick={() => handleDeleteProduct(product.id)}
+                          >
                             Delete
                           </MenuItem>
                         </MenuList>

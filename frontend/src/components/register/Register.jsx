@@ -23,7 +23,7 @@ const Register = () => {
       toast({
         title: data?.message,
         status: "success",
-        duration: 5000,
+        duration: 2000,
         isClosable: true,
         position: "bottom-right",
       });
@@ -44,7 +44,7 @@ const Register = () => {
       toast({
         title: error.message,
         status: "error",
-        duration: 5000,
+        duration: 2000,
         isClosable: true,
         position: "top-right",
       });
@@ -71,8 +71,6 @@ const Register = () => {
     validationSchema: registerSchema,
     onSubmit: handleSubmitForm,
   });
-
-  console.log(errors);
   return (
     <RegisterContainer>
       <div className="main-container">
