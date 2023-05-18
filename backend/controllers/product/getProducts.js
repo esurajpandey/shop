@@ -1,6 +1,5 @@
 import prisma from '../../init/db.js';
 import { errorResponse, successResponse } from '../../utils/helper/response.js';
-import { } from '@prisma/client'
 export default async (req, reply) => {
     try {
 
@@ -12,14 +11,13 @@ export default async (req, reply) => {
             page = +req.query.page
         }
 
-        let where = {
+        let whereCondition = {
             isDeleted: false
         }
 
-        console.log(category)
         if (category) {
             const searchLike = `%${category}%`
-            where.ProductCategories = {
+            whereCondition.ProductCategories = {
                 some: {
                     category: {
                         name: {
@@ -31,8 +29,10 @@ export default async (req, reply) => {
             }
 
             if (category === 'all') {
-                where = {}
-                limit = 40;
+                whereCondition = {
+                    isDeleted: false
+                }
+                limit = 50;
             }
         }
 
@@ -40,7 +40,7 @@ export default async (req, reply) => {
         if (attrName && attrValue) {
             const attrLike = `%${attrName.toLowerCase()}%`
             const attrValueLike = `%${attrValue.toLowerCase()}%`
-            where.attributes = {
+            whereCondition.attributes = {
                 some: {
                     name: { contains: attrLike, mode: 'insensitive' },
                     value: { contains: attrValueLike, mode: 'insensitive' }
@@ -50,7 +50,7 @@ export default async (req, reply) => {
 
         if (name) {
             const searchLike = `%${name}%`
-            where.name = {
+            whereCondition.name = {
                 contains: searchLike,
                 mode: 'insensitive'
             }
@@ -58,20 +58,20 @@ export default async (req, reply) => {
         }
 
         if (moreThan) {
-            where.unitPrice = {
+            whereCondition.unitPrice = {
                 gt: parseFloat(moreThan)
             }
         }
 
         if (lessThan) {
-            where.unitPrice = {
+            whereCondition.unitPrice = {
                 lt: parseFloat(lessThan)
             }
         }
 
         if (brand) {
             const searchLike = `%${brand}%`
-            where.brand = {
+            whereCondition.brand = {
                 name: {
                     contains: searchLike,
                     mode: 'insensitive'
@@ -86,7 +86,7 @@ export default async (req, reply) => {
         });
 
         const products = await prisma.product.findMany({
-            where,
+            where: whereCondition,
             take: limit,
             skip: limit * (page - 1),
             select: {
@@ -116,7 +116,6 @@ export default async (req, reply) => {
 
         reply.code(200).send(successResponse({ products, total: count._count.id }, "Product lists"));
     } catch (err) {
-        console.log(err);
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }
