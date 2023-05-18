@@ -133,11 +133,11 @@ const reviewSeeder = async () => {
 
 async function main() {
     console.log("Seeding start...");
-    // await shopSeeder();
-    // await brandSeeder();
-    // await colorSeeder();
-    // await productSeeder();
-    // await categorySeeder();
+    await shopSeeder();
+    await brandSeeder();
+    await colorSeeder();
+    await productSeeder();
+    await categorySeeder();
     await productCategoriesSeeder();
     await attributesSeeder();
     await addressSeeder();

@@ -41,7 +41,6 @@
     "razorpay": "^2.8.6"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
     "nodemon": "^2.0.22",
     "prisma": "^4.13.0"
   }

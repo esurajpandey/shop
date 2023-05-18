@@ -48,7 +48,11 @@ const sendNew = async (req) => {
                 otp: true
             }
         });
-        await sendOtp(user?.name, user.otp.value, user?.email);
+        try{
+            await sendOtp(user?.name, user.otp.value, user?.email);
+        }catch(err){
+            throw {msg : err.message,status : 422}
+        }
 
         const responseObj = successResponse(null, "New otp is sent to email");
         return responseObj;

@@ -87,7 +87,6 @@ const OtpVerify = () => {
       window.location.reload(true);
       navigate("/");
     } catch (err) {
-      console.log(err);
       toast({
         title: err?.message,
         status: "error",
@@ -109,7 +108,7 @@ const OtpVerify = () => {
     }
 
     if (user?.isEmailVerified) {
-      navigate("/all");
+      navigate("/category/all");
       return;
     }
     setUser(user);

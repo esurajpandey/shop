@@ -38,7 +38,7 @@ export default async (req, reply) => {
             throw { msg: "Unable to create address", status: 422 }
         }
 
-        reply.code(201).send(successResponse(address, "Address added"));
+        reply.code(201).send(successResponse(user.address, "Address added"));
     } catch (err) {
         reply.code(err?.status ?? 500).send(errorResponse(err));
     }
