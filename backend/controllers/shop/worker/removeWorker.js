@@ -3,6 +3,7 @@ import { successResponse, errorResponse } from '../../../utils/helper/response.j
 export default async (req, reply) => {
     try {
         const workerId = req.params.workerId;
+        const shopId = req.requestContext.get("shopId");
 
         const worker = await prisma.user.findUnique({
             where: {
@@ -25,12 +26,16 @@ export default async (req, reply) => {
         const updatedUser = await prisma.user.update({
             where: { id: worker.id },
             data: {
-                type: "CUSTOMER"
+                type: "CUSTOMER",
+                workerId: null
             }
         });
 
+
+
         reply.code(200).send(successResponse(null, "User is removed from worker list"));
     } catch (err) {
+        console.log(err);
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }

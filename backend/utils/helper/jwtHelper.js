@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export const generateToken = (payload) => {
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '48h' });
     if (!token)
         throw { msg: "Unable to generate token", status: 422 };
 

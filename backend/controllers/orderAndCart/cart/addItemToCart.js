@@ -3,14 +3,13 @@ import prisma from '../../../init/db.js';
 
 export default async (req, reply) => {
     try {
-        const cart = await addToCart(req);
 
+        const cart = await addToCart(req);
         reply.code(200).send(
             successResponse(cart, "Item added to cart")
         );
 
     } catch (err) {
-        console.log(err);
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }
@@ -34,12 +33,14 @@ const addToCart = async (req) => {
 
 
         const isAlreadyAdded = await tx.cartItem.findFirst({
-            where: { productId }
+            where: {
+                productId,
+                userId,
+            }
         });
 
         let cart;
         if (isAlreadyAdded?.productId) {//just increase the quantity
-
             const quantity = isAlreadyAdded.quantity + 1;
             //update
             cart = await tx.cartItem.update({
@@ -52,7 +53,6 @@ const addToCart = async (req) => {
                 data: { quantity: quantity }
             });
         } else {
-            console.log("Hello one");
             cart = await tx.cartItem.create({
                 data: {
                     quantity: 1,

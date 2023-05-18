@@ -7,8 +7,6 @@ export default async (req, reply) => {
         const page = +(req.query?.page ?? "0");
 
         const brands = await prisma.brand.findMany({
-            take: 20,
-            skip: 20 * page,
             select: {
                 id: true,
                 name: true,

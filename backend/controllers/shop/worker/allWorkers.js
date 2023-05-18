@@ -10,8 +10,6 @@ export default async (req, reply) => {
             where: { id: shopId },
             select: {
                 workers: {
-                    take: 10,
-                    skip: 10 * page,
                     select: {
                         id: true,
                         name: true,

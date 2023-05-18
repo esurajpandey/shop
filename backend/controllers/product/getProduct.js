@@ -7,7 +7,7 @@ export default async (req, reply) => {
 
         const product = await prisma.product.findUnique({
             where: {
-                id: productId
+                id: productId,
             },
             include: {
                 attributes: true,
@@ -17,6 +17,13 @@ export default async (req, reply) => {
             }
         });
 
+        if (!product)
+            throw { msg: "Product not found", status: 404 };
+
+        if (product.isDeleted) {
+            throw { msg: "Product not found", status: 404 };
+        }
+
         const category = await prisma.productCategories.findMany({
             where: {
                 productId
@@ -25,12 +32,12 @@ export default async (req, reply) => {
                 category: true
             }
         })
+
         product.category = category.map(item => item.category);
-        if (!product)
-            throw { msg: "Product not found", status: 404 };
 
         reply.code(200).send(successResponse(product, "Product details"));
     } catch (err) {
+        console.log(err);
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }

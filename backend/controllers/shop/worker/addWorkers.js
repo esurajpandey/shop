@@ -1,6 +1,5 @@
 import prisma from '../../../init/db.js';
 import { errorResponse, successResponse } from '../../../utils/helper/response.js';
-
 import bcrypt from 'bcrypt';
 
 export default async (req, reply) => {
@@ -8,6 +7,8 @@ export default async (req, reply) => {
     try {
         const hashPassword = bcrypt.hashSync(password, 10);
         const isWorkerExist = await prisma.user.findUnique({ where: { email } });
+
+        const shopId = req.requestContext.get("shopId");
 
         if (isWorkerExist)
             throw { msg: "User is already registered", status: 409 };
@@ -20,6 +21,11 @@ export default async (req, reply) => {
                 mobile,
                 isEmailVerified: true,
                 type: "WORKER",
+                worker: {
+                    connect: {
+                        id: shopId
+                    }
+                }
             }
         });
 

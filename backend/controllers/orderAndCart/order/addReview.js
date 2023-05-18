@@ -1,19 +1,17 @@
 import prisma from '../../../init/db.js';
 import { errorResponse, successResponse } from '../../../utils/helper/response.js';
-import { Rating } from '@prisma/client';
+
 export default async (req, reply) => {
-    const rate = {
-        1: "ONE",
-        2: "TWO",
-        3: "THREE",
-        4: "FOUR",
-        5: "FIVE"
-    }
+
 
     try {
-        const { rating = Rating.ZERO, comment = "", orderId, productId } = req.body;
-        const userId = req.requestContext.get('userId');
+        const { rating, comment = "", orderId, productId } = req.body;
 
+        if (!rating) {
+            throw { msg: "Rating is required", status: 400 }
+        }
+
+        const userId = req.requestContext.get('userId');
         const review = await prisma.orderItem.update({
             where: {
                 orderId_productId: {
@@ -25,7 +23,7 @@ export default async (req, reply) => {
                 review: {
                     create: {
                         comment,
-                        rating: rate[rating],
+                        rating: parseFloat(rating),
                         productId
                     }
                 }

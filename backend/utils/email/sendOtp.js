@@ -1,13 +1,18 @@
 import ejs from 'ejs';
 import transporter from '../../config/emailTransporter.js';
-
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 export default async (name, value, email) => {
     try {
         const data = {
             name,
             value
         }
-        ejs.renderFile('/home/stark/Projects/CollegeProject/My Project/backend/utils/helpers/sendEmail/otpFile.ejs', data, async (err, html) => {
+
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = dirname(__filename);
+        const filePath = path.join(__dirname, 'otp.ejs');
+        ejs.renderFile(filePath, data, async (err, html) => {
             if (err) {
                 console.log("Html rendering file", err.message);
                 throw err;
@@ -28,6 +33,7 @@ export default async (name, value, email) => {
             }
         })
     } catch (err) {
+        console.log(err);
         throw err;
     }
 }

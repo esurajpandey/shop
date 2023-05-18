@@ -3,7 +3,7 @@ import { errorResponse, successResponse } from "../../../utils/helper/response.j
 
 export default async (req, reply) => {
     try {
-        const suppliers = await prisma.supplier.findMany();
+        const suppliers = await prisma.supplier.findMany({ where: { isDeleted: false } });
 
         if (suppliers.length === 0)
             throw { msg: "No supplier found", status: 404 };

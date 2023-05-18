@@ -6,7 +6,7 @@ export default async (req, reply) => {
     try {
         const page = +(req.query?.page ?? "0");
         const shopId = req.requestContext.get("shopId");
-        const { orderStatus, deliveryStatus, paymentMode } = req.query;
+        const { orderStatus, deliveryStatus, paymentMode, from, to } = req.query;
 
         const whereCondition = {};
 
@@ -22,10 +22,16 @@ export default async (req, reply) => {
             whereCondition.payment_mode = paymentMode
         }
 
+        if (from && to) {
+            whereCondition.AND = [
+                { orderAt: { gte: new Date(from) } },
+                { orderAt: { lte: new Date(to) } }
+            ]
+        }
+
         const orders = await prisma.shop.findUnique({
             where: {
                 id: shopId,
-
             },
             select: {
                 orders: {
@@ -47,16 +53,16 @@ export default async (req, reply) => {
                                 mobile: true,
                             }
                         },
-                        worker : {
-                            select : {
-                                id : true,
-                                name : true,
+                        worker: {
+                            select: {
+                                id: true,
+                                name: true,
 
                             }
                         }
                     },
-                    orderBy : {
-                        updatedAt : "asc"
+                    orderBy: {
+                        updatedAt: "asc"
                     }
                 },
                 _count: {
@@ -64,7 +70,7 @@ export default async (req, reply) => {
                         orders: true
                     }
                 },
-                
+
             }
         })
 
