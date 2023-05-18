@@ -16,9 +16,10 @@ import {
   FormControl,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 
-import { getWorkers, updateWorker } from "../../../../api/Admin";
+import { getWorkers, removeWorker, updateWorker } from "../../../../api/Admin";
 import styled from "@emotion/styled";
 
 const ViewWorker = () => {
@@ -28,7 +29,26 @@ const ViewWorker = () => {
   const [workerEmail, setWorkerEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [workers, setworkers] = useState([]);
-  const handleDelete = () => {};
+  const toast = useToast({
+    isClosable: true,
+    duration: 2000,
+    position: "top-right",
+  });
+  const handleDelete = async (workerId) => {
+    try {
+      const data = await removeWorker(workerId);
+      await fetchWorkers();
+      toast({
+        title: data.message,
+        status: "success",
+      });
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+      });
+    }
+  };
 
   const handleEditClick = (worker) => {
     setSelectedWorker(worker);
@@ -55,6 +75,7 @@ const ViewWorker = () => {
           return worker;
         })
       );
+      await fetchWorkers();
       setShowModal(false);
     } catch (err) {
       console.log(err);
@@ -103,7 +124,7 @@ const ViewWorker = () => {
                       <MenuItem onClick={() => handleEditClick(worker)}>
                         Edit
                       </MenuItem>
-                      <MenuItem onClick={() => handleDelete(worker.id)}>
+                      <MenuItem onClick={async () => handleDelete(worker.id)}>
                         Delete
                       </MenuItem>
                     </MenuList>

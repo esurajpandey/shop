@@ -15,7 +15,16 @@ import {
   Thead,
   Tr,
   useToast,
-  Skeleton, Stack,
+  Skeleton,
+  Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { getAllOrders } from "../../../../api/Admin";
 import { getFormatedDate } from "../../../order/Order";
@@ -24,6 +33,8 @@ import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import UpdateOrder from "./UpdateOrder";
 import UpdateDelivery from "./UpdateDelivery";
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
 
 const ViewOrders = () => {
   const [query, setQuery] = useState({
@@ -31,18 +42,25 @@ const ViewOrders = () => {
     deliveryStatus: "",
     paymentMode: "",
   });
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [orderFilter, setOrderFilter] = useState({
+    from: "",
+    to: "",
+  });
+
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [selectOrder,setSelectedOrder] = useState({});
+  const [selectOrder, setSelectedOrder] = useState({});
 
   const [pagination, setPagination] = useState({
     page: 1,
     total: 0,
   });
-  const [models,setModels] = useState({
-    orderModal : false,
-    selectWorkerModal : false, 
-  })
+  const [models, setModels] = useState({
+    orderModal: false,
+    selectWorkerModal: false,
+  });
 
   const toast = useToast({
     duration: 7000,
@@ -66,8 +84,6 @@ const ViewOrders = () => {
       setLoading(false);
     }
   };
-
-
 
   useEffect(() => {
     handleFetchOrders("page=1");
@@ -98,31 +114,38 @@ const ViewOrders = () => {
     setPagination((prev) => ({ ...prev, page: event.selected }));
   };
 
+  const applyFilterForOrder = async () => {
+    const queryParams = new URLSearchParams();
+
+    if (orderFilter.from && orderFilter.to) {
+      queryParams.append("from", orderFilter.from);
+      queryParams.append("to", orderFilter.to);
+      handleFetchOrders(queryParams.toString());
+    }
+    onClose();
+  };
   useEffect(() => {
-    setTimeout(async () => {
-      await handleFetchOrders(getQueryString().toString());
-    }, 500);
+    console.log(getQueryString().toString());
+    handleFetchOrders(getQueryString().toString());
   }, [query]);
 
-  const handleOrderUpdateModal =(order) => {
-    setSelectedOrder(prev => ({...prev,...order}));
-    setModels(prev => ({...models,orderModal : true}))
-  }
+  const handleOrderUpdateModal = (order) => {
+    setSelectedOrder((prev) => ({ ...prev, ...order }));
+    setModels((prev) => ({ ...models, orderModal: true }));
+  };
 
-  const handleDeliveryUpdateModal =(order) => {
-    setSelectedOrder(prev => ({...prev,...order}));
-    setModels(prev => ({...models,selectWorkerModal : true}))
-  }
+  const handleDeliveryUpdateModal = (order) => {
+    setSelectedOrder((prev) => ({ ...prev, ...order }));
+    setModels((prev) => ({ ...models, selectWorkerModal: true }));
+  };
 
   return (
     <AdminOrderContainers>
-
-      {
-        loading ? 
-          <Stack className="stack">
-            <Skeleton height="28em" />
-          </Stack>
-        :
+      {loading ? (
+        <Stack className="stack">
+          <Skeleton height="28em" />
+        </Stack>
+      ) : (
         <div className="admin-order-content">
           <AdminOrderTopSection>
             <Select
@@ -132,6 +155,7 @@ const ViewOrders = () => {
               onChange={(e) =>
                 setQuery((prev) => ({ ...prev, orderStatus: e.target.value }))
               }
+              value={query.orderStatus}
             >
               <option value="CONFIRMED">Confirmed</option>
               <option value="CANCELED">Cancel</option>
@@ -141,8 +165,12 @@ const ViewOrders = () => {
               placeholder="Delivery Status"
               name="delivery-status"
               size="sm"
+              value={query.deliveryStatus}
               onChange={(e) =>
-                setQuery((prev) => ({ ...prev, deliveryStatus: e.target.value }))
+                setQuery((prev) => ({
+                  ...prev,
+                  deliveryStatus: e.target.value,
+                }))
               }
             >
               <option value="ORDERED">Ordered</option>
@@ -155,6 +183,7 @@ const ViewOrders = () => {
               placeholder="Payment mode"
               name="payment-wise"
               size="sm"
+              value={query.paymentMode}
               onChange={(e) =>
                 setQuery((prev) => ({ ...prev, paymentMode: e.target.value }))
               }
@@ -163,7 +192,7 @@ const ViewOrders = () => {
               <option value="ONLINE">Paid</option>
             </Select>
             <div className="date-picker">
-              <Button colorScheme="blue" size="sm">
+              <Button colorScheme="blue" size="sm" onClick={onOpen}>
                 Select date
               </Button>
             </div>
@@ -202,9 +231,18 @@ const ViewOrders = () => {
                                 <Link to={`/order/${order.id}`}>
                                   <MenuItem>View</MenuItem>
                                 </Link>
-                                <MenuItem onClick={()=>handleOrderUpdateModal(order)}>Update Order</MenuItem>
-                                <MenuItem onClick={()=>handleDeliveryUpdateModal(order)}>Select worker</MenuItem>
-                                <MenuItem>Cancel Order</MenuItem>
+                                <MenuItem
+                                  onClick={() => handleOrderUpdateModal(order)}
+                                >
+                                  Update Order
+                                </MenuItem>
+                                <MenuItem
+                                  onClick={() =>
+                                    handleDeliveryUpdateModal(order)
+                                  }
+                                >
+                                  Select worker
+                                </MenuItem>
                               </MenuList>
                             </Menu>
                           </Td>
@@ -238,12 +276,71 @@ const ViewOrders = () => {
             </div>
           </AdminOrders>
         </div>
-      }
-      {models.orderModal && <UpdateOrder fetchOrders={handleFetchOrders} isOpen={models.orderModal} onClose={()=> setModels(prev => ({...models,orderModal : false}))} order={selectOrder}/>}
-      {models.selectWorkerModal && <UpdateDelivery isOpen={models.selectWorkerModal} onClose={()=> setModels(prev => ({...models,selectWorkerModal : false}))} order={selectOrder}/>}
+      )}
+      {models.orderModal && (
+        <UpdateOrder
+          fetchOrders={handleFetchOrders}
+          isOpen={models.orderModal}
+          onClose={() =>
+            setModels((prev) => ({ ...models, orderModal: false }))
+          }
+          order={selectOrder}
+        />
+      )}
+      {models.selectWorkerModal && (
+        <UpdateDelivery
+          isOpen={models.selectWorkerModal}
+          onClose={() =>
+            setModels((prev) => ({ ...models, selectWorkerModal: false }))
+          }
+          order={selectOrder}
+        />
+      )}
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size={"2xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Select date</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <OrderDatePicker>
+              <DayPicker
+                mode="single"
+                selected={orderFilter.from}
+                onSelect={(selected) =>
+                  setOrderFilter((prev) => ({ ...prev, from: selected }))
+                }
+                captionLayout="dropdown"
+                fromYear={2015}
+                toYear={new Date().getFullYear()}
+              />
+              <DayPicker
+                mode="single"
+                selected={orderFilter.to}
+                onSelect={(selected) =>
+                  setOrderFilter((prev) => ({ ...prev, to: selected }))
+                }
+                captionLayout="dropdown"
+                fromYear={2015}
+                toYear={new Date().getFullYear()}
+              />
+            </OrderDatePicker>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={applyFilterForOrder}>
+              Submit
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </AdminOrderContainers>
   );
 };
+
+const OrderDatePicker = styled.div`
+  display: flex;
+`;
 
 const AdminOrderContainers = styled.div`
   display: flex;

@@ -11,6 +11,7 @@ export default async (req, reply) => {
             }
         });
 
+        console.log({ brand });
         if (!brand)
             throw { msg: "Unable to create brand", status: 422 };
 

@@ -15,9 +15,16 @@ export default async (req, reply) => {
             throw { msg: "Supplier not found", status: 404 };
         }
 
-        await prisma.supplier.delete({ where: { id: supplierId } });
+        const supplierData = await prisma.supplier.update({
+            where: {
+                id: supplierId
+            },
+            data: {
+                isDeleted: true
+            }
+        })
 
-        reply.code(200).send(successResponse(null, "Suppliers removed from list"));
+        reply.code(200).send(successResponse(supplierData, "Suppliers removed from list"));
     } catch (err) {
         reply
             .code(err?.status ?? 500).send(errorResponse(err));

@@ -32,11 +32,15 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   const [paymentMode, setPaymentMode] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [disbaledBtn, setDisbaledBtn] = useState(false);
+  const [orderBtn, setOrderBtn] = useState(false);
   const toast = useToast({
-    duration: 7000,
+    duration: 2000,
     isClosable: true,
     position: "top-right",
   });
+
   const navigate = useNavigate();
 
   const Razorpay = useRazorpay();
@@ -47,6 +51,7 @@ const Product = () => {
       const response = await fetch(`${baseUrl}/product/${productId}`);
       const data = await response.json();
       setProduct(data.data);
+      console.log({ svg: data.data });
     } catch (err) {
       toast({
         title: err.message,
@@ -64,7 +69,7 @@ const Product = () => {
   const handleOrderNow = async () => {
     try {
       setLoading(true);
-
+      setOrderBtn(true);
       if (!paymentMode) {
         toast({
           title: "Please select payment mode",
@@ -103,30 +108,31 @@ const Product = () => {
       });
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setOrderBtn(false);
+      }, 2000);
     }
   };
 
   const handleAddToCart = async () => {
     try {
       setLoading(true);
+      setDisbaledBtn(true);
       const data = await addToCart(productId);
       toast({
         title: data.message,
-        position: "top-right",
         status: "success",
-        duration: 9000,
-        isClosable: true,
       });
     } catch (err) {
       toast({
         title: err.message,
-        position: "bottom",
-        statussuccess: "error",
-        duration: 9000,
-        isClosable: true,
+        status: "error",
       });
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setDisbaledBtn(false);
+      }, 2000);
     }
   };
 
@@ -138,11 +144,11 @@ const Product = () => {
           <ProductImagesBuy>
             <Images pictures={product.pictures} />
             <Buybuttons>
-              <button onClick={handleAddToCart}>
+              <button onClick={handleAddToCart} disabled={disbaledBtn}>
                 <AiOutlineShoppingCart />
                 <span>Add to cart </span>
               </button>
-              <button onClick={onOpen}>
+              <button onClick={onOpen} disabled={orderBtn}>
                 <TiFlash />
                 <span>Order Now</span>
               </button>
@@ -240,6 +246,14 @@ const Buybuttons = styled.div`
       background-color: #e67207;
       border: 0;
     }
+
+    :disabled {
+      background-color: #655e5e;
+      &:hover {
+        background-color: #655e5e;
+      }
+    }
+
     svg {
       font-size: 1.5rem;
     }

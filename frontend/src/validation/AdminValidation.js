@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const supplierSchema = Yup.object().shape({
-    name: Yup.string().required("Supplier name is required").matches(/^[a-zA-Z]+$/, 'Name should only contain alphabetical characters'),
+    name: Yup.string().required("Supplier name is required").matches(/^[a-zA-Z ]+$/, 'Name should only contain alphabetical characters'),
     email: Yup.string().matches(
         /^[A-Z0-9._%+-]+@[A-Z.]+\.(com|edu|in)$/i,
         'Invalid email address'
@@ -10,7 +10,7 @@ export const supplierSchema = Yup.object().shape({
 })
 
 export const workerSchema = Yup.object().shape({
-    name: Yup.string().required("worker name is required").matches(/^[a-zA-Z]+$/, 'Name should only contain alphabetical characters'),
+    name: Yup.string().required("worker name is required").matches(/^[a-zA-Z ]+$/, 'Name should only contain alphabetical characters'),
     email: Yup.string().matches(
         /^[A-Z0-9._%+-]+@[A-Z.]+\.(com|edu|in)$/i,
         'Invalid email address'

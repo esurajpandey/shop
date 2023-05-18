@@ -5,7 +5,7 @@ import HomePage from "./page/HomePage/HomePage";
 import AdminPage from "./page/AdminPage/AdminPage";
 import Navbar from "./components/Navbar/Navbar";
 import Contact from "./page/Contact";
-import Help from "./page/Help";
+import Help from "./page/HelpCenter";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import OtpVerify from "./components/OtpVerification/OtpVerify";
@@ -13,7 +13,6 @@ import Cart from "./components/cart/cart-items/Cart";
 import Product from "./components/product/Product";
 import styled from "styled-components";
 import Account from "./components/account/Account";
-import { OrderedList } from "@chakra-ui/react";
 import Wishlist from "./components/wishlist/Wishlist";
 
 import Order from "./components/order/Order";
@@ -21,6 +20,11 @@ import OrderDetails from "./components/order/OrderDetails";
 import PaymentSuccess from "./page/PaymentSuccess";
 import CategoryPage from "./page/Category/CategoryPage";
 import Search from "./page/Search";
+import HelpCenter from "./page/HelpCenter";
+import AboutPage from "./page/About";
+import ReturnPolicyPage from "./page/ReturnPolicy";
+import TermsPage from "./page/Terms";
+import PaymentOptionsPage from "./page/Payment-page";
 
 function App() {
   const [user, setUser] = useState();
@@ -50,7 +54,14 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/favorites" element={<Wishlist />} />
             <Route path="/product/:productId" element={<Product />} />
-            <Route path="/search/:searchParams" element={<Search/>}/>
+            <Route path="/search/:searchParams" element={<Search />} />
+            <Route path="/contactus" element={<Contact />} />
+            <Route path="/help" element={<HelpCenter />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/return-policy" element={<ReturnPolicyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="payment-method" element={<PaymentOptionsPage />} />
+
             {user?.type === "ADMIN" && (
               <Route path="/admin/*" element={<AdminPage />} />
             )}

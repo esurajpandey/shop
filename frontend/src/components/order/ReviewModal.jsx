@@ -10,12 +10,18 @@ import {
   ModalCloseButton,
   Button,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import styled from "styled-components";
 import { addReview } from "../../api/Shop";
 const ReviewModal = ({ isOpen, onClose, review, productId, orderId }) => {
   const [rating, setRating] = useState();
   const [comment, setComment] = useState();
+  const toast = useToast({
+    isClosable: true,
+    position: "top-right",
+    duration: 2000,
+  });
 
   const submitReview = async (e) => {
     e.preventDefault();
@@ -26,23 +32,19 @@ const ReviewModal = ({ isOpen, onClose, review, productId, orderId }) => {
         productId,
         orderId,
       };
-      console.log(reviewData);
       const data = await addReview(reviewData);
-      console.log(data);
+      toast({
+        status: "success",
+        title: data.message,
+      });
     } catch (err) {
-      console.log(err);
+      toast({
+        status: "error",
+        title: err.message,
+      });
     } finally {
       onClose();
     }
-  };
-
-  const rate = {
-    ONE: 1,
-    TWO: 2,
-    THREE: 3,
-    FOUR: 4,
-    FIVE: 5,
-    ZERO: 0,
   };
 
   const onRateChange = (newRating) => {
@@ -62,7 +64,7 @@ const ReviewModal = ({ isOpen, onClose, review, productId, orderId }) => {
               count={5}
               size={24}
               color2={"#ffd700"}
-              value={rate[review.rating]}
+              value={rating}
               edit={false}
             />
             <span>Review : {review.comment}</span>

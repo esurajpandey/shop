@@ -13,6 +13,7 @@ export default async (req, reply) => {
         }
 
         let where = {
+            isDeleted: false
         }
 
         console.log(category)

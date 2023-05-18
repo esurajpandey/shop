@@ -8,6 +8,7 @@ import addProduct from "./addProduct.js";
 import getProducts from "./getProducts.js";
 import getProduct from "./getProduct.js";
 import editProduct from "./editProduct.js";
+import deleteProduct from "./deleteProduct.js";
 
 export default {
     addBrand,
@@ -19,5 +20,6 @@ export default {
     addProduct,
     getProducts,
     getProduct,
-    editProduct
+    editProduct,
+    deleteProduct
 }

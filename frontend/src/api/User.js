@@ -196,7 +196,7 @@ export const getWishlist = async () => {
 }
 
 export const addToWishlist = async (productId) => {
-    const data = await Fetch(`/user/wishlist/${productId}`,{},"POST");
+    const data = await Fetch(`/user/wishlist/${productId}`, {}, "POST");
     if (data?.status === "ERROR" || data.status === "FAILURE") {
         throw data;
     }
@@ -204,7 +204,15 @@ export const addToWishlist = async (productId) => {
 }
 
 export const removeFromWishlist = async (productId) => {
-    const data = await Fetch(`/user/wishlist/${productId}`,{},"DELETE");
+    const data = await Fetch(`/user/wishlist/${productId}`, {}, "DELETE");
+    if (data?.status === "ERROR" || data.status === "FAILURE") {
+        throw data;
+    }
+    return data;
+}
+
+export const updateProfile = async (userData) => {
+    const data = await Fetch("/user/update", userData, "PUT");
     if (data?.status === "ERROR" || data.status === "FAILURE") {
         throw data;
     }

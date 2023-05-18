@@ -14,6 +14,10 @@ export default async (req, reply) => {
 
         if (isUserExist)
             throw { msg: "User is already registered", status: 409 };
+        if (mobile.length > 10) {
+            throw { mgs: "Invalid mobile number", status: 400 }
+        }
+
 
         const otpValue = generateOTP();
 

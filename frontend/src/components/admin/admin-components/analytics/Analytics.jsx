@@ -26,11 +26,10 @@ const Analytics = () => {
     from: "",
     to: "",
   });
-  const [selected, setSelected] = useState();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast({
-    duration: 7000,
+    duration: 3000,
     position: "top-right",
     isClosable: true,
   });

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getProducts } from "../../api/Shop";
-import ProductCard from "../../components/home-page-component/best-seller/ProductCard";
 import { Box, Spinner, useToast } from "@chakra-ui/react";
 import ProductCardContainer from "../../components/product/ProductCartContainer";
 import { getCategories } from "../../api/Admin";
@@ -22,7 +21,7 @@ const CategoryPage = () => {
   });
 
   const toast = useToast({
-    duration: 5000,
+    duration: 2000,
     position: "top-right",
     isClosable: true,
     variant: "subtle",

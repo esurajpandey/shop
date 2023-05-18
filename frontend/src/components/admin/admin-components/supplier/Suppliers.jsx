@@ -16,9 +16,14 @@ import {
   FormControl,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 
-import { getSuppliers, updateSupplier } from "../../../../api/Admin";
+import {
+  getSuppliers,
+  removeSupplier,
+  updateSupplier,
+} from "../../../../api/Admin";
 import styled from "@emotion/styled";
 
 const ViewSupplier = () => {
@@ -29,7 +34,11 @@ const ViewSupplier = () => {
   const [mobile, setMobile] = useState("");
   const [suppliers, setSuppliers] = useState([]);
 
-  const handleDelete = () => {};
+  const toast = useToast({
+    isClosable: true,
+    duration: 2000,
+    position: "top-right",
+  });
 
   const handleEditClick = (supplier) => {
     setSelectedSupplier(supplier);
@@ -76,6 +85,22 @@ const ViewSupplier = () => {
   useEffect(() => {
     fetchSupplier();
   }, []);
+
+  const handleDelete = async (supplierId) => {
+    try {
+      const data = await removeSupplier(supplierId);
+      toast({
+        title: data.message,
+        status: "success",
+      });
+      await fetchSupplier();
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+      });
+    }
+  };
 
   return (
     <WorkerDetailsContainer>

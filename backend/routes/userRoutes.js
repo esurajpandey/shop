@@ -9,6 +9,9 @@ export default async (fastify, otps, done) => {
     fastify.post('/login', user.login);
     fastify.post('/register', user.register);
     fastify.get("/details", { preHandler: [verifyToken], handler: user.getUser });
+
+    fastify.put("/update", { preHandler: [verifyToken], handler: user.editProfile });
+
     fastify.post('/verify-email', user.verifyMail);
     fastify.post('/send-new-otp', user.sendNewOtp);
     fastify.post('/address', { preHandler: [verifyToken], handler: user.addAddress });

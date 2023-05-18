@@ -41,6 +41,7 @@ model User {
   otp   Otp?    @relation(fields: [otpId], references: [id])
   otpId String? @unique
 
+  isDeleted Boolean    @default(false)
   orders    Order[]    @relation(name: "customer")
   delivery  Order[]    @relation(name: "worker")
   cartItem  CartItem[]
@@ -107,10 +108,10 @@ model Product {
   shop   Shop   @relation(fields: [shopId], references: [id])
   shopId String
 
-  brand   Brand  @relation(fields: [brandId], references: [id])
-  brandId String
-
-  tag ProductTag?
+  brand     Brand       @relation(fields: [brandId], references: [id])
+  brandId   String
+  isDeleted Boolean     @default(false)
+  tag       ProductTag?
 
   attributes        Attributes[]
   ProductCategories ProductCategories[]
@@ -257,11 +258,13 @@ model OrderItem {
 }
 
 model Supplier {
-  id       String     @id @default(uuid())
-  name     String
-  mobile   String     @unique
-  email    String     @unique
-  Supplies Supplies[]
+  id     String @id @default(uuid())
+  name   String
+  mobile String @unique
+  email  String @unique
+
+  isDeleted Boolean    @default(false)
+  Supplies  Supplies[]
 }
 
 model Supplies {
@@ -281,19 +284,10 @@ model Supplies {
   @@map("supplies")
 }
 
-enum Rating {
-  ONE
-  TWO
-  THREE
-  FOUR
-  FIVE
-  ZERO
-}
-
 model Review {
   id        String     @id @default(uuid())
   comment   String?
-  rating    Rating?
+  rating    Float
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   orderItem OrderItem?

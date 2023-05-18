@@ -11,23 +11,38 @@ import {
   useDisclosure,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 
+import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getUserDetails } from "../../../api/User";
+import { getUserDetails, updateProfile } from "../../../api/User";
+import { ProfilUpdateSchema } from "../../../validation/UserValidation";
+import { getUser } from "../../../api/commonCall";
+
 const MyProfile = () => {
   const [user, setUser] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const toast = useToast({
+    isClosable: true,
+    duration: 2000,
+    position: "top-right",
+  });
+
   const fetchUser = async () => {
     try {
       const data = await getUserDetails();
       setUser(data.data);
+      console.log(data);
     } catch (err) {
       console.log(err);
+      toast({
+        title: err.message,
+        status: "error",
+      });
     }
   };
 
@@ -35,11 +50,51 @@ const MyProfile = () => {
     fetchUser();
   }, []);
 
+  const handleUpdate = async (values, action) => {
+    try {
+      const data = await updateProfile(values);
+      toast({
+        title: data.message,
+        status: "info",
+      });
+      const user = getUser();
+      const newData = {
+        ...user,
+        name: data.data.name,
+        mobile: data.data.mobile,
+      };
+
+      localStorage.setItem("user", JSON.stringify(newData));
+      window.location.reload(true);
+    } catch (err) {
+      toast({
+        title: err.message,
+        status: "error",
+      });
+    }
+  };
+
+  const { isSubmitting, handleChange, handleSubmit, touched, errors, values } =
+    useFormik({
+      initialValues: {
+        name: user?.name,
+        mobile: user?.mobile,
+      },
+      validationSchema: ProfilUpdateSchema,
+      onSubmit: handleUpdate,
+    });
+
+  const handleEditOpen = () => {
+    values.mobile = user.mobile;
+    values.name = user.name;
+    onOpen();
+  };
+
   return (
     <ProfileContainer>
       <div className="title">
         <span>My Profile</span>
-        <Button size="sm" colorScheme="green" onClick={onOpen}>
+        <Button size="sm" colorScheme="green" onClick={handleEditOpen}>
           Edit profile
         </Button>
       </div>
@@ -110,16 +165,26 @@ const MyProfile = () => {
                   <Input
                     type="text"
                     placeholder="Enter your name"
-                    value={user.name}
+                    value={values.name}
+                    name="name"
+                    onChange={handleChange}
                   />
+                  {touched.name && errors.name && (
+                    <span style={{ color: "red " }}>{errors.name}</span>
+                  )}
                 </FormControl>
                 <FormControl>
                   <FormLabel>Mobile Number</FormLabel>
                   <Input
                     type="phone"
                     placeholder="Enter your phone number"
-                    value={user.mobile}
+                    value={values.mobile}
+                    onChange={handleChange}
+                    name="mobile"
                   />
+                  {touched.mobile && errors.mobile && (
+                    <span style={{ color: "red " }}>{errors.mobile}</span>
+                  )}
                 </FormControl>
               </ModalBody>
 
@@ -127,7 +192,12 @@ const MyProfile = () => {
                 <Button colorScheme="gray" onClick={onClose}>
                   Close
                 </Button>
-                <Button variant="solid" colorScheme="green">
+                <Button
+                  variant="solid"
+                  colorScheme="green"
+                  onClick={handleSubmit}
+                  isLoading={isSubmitting}
+                >
                   Update
                 </Button>
               </ModalFooter>

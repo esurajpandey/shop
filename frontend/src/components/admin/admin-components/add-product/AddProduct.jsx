@@ -8,6 +8,7 @@ import AddColor from "./modal/AddColor";
 import AddBrand from "./modal/AddBrand";
 import AddAttributes from "./modal/AddAttributes";
 import AddCategory from "./modal/AddCategory";
+import { Link } from "react-router-dom";
 
 import {
   AddProductContainer,
@@ -38,7 +39,11 @@ const AddProduct = () => {
   const [attrValue, setAttrValue] = useState("");
   const [productAttributes, setProductAttributes] = useState([]);
   const [pic, setPic] = useState("");
-  const toast = useToast();
+  const toast = useToast({
+    duration: 2000,
+    isClosable: true,
+    position: "top-right",
+  });
 
   const handleProductAttributes = () => {
     if (attrName && attrValue) {
@@ -90,9 +95,6 @@ const AddProduct = () => {
         toast({
           title: "Add some product attribute",
           status: "warning",
-          duration: 5000,
-          isClosable: true,
-          position: "bottom",
         });
         setLoading(false);
         setSubmitting(false);
@@ -108,9 +110,6 @@ const AddProduct = () => {
         toast({
           title: "Please Select an Image",
           status: "warning",
-          duration: 5000,
-          isClosable: true,
-          position: "bottom",
         });
         setSubmitting(false);
         return;
@@ -125,17 +124,11 @@ const AddProduct = () => {
       toast({
         title: data.message,
         status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
       });
     } catch (err) {
       toast({
         title: err.message,
         status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
       });
       setLoading(false);
     }
@@ -205,9 +198,6 @@ const AddProduct = () => {
       toast({
         title: "Please Select an Image",
         status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
       });
       setLoading(false);
       return;
@@ -320,9 +310,9 @@ const AddProduct = () => {
           <InputContainer>
             <LabelText>
               Color{" "}
-              <button className="open-model-btn" onClick={handleColorModal}>
+              {/* <button className="open-model-btn" onClick={handleColorModal}>
                 Add color
-              </button>
+              </button> */}
             </LabelText>
             <Select
               placeholder="Select color"
@@ -376,8 +366,7 @@ const AddProduct = () => {
           </InputContainer>
           <InputContainer>
             <LabelText>
-              Select supplier{" "}
-              <button className="open-model-btn">Add supplier</button>
+              Select supplier <Link to="/admin/add-supplier">Add supplier</Link>
             </LabelText>
             <Select
               placeholder="Select supplier"
@@ -525,8 +514,16 @@ const AddProduct = () => {
         setName={setAttrName}
         setValue={setAttrValue}
       />
-      <AddBrand onClose={handleBrandModal} isOpen={brandModal} />
-      <AddCategory onClose={handleCategoryModal} isOpen={categoryModal} />
+      <AddBrand
+        onClose={handleBrandModal}
+        isOpen={brandModal}
+        onSubmit={fetchBrands}
+      />
+      <AddCategory
+        onClose={handleCategoryModal}
+        isOpen={categoryModal}
+        fetchCateory={fetchCategories}
+      />
     </AddProductContainer>
   );
 };

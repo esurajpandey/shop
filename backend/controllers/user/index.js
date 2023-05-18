@@ -10,7 +10,7 @@ import addAddress from "./addAddress.js";
 import updateAddress from "./updateAddress.js";
 import getAddress from "./getAddress.js";
 import resetPassword from "./resetPassword.js";
-
+import editProfile from "./editProfile.js";
 export default {
     changeEmail,
     changePassword,
@@ -23,5 +23,6 @@ export default {
     addAddress,
     updateAddress,
     getAddress,
-    resetPassword
+    resetPassword,
+    editProfile
 }
