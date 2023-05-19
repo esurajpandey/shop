@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useToast } from "@chakra-ui/react";
 
 const NewLetterSection = () => {
+  const [email, setEmail] = useState();
+  const toast = useToast({
+    duration: 5000,
+    isClosable: true,
+    position: "top",
+    status: "loading",
+  });
+
+  const handleSubmit = async () => {
+    if (!email) {
+      toast({
+        title: "Email is required",
+        status: "warning",
+        position: "top-right",
+      });
+      return;
+    }
+    toast({
+      title: "You subscribed news letters",
+    });
+  };
+
   return (
     <NewLetterFormSectionContainer>
       <div className="top-news-text">
@@ -13,8 +36,13 @@ const NewLetterSection = () => {
       <div className="news-form">
         <label htmlFor="">Email *</label>
         <div className="input-box">
-          <input type="text" placeholder="Your Email Here" />
-          <button>Subscribe</button>
+          <input
+            type="text"
+            placeholder="Your Email Here"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button onClick={handleSubmit}>Subscribe</button>
         </div>
       </div>
     </NewLetterFormSectionContainer>

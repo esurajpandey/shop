@@ -133,7 +133,7 @@ export const ShopName = styled.div`
     }
   }
   &:hover{
-    transform: scale(1.08);
+    transform: scale(1.02);
   }
 `;
 

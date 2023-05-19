@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const HelpCenterSection = () => {
+  const navigate = useNavigate();
   return (
     <HelpCenterContainer>
       <div className="left-help-center">
@@ -11,7 +13,7 @@ const HelpCenterSection = () => {
           add your own text and edit me. Let your users get to know you.
         </div>
         <div className="hlp-btns">
-          <button>Go to help center</button>
+          <button onClick={() => navigate("/help")}>Go to help center</button>
         </div>
       </div>
       <div className="right-img-container">

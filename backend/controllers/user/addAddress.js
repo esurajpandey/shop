@@ -13,6 +13,18 @@ export default async (req, reply) => {
 
         const userId = req.requestContext.get("userId");
 
+        const isActivated = await prisma.user.findUnique({
+            where: {
+                id: userId
+            },
+            select: {
+                isEmailVerified: true
+            }
+        });
+
+        if (!isActivated.isEmailVerified) {
+            throw { msg: "Please verify your account first", status: 400 }
+        }
         const user = await prisma.user.update({
             where: {
                 id: userId
@@ -32,14 +44,13 @@ export default async (req, reply) => {
                 address: true
             }
         });
-        console.log(user);
-
-        if (!address) {
+        if (!user.address) {
             throw { msg: "Unable to create address", status: 422 }
         }
 
         reply.code(201).send(successResponse(user.address, "Address added"));
     } catch (err) {
+        console.log(err);
         reply.code(err?.status ?? 500).send(errorResponse(err));
     }
 }

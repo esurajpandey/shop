@@ -21,9 +21,9 @@ const MyAddress = () => {
   };
 
   const toast = useToast({
-    isClosable :  true,
-    duration : 3000,
-    position : 'top-right'
+    isClosable: true,
+    duration: 3000,
+    position: "top-right",
   });
 
   const fetchAddress = async () => {
@@ -72,6 +72,7 @@ const MyAddress = () => {
           title: data.message,
           status: "success",
         });
+        await fetchAddress();
       }
     } catch (err) {
       console.log(err);

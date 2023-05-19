@@ -20,7 +20,6 @@ export default async (req, reply) => {
 
 
         const otpValue = generateOTP();
-
         const user = await prisma.user.create({
             data: {
                 email: email.toLowerCase(),
@@ -52,16 +51,17 @@ export default async (req, reply) => {
         const token = generateToken({ id: user?.id });
 
         user.otp = null;
-        let responseData = successResponse(user, "User is registered"); responseData
+        let responseData = successResponse(user, "User is registered");
         responseData.token = token;
-
         reply
             .code(201)
             .send(responseData);
 
     } catch (err) {
-
-
+        if (err.code === 'P2002') {
+            err.msg = "Mobile number alredy registered";
+            err.status = 400;
+        }
         reply
             .code(err?.status ?? 500).send(errorResponse(err));
     }
