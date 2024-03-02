@@ -68,7 +68,6 @@ const CategoryPage = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams();
-    console.log(queries);
     if (queries.brand) {
       queryParams.append("brand", queries.brand);
     }
@@ -83,7 +82,6 @@ const CategoryPage = () => {
     if (queries.moreThan) {
       queryParams.append("moreThan", queries.moreThan);
     }
-    console.log(queryParams.toString());
     handleFetchProducts(queryParams.toString());
   }, [queries]);
   return (

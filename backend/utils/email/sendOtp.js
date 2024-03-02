@@ -29,7 +29,8 @@ export default async (name, value, email) => {
                         recipient: process.env.USER_EMAIL
                     }
                 }
-                return await transporter.sendMail(mailOptions);
+                
+                return transporter.sendMail(mailOptions);
             }
         })
     } catch (err) {

@@ -30,7 +30,6 @@ const OtpVerify = () => {
     try {
       setIsLoading(true);
       const data = await resendOtp({ email: user?.email });
-      console.log(data);
       toast({
         title: data?.message,
         status: "success",

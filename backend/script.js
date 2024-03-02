@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import fs from 'fs';
 import brand from './data/brand.json' assert {type: 'json'};
 import color from './data/color.json' assert {type: 'json'};

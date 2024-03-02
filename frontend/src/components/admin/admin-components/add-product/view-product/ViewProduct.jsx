@@ -98,7 +98,6 @@ const ViewProduct = () => {
 
   const handlePageClick = async (event) => {
     const newOffset = (event.selected * 10) % pagination.total;
-    console.log("Page numer", pagination.page, event.selected);
     await fetchProducts(event.selected + 1);
     setPagination((prev) => ({ ...prev, page: event.selected }));
   };

@@ -7,9 +7,18 @@ export default async (req, reply) => {
     try {
         const link = await orderTransaction(req);
         // console.log(link);
-        reply.code(200).send(successResponse(link, "Order is pending please do payment to confirm"));
+        let message = "Order has been successfully placed";
+        if (req.body.paymentMode === "ONLINE"){
+            message = "Order is pending please do payment to confirm";
+        }
+        reply.code(200).send(successResponse(link, message));
     } catch (err) {
-        console.log(err.message);
+        console.log(err);
+
+        if (err?.message == "Cannot read properties of null (reading 'id')"){
+            err.message = "Address details not found";
+        }
+
         reply.code(err?.status ?? 500).send(errorResponse(err));
     }
 }
@@ -19,6 +28,9 @@ const orderTransaction = async (req) => {
     return await prisma.$transaction(async tx => {
         const { productId, paymentMode } = req.body;
         const userId = req.requestContext.get('userId');
+        if (paymentMode === "ONLINE"){
+            throw { msg: "Sorry! Online Payment is disabled due to free tier", status: 500 };
+        }
         const user = await tx.user.findUnique({
             where: { id: userId },
             select: {
@@ -42,9 +54,9 @@ const orderTransaction = async (req) => {
                 quantityInStock: true,
             }
         });
-
         if (product.quantityInStock < 1)
             throw { msg: "Sorry! Product is not availabe.", status: 422 };
+
 
 
         const order = await tx.order.create({

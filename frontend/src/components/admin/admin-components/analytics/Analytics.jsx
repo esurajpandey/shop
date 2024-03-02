@@ -39,7 +39,6 @@ const Analytics = () => {
       setLoading(true);
       const data = await getAnalytics(query);
       setDetails(data.data);
-      console.log(data.data);
     } catch (err) {
       console.log(err);
       toast({

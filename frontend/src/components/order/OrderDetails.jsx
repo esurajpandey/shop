@@ -12,7 +12,6 @@ const OrderDetails = () => {
     try {
       setLoading(true);
       const data = await getOrderItems(orderId);
-      console.log(data);
       setOrderDetails(data.data);
     } catch (err) {
       console.log(err);

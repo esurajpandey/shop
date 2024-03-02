@@ -75,7 +75,7 @@ const ViewOrders = () => {
       const data = await getAllOrders(query);
       setPagination((prev) => ({ ...prev, total: data.data._count.orders }));
       setOrders(data.data.orders);
-      console.log(data.data);
+
     } catch (err) {
       toast({
         title: err.message,

@@ -1,7 +1,7 @@
 import prisma from "../../init/db.js";
 import { successResponse, errorResponse } from "../../utils/helper/response.js";
 import { isValidOtp } from "./verifyMail.js";
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export default async (req, reply) => {
     try {
@@ -25,7 +25,6 @@ export default async (req, reply) => {
         if (+otp !== user?.otp?.value)
             throw { msg: "Incorrect Otp", status: 400 };
 
-        console.log(user);
         const hashPassword = bcrypt.hashSync(password, 10);
         const updatedUser = await prisma.user.update({
             where: {
@@ -35,14 +34,12 @@ export default async (req, reply) => {
                 password: hashPassword
             }
         });
-        console.log(2)
         const d = await prisma.otp.delete({
             where: {
                 id: user.otp.id
             }
         })
 
-        console.log(d);
 
         if (!updatedUser) {
             throw { msg: "Unable to reset password! try after sometime", status: 422 }

@@ -16,7 +16,6 @@ export default async (req, reply) => {
                 Review: true,
             }
         });
-        console.log(product);
 
         if (!product)
             throw { msg: "Product not found", status: 404 };

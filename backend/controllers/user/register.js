@@ -1,5 +1,5 @@
 import prisma from '../../init/db.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { generateToken } from '../../utils/helper/jwtHelper.js';
 import { errorResponse, successResponse } from '../../utils/helper/response.js';
 import sendOtp from '../../utils/email/sendOtp.js';

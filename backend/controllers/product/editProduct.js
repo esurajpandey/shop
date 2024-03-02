@@ -9,7 +9,6 @@ export default async (req, reply) => {
             throw { msg: "Product not found", status: 404 };
         }
 
-        console.log(req.body);
         const name = req.body?.name ?? product.name;
         const quantityInStock = +(req.body?.quantityInStock) ?? product.quantityInStock;
         const unitPrice = parseFloat(req.body?.unitPrice) ?? product.unitPrice;

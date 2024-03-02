@@ -6,7 +6,6 @@ import ReviewModal from "./ReviewModal";
 
 const OrderItem = ({ order }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log({ gtf: order });
   return (
     <OrderItemContainer>
       <Picsection>

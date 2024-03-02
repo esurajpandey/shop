@@ -1,6 +1,6 @@
 import prisma from '../../../init/db.js';
 import { errorResponse, successResponse } from '../../../utils/helper/response.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export default async (req, reply) => {
     const { name, email, password, mobile } = req.body;

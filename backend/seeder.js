@@ -17,7 +17,7 @@ import workerAddress from './data/workerAddress.json' assert {type: 'json'};
 
 import supplier from './data/supplier.json' assert {type: 'json'};
 import reviews from './data/reviews.json' assert {type: 'json'};
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const shopSeeder = async () => {
     return await prisma.shop.create({

@@ -1,8 +1,10 @@
 import prisma from '../init/db.js';
 import { errorResponse } from '../utils/helper/response.js';
 import { UserType } from '@prisma/client';
+import verifyToken from './verifyToken.js';
 
 export default async (req, reply, next) => {
+    await verifyToken(req, reply, next);
     try {
         const userId = req.requestContext.get('userId');
 

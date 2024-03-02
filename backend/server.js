@@ -12,6 +12,7 @@ import productRoutes from './routes/productRoutes.js'
 import adminRoutes from './routes/adminRoutes.js';
 import cartRoutes from './routes/cartRouter.js';
 import verifyToken from './middleware/verifyToken.js';
+import { errorResponse } from './utils/helper/response.js';
 
 
 const fastify = Fastify();//{ logger: true }
@@ -26,6 +27,7 @@ const context = {
 
 
 fastify.register(formBody);
+
 fastify.register(userRoutes, { prefix: '/api/user' });
 fastify.register(productRoutes, { prefix: "/api/product" });
 fastify.register(adminRoutes, { prefix: "/api/admin" });
@@ -36,7 +38,13 @@ fastify.register(fastifyRequestContext, { hook: 'onRequest', defaultStoreValues:
 
 fastify.get('/api', async (req, resp) => {
     resp.send("Hello Welcome")
-})
+});
+
+fastify.setErrorHandler((error, request, reply) => {
+    console.log("Indide error handler")
+    reply.status(error?.code).send(errorResponse(error));
+  });
+
 
 const PORT = process.env.PORT || 5000;
 const start = async () => {

@@ -132,7 +132,6 @@ export const getUserDetails = async () => {
     if (data.status === "FAILURE" || data.status === "ERROR") {
         throw data
     }
-    console.log(data);
     return data;
 }
 

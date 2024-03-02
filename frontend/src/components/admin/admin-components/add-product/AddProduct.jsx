@@ -120,7 +120,6 @@ const AddProduct = () => {
 
       const data = await addProduct(formData);
       action.resetForm();
-      console.log(data);
       toast({
         title: data.message,
         status: "success",

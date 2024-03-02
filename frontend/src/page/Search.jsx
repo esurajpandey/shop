@@ -20,7 +20,6 @@ const Search = () => {
     try{
       setLoading(true);
       const data = await getProducts(`name=${searchQuery}`);
-      console.log(data);
       setProduct(data?.data?.products);
     }catch(err){
       toast({

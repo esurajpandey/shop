@@ -51,7 +51,7 @@ const Product = () => {
       const response = await fetch(`${baseUrl}/product/${productId}`);
       const data = await response.json();
       setProduct(data.data);
-      console.log({ svg: data.data });
+
     } catch (err) {
       toast({
         title: err.message,

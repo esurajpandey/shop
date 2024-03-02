@@ -9,7 +9,6 @@ import { OrderStatus, DeliveryStatus } from '@prisma/client';
 const redirectUrl = process.env.REDIRECT_URL;
 export default async (req, reply) => {
     try {
-        console.log("Hello in verify payment");
         const orderId = req.query.orderId;
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
         let body = razorpay_order_id + "|" + razorpay_payment_id;
@@ -20,7 +19,6 @@ export default async (req, reply) => {
             throw { msg: "Payment is not successfull", status: 403 }
         }
 
-        console.log(orderId, "OrderId");
         const order = await prisma.order.update({
             where: {
                 id: orderId

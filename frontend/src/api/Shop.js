@@ -33,7 +33,6 @@ export const removeItemFromCart = async (productId) => {
 export const orderNow = async (orderData) => {
     const data = await Fetch('/order/order-now', orderData, "POST");
 
-    console.log(data);
     if (data.status === "ERROR" || data.status === "FAILURE")
         throw data;
     return data;

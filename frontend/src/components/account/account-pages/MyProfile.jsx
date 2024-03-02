@@ -36,7 +36,6 @@ const MyProfile = () => {
     try {
       const data = await getUserDetails();
       setUser(data.data);
-      console.log(data);
     } catch (err) {
       console.log(err);
       toast({

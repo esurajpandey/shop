@@ -11,6 +11,6 @@ export default async (fastify, otps, done) => {
     fastify.put('/update/:productId', product.editProduct);
     fastify.get('/all', product.getProducts);
     fastify.get('/:productId', product.getProduct);
-    fastify.post('/', { preHandler: [verifyToken, adminVerifier] }, product.addProduct);
+    fastify.post('/', { preHandler: adminVerifier }, product.addProduct);
     done();
 }

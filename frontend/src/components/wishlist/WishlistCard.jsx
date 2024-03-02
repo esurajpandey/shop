@@ -2,8 +2,6 @@ import styled from '@emotion/styled'
 import React from 'react'
 import {AiOutlineShoppingCart,AiFillDelete} from 'react-icons/ai';
 const WishlistCard = ({product}) => {
-
-    console.log(product)
   return (
     <WishlistCardConatiner>
         <div className='product-details'>

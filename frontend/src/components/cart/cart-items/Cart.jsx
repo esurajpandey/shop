@@ -43,7 +43,6 @@ const Cart = () => {
     try {
       const res = await getCartItems();
       setCartItems(res.data);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
