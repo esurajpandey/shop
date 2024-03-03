@@ -2,9 +2,11 @@
     "version": 2,
     "builds": [
       {
+        "buildCommand": "npx prisma generate"
+      },
+      {
         "src": "./server.js",
-        "use": "@vercel/node",
-        "postinstall": ["npx prisma generate"]
+        "use": "@vercel/node"
       }
     ],
     "routes": [
