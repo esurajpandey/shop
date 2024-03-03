@@ -9,7 +9,7 @@
     "dev": "nodemon server.js",
     "seed": "node seeder.js",
     "generate" : "npx prisma generate",
-    "build" : "npx prisma generate && node server.js"
+    "build" : "npx prisma generate"
   },
   "repository": {
     "type": "git",
