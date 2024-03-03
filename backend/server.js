@@ -36,8 +36,8 @@ fastify.register(orderRoutes, { prefix: "/api/order" });
 
 fastify.register(fastifyRequestContext, { hook: 'onRequest', defaultStoreValues: context });
 
-fastify.get('/api', async (req, resp) => {
-    resp.send("Hello Welcome")
+fastify.get('/api', async (req, reply) => {
+    reply.send("Hello Welcome")
 });
 
 fastify.setErrorHandler((error, request, reply) => {
