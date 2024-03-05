@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
     "seed": "node seeder.js",
-    "generate" : "npx prisma generate",
-    "build" : "npx prisma generate"
+    "generate": "npx prisma generate",
+    "build": "npx prisma generate"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
-    "fastify": "^4.15.0",
+    "fastify": "^4.26.2",
     "jsonwebtoken": "^9.0.0",
     "nodemailer": "^6.9.1",
     "razorpay": "^2.8.6"
