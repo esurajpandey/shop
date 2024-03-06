@@ -11,7 +11,7 @@ import ViewWorker from "../../components/admin/admin-components/worker/ViewWorke
 import ViewSupplier from "../../components/admin/admin-components/supplier/Suppliers";
 import { getUser } from "../../api/commonCall";
 import { useToast } from "@chakra-ui/react";
-import Analytics from "../../components/admin/admin-components/analytics/Analytics";
+// import Analytics from "../../components/admin/admin-components/analytics/Analytics";
 import ViewProduct from "../../components/admin/admin-components/add-product/view-product/ViewProduct";
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const AdminPage = () => {
       <AdminMenu />
       <AdminComponents>
         <Routes>
-          <Route path="/" exact element={<Analytics />} />
+          {/* <Route path="/" exact element={<Analytics />} /> */}
           <Route path="/add-product" exact element={<AddProduct />} />
           <Route path="/update-product" element={<UpdateProduct />} />
           <Route path="/order-list" element={<ViewOrders />} />

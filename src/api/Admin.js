@@ -25,7 +25,7 @@ export const Fetch = async (urlPath, bodyData, method) => {
 
 export const FetchGET = async (urlPath) => {
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'));
     const config = {
         Authorization: `bearer ${user.token}`
     }

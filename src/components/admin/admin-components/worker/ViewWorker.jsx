@@ -110,7 +110,7 @@ const ViewWorker = () => {
             </tr>
           </thead>
           <tbody>
-            {workers.map((worker) => (
+            {workers && workers.map((worker) => (
               <tr key={worker.id}>
                 <td>{worker.name}</td>
                 <td>{worker.email}</td>
