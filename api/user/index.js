@@ -1,4 +1,5 @@
 import userRoutes from "./user.route.js";
+import verifyToken from '../../middleware/verifyToken.js';
 export default async function (router) {
     for (const route of userRoutes) {
       switch (route.method) {
