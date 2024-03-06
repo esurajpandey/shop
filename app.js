@@ -29,8 +29,10 @@ class App{
     }
 
     initializeRoutes() {
+        const apiDirectory = path.join(__dirname, '/api')
+        console.log(apiDirectory);
         this.fastifyInstance.register(Autoload,{
-            dir : path.join(__dirname,'api'),
+            dir : apiDirectory,
             options : {prefix : "/api"},
         })
     }

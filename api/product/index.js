@@ -1,4 +1,4 @@
-import productRoutes from "./.route.js";
+import productRoutes from "./product.route.js";
 export default async function (router) {
     for (const route of productRoutes) {
       switch (route.method) {

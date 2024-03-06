@@ -9,7 +9,8 @@
     "dev": "nodemon index.js",
     "seed": "node seeder.js",
     "generate": "npx prisma generate",
-    "build": "npx prisma generate"
+    "build": "npx prisma generate",
+    "start" : "node index.js"
   },
   "repository": {
     "type": "git",
