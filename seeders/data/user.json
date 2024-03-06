@@ -14,7 +14,7 @@
   {
     "id": "b341f1e8-052f-44f8-9925-58fc123d75bd",
     "name": "Niruba",
-    "email": "nirubad.21mca@kongu.edu",
+    "email": "niruba@kongu.edu",
     "type": "ADMIN",
     "gender": "female",
     "profile": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/422.jpg",
@@ -27,7 +27,7 @@
     "id": "face0d7d-8a13-455e-a31f-a69249f96226",
     "name": "Suraj Pandey",
     "email": "esurajpandey@gmail.com",
-    "type": "ADMIN",
+    "type": "CUSTOMER",
     "gender": "male",
     "profile": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/142.jpg",
     "mobile": "+91 4908841726",

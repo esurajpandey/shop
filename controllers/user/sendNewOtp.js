@@ -16,7 +16,7 @@ export default async (req, reply) => {
 const sendNew = async (req) => {
     return prisma.$transaction(async tx => {
         const { email } = req.body;
-        let user = await prisma.user.findUnique({ where: { email } });
+        let user = await tx.user.findUnique({ where: { email } });
 
         if (!user)
             throw { msg: "User not found", status: 404 };
@@ -55,5 +55,8 @@ const sendNew = async (req) => {
 
         const responseObj = successResponse(null, "New otp is sent to email");
         return responseObj;
+    },{
+        maxWait : 10000,
+        timeout : 8000
     })
 }

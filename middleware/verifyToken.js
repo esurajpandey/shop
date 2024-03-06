@@ -2,17 +2,17 @@ import jwt from 'jsonwebtoken';
 import prisma from '../init/db.js';
 import { errorResponse } from '../utils/helper/response.js';
 
-export default async (req, reply, next) => {
+export default async (req, reply) => {
     try {
-        console.log("****************************")
-        const authHeader = req.headers['authorization'];
+        const ignorePaths = [/\/health/, /\/login(\/json|\/static|\/?$)/,/\/register(\/json|\/static|\/?$)/];
+        if (ignorePaths.find(path => path.test(req.url))) return;
 
+        const authHeader = req.headers['authorization'];
         if (typeof authHeader === 'undefined')
             throw { msg: "Unauthorized - No token", status: 401 }
 
         const token = authHeader.split(' ')[1];
 
-        console.log(token);
         let id;
         jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
             if (err) {
@@ -31,6 +31,7 @@ export default async (req, reply, next) => {
                 id: true,
                 name: true,
                 email: true,
+                type : true,
             }
         });
 
@@ -41,6 +42,7 @@ export default async (req, reply, next) => {
         req.requestContext.set('userId', user.id);
         req.requestContext.set('name', user.name);
         req.requestContext.set('email', user.email);
+        req.requestContext.set('type', user.type);
 
     } catch (err) {
         console.log(err);

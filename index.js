@@ -13,15 +13,23 @@ const app = new App({
 
 const PORT = 5000;
 app
-    .listen({ port: PORT, host: '0.0.0.0' }, (err, address) => {
-        if (err) {
-            console.log(
-                `error starting the server @ ${
-                    address || '0.0.0.0'
-                } with error ${err}`
-            );
-            process.exit(1);
-        }
-        console.log(`App listening on ${address}`);
-    });
+    .connectPrisma()
+    .then(() => {
+        app.listen({ port: PORT, host: '0.0.0.0' }, (err, address) => {
+            if (err) {
+                console.log(
+                    `error starting the server @ ${
+                        address || '0.0.0.0'
+                    } with error ${err}`
+                );
+                process.exit(1);
+            }
+            console.log(`App listening on ${address}`);
+        });
+    })
+    .catch(error => {
+        console.log(error)
+        console.log("[Error occured while connecting db]")
+    })
+    
     

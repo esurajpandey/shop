@@ -5,14 +5,15 @@ import cors from '@fastify/cors';
 import requestContext from '@fastify/request-context';
 import multer from 'fastify-multer';
 import dotenv from 'dotenv';
-
+import client from './init/db.js';
 dotenv.config();
 
 const appContext = {
     userId: null,
     name: null,
     email: null,
-    shopId: null
+    shopId: null,
+    type : null,
 }
 const __dirname = new URL('.', import.meta.url).pathname;
 class App{
@@ -33,12 +34,19 @@ class App{
 
     initializeRoutes() {
         const apiDirectory = path.join(__dirname, '/api')
-        console.log(apiDirectory);
         this.fastifyInstance.register(Autoload,{
             dir : apiDirectory,
             options : {prefix : "/api"},
         })
     }
+    connectPrisma() {
+		// const client = new PrismaClient();
+		this.fastifyInstance.addHook('onClose', () => {
+			redisClient.end();
+			client.$disconnect();
+		});
+		return client.$connect();
+	}
 
     initializePreHandlers() {
 		this.fastifyInstance.register(cors, {

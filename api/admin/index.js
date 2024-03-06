@@ -2,26 +2,10 @@ import adminRoutes from "./admin.route.js";
 import verifyToken from "../../middleware/verifyToken.js";
 
 export default async function (router) {
-    for (const route of adminRoutes) {
-      switch (route.method) {
-        case 'GET':
-          router.get(route.url, route.handler)
-          break
-        case 'POST':
-          router.post(route.url, route.handler)
-          break
-        case 'PUT':
-          router.put(route.url, route.handler)
-          break
-        case 'DELETE':
-          router.delete(route.url, route.handler)
-          break
-      }
-
-      if (Array.isArray(route.preHandler)) {
-        route.preHandler = [verifyToken, ...route.preHandler];
-      }
-    }
-    
-    return router;
+  for (const adminRoute of adminRoutes) {
+		if (Array.isArray(adminRoute.preHandler)) {
+			adminRoute.preHandler = [verifyToken,...adminRoute.preHandler];
+		}
+		router.route(adminRoute);
+	}
 }

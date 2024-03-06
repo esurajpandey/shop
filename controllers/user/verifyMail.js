@@ -96,5 +96,8 @@ const verify = async (req) => {
         responseObj.token = generateToken({ id: user.id });
 
         return responseObj;
+    },{
+        maxWait :8000,
+        timeout : 7000
     });
 }

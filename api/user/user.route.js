@@ -7,7 +7,6 @@ const userRoutes = [
     url: '/health',
     handler: userController.health,
     method: 'GET',
-    preHandler : []
   },
   {
     url: '/change-email',
@@ -25,19 +24,16 @@ const userRoutes = [
     url: '/forget-password',
     handler: userControllers.forgetPassword,
     method: 'POST',
-    preHandler : []
   },
   {
     url: '/login',
     handler: userControllers.login,
     method: 'POST',
-    preHandler : []
   },
   {
     url: '/register',
     handler: userControllers.register,
     method: 'POST',
-    preHandler : []
   },
   {
     url: '/details',
@@ -55,13 +51,11 @@ const userRoutes = [
     url: '/verify-email',
     handler: userControllers.verifyMail,
     method: 'POST',
-    preHandler : []
   },
   {
     url: '/send-new-otp',
     handler: userControllers.sendNewOtp,
     method: 'POST',
-    preHandler : []
   },
   {
     url: '/address',
@@ -85,7 +79,6 @@ const userRoutes = [
     url: '/reset-password',
     handler: userControllers.resetPassword,
     method: 'PUT',
-    preHandler : []
   },
   {
     url: '/wishlist/:productId',
