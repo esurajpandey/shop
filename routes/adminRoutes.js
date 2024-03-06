@@ -24,5 +24,4 @@ export default async (fastify, otps, done) => {
     fastify.put('/assign-order-worker/:orderId', { preHandler: adminVerifier, handler: shop.assignOrderToWorker });
 
     fastify.delete("/product/:productId", { preHandler: adminVerifier, handler: product.deleteProduct });
-    done();
 }

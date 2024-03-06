@@ -6,5 +6,4 @@ export default async (fastify, otps, done) => {
     fastify.get('/items', { preHandler: verifyToken }, cart.getCartItem);
     fastify.delete('/remove-item/:productId', { preHandler: verifyToken }, cart.removeItemFromCart);
     fastify.put('/update-item/:productId', { preHandler: verifyToken }, cart.updateCartItem);
-    done();
 }

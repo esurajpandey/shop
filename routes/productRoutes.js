@@ -12,5 +12,4 @@ export default async (fastify, otps, done) => {
     fastify.get('/all', product.getProducts);
     fastify.get('/:productId', product.getProduct);
     fastify.post('/', { preHandler: adminVerifier }, product.addProduct);
-    done();
 }

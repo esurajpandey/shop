@@ -16,5 +16,4 @@ export default async (fastify, otps, done) => {
 
     fastify.put('/update-delivery-status/:orderId', { preHandler: workerVerifier, handler: order.updateDeliveryStatus });
     fastify.get('/delivery', { preHandler: verifyToken, workerVerifier, handler: order.orderOnMyName });
-    done();
 }

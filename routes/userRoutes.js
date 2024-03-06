@@ -21,5 +21,4 @@ export default async (fastify, otps, done) => {
     fastify.post('/wishlist/:productId', { preHandler: verifyToken, handler: wishlist.addProductToWishlist });
     fastify.delete('/wishlist/:productId', { preHandler: verifyToken, handler: wishlist.removedProductFromWishlist });
     fastify.get('/wishlist', { preHandler: verifyToken, handler: wishlist.getWishlist });
-    done();
 }

@@ -14,49 +14,43 @@ import cartRoutes from './routes/cartRouter.js';
 import verifyToken from './middleware/verifyToken.js';
 import { errorResponse } from './utils/helper/response.js';
 
+(async () => {
+    const fastify = Fastify();//{ logger: true }
+    await fastify.register(cors);
 
-const fastify = Fastify();//{ logger: true }
-await fastify.register(cors);
-
-const context = {
-    userId: null,
-    name: null,
-    email: null,
-    shopId: null
-}
-
-
-fastify.register(formBody);
-
-fastify.register(userRoutes, { prefix: '/api/user' });
-fastify.register(productRoutes, { prefix: "/api/product" });
-fastify.register(adminRoutes, { prefix: "/api/admin" });
-fastify.register(cartRoutes, { prefix: "/api/cart" });
-fastify.register(orderRoutes, { prefix: "/api/order" });
-
-fastify.register(fastifyRequestContext, { hook: 'onRequest', defaultStoreValues: context });
-
-fastify.get('/api', async (req, reply) => {
-    reply.send("Hello Welcome")
-});
-
-fastify.setErrorHandler((error, request, reply) => {
-    console.log("Indide error handler")
-    reply.status(error?.code).send(errorResponse(error));
-  });
-
-
-const PORT = process.env.PORT || 5000;
-const start = async () => {
-    try {
-        fastify.listen({ port: PORT }, () => {
-            console.log("Server running at", PORT);
-        });
-    } catch (err) {
-        console.log(err.message);
-    } finally {
-        //closing connection
+    const context = {
+        userId: null,
+        name: null,
+        email: null,
+        shopId: null
     }
-}
 
-start();
+
+    await fastify.register(formBody);
+
+    await fastify.register(userRoutes, { prefix: '/api/user' });
+//     await fastify.register(productRoutes, { prefix: "/api/product" });
+//     await fastify.register(adminRoutes, { prefix: "/api/admin" });
+//    await fastify.register(cartRoutes, { prefix: "/api/cart" });
+//     await fastify.register(orderRoutes, { prefix: "/api/order" });
+
+    await fastify.register(fastifyRequestContext, { hook: 'onRequest', defaultStoreValues: context });
+
+    fastify.get('/api', async (req, reply) => {
+        reply.send("Hello Welcome")
+    });
+
+    fastify.setErrorHandler(async(error, request, reply) => {
+        console.log("Indide error handler")
+        reply.status(error?.code).send(errorResponse(error));
+    });
+
+
+    const PORT = process.env.PORT || 5000;
+    fastify.listen({ port: PORT, host: '0.0.0.0' })
+    .then(() => {
+        console.log("Server started at 0.0.0.0:",PORT);
+    })
+})();
+
+
