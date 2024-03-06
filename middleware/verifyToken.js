@@ -4,6 +4,7 @@ import { errorResponse } from '../utils/helper/response.js';
 
 export default async (req, reply, next) => {
     try {
+        console.log("****************************")
         const authHeader = req.headers['authorization'];
 
         if (typeof authHeader === 'undefined')
@@ -11,6 +12,7 @@ export default async (req, reply, next) => {
 
         const token = authHeader.split(' ')[1];
 
+        console.log(token);
         let id;
         jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
             if (err) {
@@ -40,7 +42,6 @@ export default async (req, reply, next) => {
         req.requestContext.set('name', user.name);
         req.requestContext.set('email', user.email);
 
-        next();
     } catch (err) {
         console.log(err);
         reply.code(err?.status ?? 500).send(errorResponse(err));

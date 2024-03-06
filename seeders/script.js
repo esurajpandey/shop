@@ -1,15 +1,15 @@
 import { faker } from '@faker-js/faker';
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
-import brand from './data/brand.json' assert {type: 'json'};
-import color from './data/color.json' assert {type: 'json'};
-import product from './data/product1.json' assert {type: 'json'};
-import category from './data/category.json' assert {type: 'json'};
-import address from './data/address.json' assert {type: 'json'};
-import user from './data/user.json' assert {type: 'json'};
-import worker from './data/workers.json' assert {type: 'json'};
-import orders from './data/orders.json' assert {type: 'json'};
-import workerAddress from './data/workerAddress.json' assert {type: 'json'};
+import brand from '../data/brand.json' assert {type: 'json'};
+import color from '../data/color.json' assert {type: 'json'};
+import product from '../data/product1.json' assert {type: 'json'};
+import category from '../data/category.json' assert {type: 'json'};
+import address from '../data/address.json' assert {type: 'json'};
+import user from '../data/user.json' assert {type: 'json'};
+import worker from '../data/workers.json' assert {type: 'json'};
+import orders from '../data/orders.json' assert {type: 'json'};
+import workerAddress from '../data/workerAddress.json' assert {type: 'json'};
 
 const productGenrator = () => {
     const products = []

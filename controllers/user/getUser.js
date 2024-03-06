@@ -4,6 +4,7 @@ import { errorResponse, successResponse } from "../../utils/helper/response.js";
 export default async (req, reply) => {
     try {
         const userId = req.requestContext.get("userId");
+        console.log({userId});
         const user = await prisma.user.findUnique({
             where: {
                 id: userId

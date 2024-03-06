@@ -1,22 +1,22 @@
-import prisma from './init/db.js';
-import shop from './data/shop.json' assert {type: 'json'};
-import brand from './data/brand.json' assert {type: 'json'};
-import color from './data/color.json' assert {type: 'json'};
-import product from './data/product1.json' assert {type: 'json'};
-import category from './data/category.json' assert {type: 'json'};
-import productCategories from './data/productCategories1.json' assert {type: 'json'};
-import attributes from './data/attributes1.json' assert {type: 'json'};
+import prisma from '../init/db.js';
+import shop from '../data/shop.json' assert {type: 'json'};
+import brand from '../data/brand.json' assert {type: 'json'};
+import color from '../data/color.json' assert {type: 'json'};
+import product from '../data/product1.json' assert {type: 'json'};
+import category from '../data/category.json' assert {type: 'json'};
+import productCategories from '../data/productCategories1.json' assert {type: 'json'};
+import attributes from '../data/attributes1.json' assert {type: 'json'};
 
-import address from './data/address.json' assert {type: 'json'};
-import users from './data/user.json' assert {type: 'json'};
-import worker from './data/workers.json' assert {type: 'json'};
-import cartItem from './data/cartItems.json' assert {type: 'json'};
-import order from './data/orders.json' assert {type: 'json'};
-import orderItem from './data/orderItem.json' assert {type: 'json'};
-import workerAddress from './data/workerAddress.json' assert {type: 'json'};
+import address from '../data/address.json' assert {type: 'json'};
+import users from '../data/user.json' assert {type: 'json'};
+import worker from '../data/workers.json' assert {type: 'json'};
+import cartItem from '../data/cartItems.json' assert {type: 'json'};
+import order from '../data/orders.json' assert {type: 'json'};
+import orderItem from '../data/orderItem.json' assert {type: 'json'};
+import workerAddress from '../data/workerAddress.json' assert {type: 'json'};
 
-import supplier from './data/supplier.json' assert {type: 'json'};
-import reviews from './data/reviews.json' assert {type: 'json'};
+import supplier from '../data/supplier.json' assert {type: 'json'};
+import reviews from '../data/reviews.json' assert {type: 'json'};
 import bcrypt from 'bcryptjs';
 
 const shopSeeder = async () => {

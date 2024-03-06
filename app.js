@@ -4,12 +4,15 @@ import path,{dirname} from 'path';
 import cors from '@fastify/cors';
 import requestContext from '@fastify/request-context';
 import multer from 'fastify-multer';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const appContext = {
-    userId: "",
-    name: "",
-    email: "",
-    shopId: ""
+    userId: null,
+    name: null,
+    email: null,
+    shopId: null
 }
 const __dirname = new URL('.', import.meta.url).pathname;
 class App{
