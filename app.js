@@ -50,7 +50,7 @@ class App{
 
     initializePreHandlers() {
 		this.fastifyInstance.register(cors, {
-			origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://app.quickrecruit.com'],
+			origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://swiftbasket.netlify.app'],
 			methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'OPTION'],
 			credentials: true,
 			allowedHeaders: ['Content-Type', 'Authorization', 'Referer'],
