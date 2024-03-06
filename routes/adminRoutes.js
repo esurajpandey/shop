@@ -1,6 +1,5 @@
 import shop from "../controllers/shop/index.js"
 import adminVerifier from "../middleware/adminVerifier.js";
-import verifyToken from "../middleware/verifyToken.js";
 import product from '../controllers/product/index.js';
 
 export default async (fastify, otps, done) => {

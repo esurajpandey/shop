@@ -1,9 +1,8 @@
-import userRoutes from "./user.route.js";
-import verifyToken from '../../middleware/verifyToken.js';
+import adminRoutes from "./admin.route.js";
+import verifyToken from "../../middleware/verifyToken.js";
 
 export default async function (router) {
-    for (const route of userRoutes) {
-
+    for (const route of adminRoutes) {
       switch (route.method) {
         case 'GET':
           router.get(route.url, route.handler)

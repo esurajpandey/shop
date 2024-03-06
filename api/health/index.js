@@ -1,9 +1,7 @@
-import userRoutes from "./user.route.js";
-import verifyToken from '../../middleware/verifyToken.js';
+import healthRoutes from "./health.route.js";
 
 export default async function (router) {
-    for (const route of userRoutes) {
-
+    for (const route of healthRoutes) {
       switch (route.method) {
         case 'GET':
           router.get(route.url, route.handler)
@@ -18,11 +16,6 @@ export default async function (router) {
           router.delete(route.url, route.handler)
           break
       }
-
-      if (Array.isArray(route.preHandler)) {
-        route.preHandler = [verifyToken, ...route.preHandler];
-      }
     }
-    
     return router;
 }
