@@ -83,7 +83,7 @@ const MainApp = styled.div`
   padding: 0;
   margin: 0;
   @media only screen and (max-width: 480px){
-    max-width: 18em !important;
+  
   }
 `;
 

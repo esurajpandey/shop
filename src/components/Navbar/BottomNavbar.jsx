@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { navLinks } from "./Navbar.styled";
 import { FaBars } from "react-icons/fa";
 
-const BottomNavbar = () => {
+const BottomNavbar = ({user,handleLogout}) => {
   const [open, setOpen] = useState(false);
   return (
     <BottomNavContainer isVisible={open}>
@@ -21,9 +21,19 @@ const BottomNavbar = () => {
                 </li>
               );
             })}
-            <li key={"login-link"} className="login-link">
-              <Link to="/login">Login</Link>
-            </li>
+            {user ?
+              (
+                  <li key={"login-link"} className="login-link">
+                    <button onClick={handleLogout}>Logout</button>
+                  </li>
+              )
+              :
+              (
+                <li key={"login-link"} className="login-link">
+                  <Link to="/login">Login</Link>
+                </li>
+              )
+            }
           </ul>
         </div>
       </nav>
@@ -52,7 +62,7 @@ const BottomNavContainer = styled.div`
       li {
         list-style: none;
 
-        a {
+        a ,button{
           text-decoration: none;
           color: white;
           padding: 0.5rem;
@@ -62,8 +72,13 @@ const BottomNavContainer = styled.div`
             background-color: #9c9494;
           }
         }
+
+        button{
+          width: 100%;
+        }
       }
     }
+
 
     .login-link {
       display: none;

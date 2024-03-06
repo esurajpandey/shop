@@ -76,7 +76,7 @@ export const NavContainer = styled.div`
     }
   }
   @media only screen and (max-width: 480px){
-    max-width: 412px !important;
+    /* max-width: 412px !important; */
   }
   
 `;
@@ -178,7 +178,6 @@ export const SearchBox = styled.div`
   }
 
   @media (max-width: 480px){
-    border: 1px solid red;
     padding: 0em 1em;
     width: 80%;
   }

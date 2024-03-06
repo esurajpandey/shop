@@ -158,7 +158,7 @@ function Navbar() {
         )}
       </MiddleContainer>
       {/* {user && user?.type === "ADMIN" && <NavButtomLine></NavButtomLine>} */}
-      <BottomNavbar />
+      <BottomNavbar user={user} handleLogout={handleLogout}/>
     </NavContainer>
   );
 }
