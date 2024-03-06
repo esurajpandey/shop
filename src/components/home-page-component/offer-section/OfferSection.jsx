@@ -27,11 +27,14 @@ const OfferSection = () => {
 
 const OfferSectionContainer = styled.div`
   display: flex;
-  /* width: 100%; */
   box-sizing: border-box;
-  /* border: 1px solid grey; */
-  /* height: 100%; */
   min-height: 28em;
-  max-width: 98vw;
+  width: 100%;
+  @media only screen and (max-width: 480px){
+    max-width: 412px !important;
+    min-height: 15em;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export default OfferSection;

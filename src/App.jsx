@@ -80,7 +80,11 @@ function App() {
 
 const MainApp = styled.div`
   width: 100%;
-  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  @media only screen and (max-width: 480px){
+    max-width: 18em !important;
+  }
 `;
 
 export default App;

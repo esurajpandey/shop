@@ -100,8 +100,7 @@ const CategoryPage = () => {
                 setQueries((prev) => ({ ...prev, brand: e.target.value }))
               }
             >
-              {brands.length > 0 &&
-                brands.map((item) => {
+              {brands && brands.map((item) => {
                   return (
                     <option key={item.id} value={item.name}>
                       {item.name}
@@ -116,8 +115,7 @@ const CategoryPage = () => {
                 setQueries((prev) => ({ ...prev, category: e.target.value }))
               }
             >
-              {categories.length > 0 &&
-                categories.map((item) => {
+              {categories && categories.map((item) => {
                   return (
                     <option key={item.id} value={item.name}>
                       {item.name}
@@ -151,8 +149,7 @@ const CategoryPage = () => {
             </Select>
           </Filters>
           <ProductLists>
-            {products.length > 0 &&
-              products.map((product) => {
+            {products && products.map((product) => {
                 return (
                   <Link to={`/product/${product.id}`} key={product.id}>
                     <ProductCardContainer product={product} key={product.id} />

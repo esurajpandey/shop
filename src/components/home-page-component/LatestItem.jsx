@@ -22,9 +22,7 @@ const LatestItem = () => {
 
 const LatestItemContainer = styled.div`
   display: flex;
-  /* width: 100%; */
   height: 100%;
-  /* border: 1px solid blue; */
   min-height: 30em;
   background-image: url("https://res.cloudinary.com/durmhsdmz/image/upload/v1682237713/miz_qeub6k.jpg");
   background-repeat: no-repeat;
@@ -42,7 +40,6 @@ const LatestItemContainer = styled.div`
 
   .tag {
     display: flex;
-
     span {
       background-color: #d72d2d;
       padding: 0.2em 0.6em;
@@ -70,6 +67,23 @@ const LatestItemContainer = styled.div`
       font-weight: 300;
       color: black;
       font-family: "Poppins";
+    }
+  }
+
+  @media only screen and (max-width: 480px){
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    .text{
+      display : none;
+    }
+    .latest-item-details{
+      margin-top: 10em;
+      margin-left: 0em;
+      display:flex;
+      align-items : center;
+      justify-content : center;
     }
   }
 `;

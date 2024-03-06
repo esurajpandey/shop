@@ -35,7 +35,6 @@ function Navbar() {
   const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
 
-  const type = "admin";
   const navigate = useNavigate();
 
   useEffect(() => {

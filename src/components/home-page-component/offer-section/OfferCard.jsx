@@ -30,9 +30,7 @@ const OfferCardContainer = styled.div`
   background-size: cover;
   box-sizing: border-box;
   min-height: 27em;
-  min-width: 30em;
-  width: 40em;
-  /* height: 100%; */
+  width: 45%;
   margin: 3rem;
   display: flex;
 
@@ -91,6 +89,33 @@ const OfferCardContainer = styled.div`
 
   .offer-card-right-side {
     width: 50%;
+  }
+
+  @media (max-width: 600px){
+    min-height: 27em;
+    flex-direction: column;
+    width: 80%;
+
+    .offer-card-data{
+      width: 100%;
+      /* margin-top: 3em;
+      margin-left: 4em; */
+
+    }
+    .offer-card-text{
+      width: 90%;
+      h2 {
+        font-size: 1.7rem;
+        font-weight: 700;
+        width: 80%;
+        word-wrap: break-word;
+        
+      }
+
+    }
+    .card-second-text{
+      display: none;
+    }
   }
 `;
 
