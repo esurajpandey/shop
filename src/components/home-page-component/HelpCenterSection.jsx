@@ -26,7 +26,7 @@ const HelpCenterSection = () => {
   );
 };
 const HelpCenterContainer = styled.div`
-  min-width: 80vw;
+  /* min-width: 80vw; */
   display: flex;
   align-items: center;
   min-height: 12em;
@@ -83,6 +83,23 @@ const HelpCenterContainer = styled.div`
         background-color: white;
         color: black;
       }
+    }
+  }
+
+  @media (max-width: 600px){
+    max-width: 412px !important;
+    overflow: hidden;
+    margin: 0.8em 2.5em;
+    flex-direction: column;
+
+    .left-help-center{
+      width: 100%;
+    }
+    .right-img-container{
+      width: 100%;
+    }
+    .hlp-btns{
+      margin-top: 2em;
     }
   }
 `;

@@ -163,17 +163,6 @@ const CategoryPage = () => {
   );
 };
 
-const CategoryPageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  .loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10em;
-  }
-`;
 
 const Filters = styled.div`
   position: sticky;
@@ -195,13 +184,15 @@ const Filters = styled.div`
       outline: 0;
     }
   }
-  @media (max-width: 700px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
     gap: 1em;
     top: 14.6em;
+    padding: 2em 1em;
+
   }
-  @media (max-width: 1000px) {
+  @media screen and (max-width: 1000px) {
     top: 14.6em;
   }
 `;
@@ -211,10 +202,32 @@ export const ProductLists = styled.div`
   flex-wrap: wrap;
   color: black;
   align-items: center;
-  /* justify-content: center; */
+  
   padding: 2rem;
   gap: 3em;
   /* border: 1px solid red; */
+
+  @media screen and (max-width: 600px){
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
+const CategoryPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+ 
+  position: relative;
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10em;
+  }
+
+  @media (max-width: 600px){
+   
+  }
+  
+`;
 export default CategoryPage;

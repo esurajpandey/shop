@@ -35,6 +35,14 @@ const ShopByCategoryContainer = styled.div`
   min-height: 18em;
   align-items: center;
   padding: 1em;
+
+  @media (max-width: 600px){
+    max-width: 100%;
+    margin: 1.5em 2.5em;
+    overflow: hidden;
+  }
+
+
 `;
 
 const CategoryContainer = styled.div`

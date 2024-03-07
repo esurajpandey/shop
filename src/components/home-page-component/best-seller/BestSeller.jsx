@@ -32,7 +32,7 @@ const BestSeller = () => {
         <Spinner size="xl" color="blue.500" />
       ) : (
         <ProductLists>
-          {products.length > 0 &&
+          {products && products.length > 0 &&
             products.map((product) => {
               return (
                 <Link to={`/product/${product.id}`} key={product.id}>
@@ -60,6 +60,12 @@ const BestSellerContainer = styled.div`
   .best-seller-title {
     font-size: 1.5rem;
     font-weight: 600;
+  }
+
+  @media (max-width: 600px){
+    max-width: 100%;
+    margin: 0.6em 2.5em;
+    overflow: hidden;
   }
 `;
 

@@ -50,9 +50,17 @@ const DescContainer = styled.div`
   justify-content: space-evenly;
   margin: 0.8em 3em;
   margin-right: 4.5em;
+  
   min-height: 12em;
   /* border: 1px solid black; */
   background-color: white;
+
+  @media (max-width: 600px){
+    margin : 0;
+    margin: 0em 2.5em;
+    margin-bottom: 2em;
+    flex-direction: column;
+  }
 `;
 
 const DescDetailBox = styled.div`

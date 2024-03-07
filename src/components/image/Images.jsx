@@ -20,9 +20,34 @@ const images = [
 ];
 
 const Images = ({ pictures }) => {
+  // const styleObj = {
+  //   borderRadius: "5px",
+  //   '@media (max-width: 500px)': {
+  //     display: 'none !important',
+  //   },
+  // };
   const styleObj = {
-    borderRadius: "5px",
+    // Define your base styles here
+    width: "500px",
+    height: "400px",
+    "@media screen and (max-width: 600px)": {
+      width: "200px",
+      height: "200px",
+    },
   };
+
+  // Define your responsive styles
+  const responsiveStyle = {
+    "@media screen and (max-width: 600px)": {
+      // Adjust width and height for smaller screens
+      width: "200px",
+      height: "200px",
+    },
+  };
+
+  // Merge base and responsive styles
+  const mergedStyles = { ...styleObj, ...responsiveStyle };
+
   const [imageSet, setImageSet] = useState([]);
 
   useEffect(() => {
@@ -37,18 +62,24 @@ const Images = ({ pictures }) => {
     <ImageSliderContainer>
       {imageSet.length > 0 && (
         <SimpleImageSlider
-          width={500}
-          height={400}
+          width={styleObj.width}
+          height={styleObj.height}
           images={imageSet}
-          style={styleObj}
+          style={mergedStyles}
           showBullets={true}
           showNavs={true}
           autoPlayDelay={2.0}
+          
         />
       )}
     </ImageSliderContainer>
   );
 };
 
-const ImageSliderContainer = styled.div``;
+const ImageSliderContainer = styled.div`
+  @media screen and (max-width:600px){
+    /* border: 2px solid red; */
+    
+  }
+`;
 export default Images;

@@ -92,6 +92,18 @@ const BestPriceContainer = styled.div`
       }
     }
   }
+
+  @media (max-width: 600px){
+    max-width: 100%;
+    margin: 1.5em 2.5em;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: 1.5em;
+
+    .right-side-box{
+      margin-top: 1.5em;
+    }
+  }
 `;
 
 export default BestPrice;

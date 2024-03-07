@@ -5,7 +5,7 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   padding: 3.3rem;
   font-family: "Anton";
@@ -59,6 +59,20 @@ export const LoginContainer = styled.div`
     &:hover{
       text-decoration: underline;
       color : #6C9BCF;
+    }
+  }
+
+  @media (max-width: 600px){
+    max-width: 412px !important;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    .main-login-container{
+    }
+
+    .form-container{
+      margin: 2em;
+      margin-block: 0rem;
     }
   }
 `;

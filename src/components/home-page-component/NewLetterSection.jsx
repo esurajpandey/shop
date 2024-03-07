@@ -34,8 +34,8 @@ const NewLetterSection = () => {
         Sign up to receive updates on new arrivals and special offers
       </div>
       <div className="news-form">
-        <label htmlFor="">Email *</label>
-        <div className="input-box">
+        {/* <label htmlFor="">Email *</label> */}
+        <div className="input-boxinput-box">
           <input
             type="text"
             placeholder="Your Email Here"
@@ -64,10 +64,19 @@ const NewLetterFormSectionContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    width: 100%;
+    align-items: center;
+
+    .input-boxinput-box{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     input {
       font-size: 1rem;
       padding: 0.6em 0.8em;
-      min-width: 35em;
+      min-width: 60%;
       border-radius: 2em;
       color: black;
       &:focus {
@@ -95,6 +104,18 @@ const NewLetterFormSectionContainer = styled.div`
   .middle-top-news {
     font-size: 1rem;
     font-family: "Poppins";
+  }
+
+  @media (max-width: 600px){
+    max-width: 412px !important;
+    overflow: hidden;
+    margin: 0.8em 2.5em;
+    padding: 0.5em 1em;
+    flex-direction: column;
+
+    .news-form{
+      margin-top : 1em;
+    }
   }
 `;
 export default NewLetterSection;

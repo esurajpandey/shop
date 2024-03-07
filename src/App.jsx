@@ -82,8 +82,9 @@ const MainApp = styled.div`
   width: 100%;
   padding: 0;
   margin: 0;
-  @media only screen and (max-width: 480px){
-  
+
+  @media only screen and (max-width: 600){
+    width: 100%;
   }
 `;
 

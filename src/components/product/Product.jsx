@@ -23,6 +23,7 @@ import {
   Select,
 } from "@chakra-ui/react";
 import getPaymentOption from "../../utils/getPaymentOption";
+import ImageSlider from "../image/ImageSlider";
 
 const baseUrl = import.meta.env.VITE_defaultURL;
 const paymentKey = import.meta.env.VITE_payment_key;
@@ -142,7 +143,8 @@ const Product = () => {
       {!loading && product && (
         <div className="main-container-product">
           <ProductImagesBuy>
-            <Images pictures={product.pictures} />
+            {/* <Images pictures={product.pictures} /> */}
+            <ImageSlider images={product?.pictures}/>
             <Buybuttons>
               <button onClick={handleAddToCart} disabled={disbaledBtn}>
                 <AiOutlineShoppingCart />
@@ -189,12 +191,10 @@ const Product = () => {
 
 const ShowLoading = styled.div``;
 const ProductImagesBuy = styled.div`
-  min-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  @media (max-width: 600px) {
-    min-width: 400px;
+  @media screen and (max-width: 600px) {
   }
 `;
 
@@ -219,8 +219,9 @@ const ProductContainer = styled.div`
       padding-left: 0.5rem;
     }
   }
-  @media (max-width: 700px) {
+  @media (max-width: 600px) {
     position: relative;
+    border: 1px solid red;
   }
 `;
 
